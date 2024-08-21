@@ -26,8 +26,10 @@ from scipy.linalg import block_diag, norm
 from isofit.core.common import svd_inv
 from isofit.surface.surface import Surface
 
+from .surface_base import BaseSurface
 
-class MultiComponentSurface(Surface):
+
+class MultiComponentSurface(BaseSurface):
     """A model of the surface based on a collection of multivariate
     Gaussians, with one or more equiprobable components and full
     covariance matrices.
@@ -37,16 +39,15 @@ class MultiComponentSurface(Surface):
     Multivariate Gaussian surface model.
     """
 
-    def __init__(self, full_config: Config):
-        """."""
+    def __init__(self, config: dict, params: dict):
+        super().__init__(config)
 
-        super().__init__(full_config)
+        # Check to see if .mat surface file exists
+        if exists(config.get("surface_file", "")):
+            model_dict = loadmat(config["surface_file"])
+        else:
+            raise FileNotFoundError("No surface .mat file exists")
 
-        config = full_config.forward_model.surface
-
-        # Models are stored as dictionaries in .mat format
-        # TODO: enforce surface_file existence in the case of multicomponent_surface
-        model_dict = loadmat(config.surface_file)
         self.components = list(zip(model_dict["means"], model_dict["covs"]))
         self.n_comp = len(self.components)
         self.wl = model_dict["wl"][0]
@@ -63,8 +64,9 @@ class MultiComponentSurface(Surface):
         else:
             raise ValueError("Unrecognized Normalization: %s\n" % self.normalize)
 
-        self.selection_metric = config.selection_metric
-        self.select_on_init = config.select_on_init
+        # Place holder until I work out how to pass these in as kwargs
+        self.selection_metric = params.get("selection_metric", "Euclidean")
+        self.select_on_init = params.get("select_on_init", True)
 
         # Reference values are used for normalizing the reflectances.
         # in the VSWIR regime, reflectances are normalized so that the model
@@ -224,6 +226,7 @@ class MultiComponentSurface(Surface):
         nsuffix = len(self.statevec_names) - self.idx_lamb[-1] - 1
         prefix = np.zeros((self.n_wl, nprefix))
         suffix = np.zeros((self.n_wl, nsuffix))
+
         return np.concatenate((prefix, dLs, suffix), axis=1)
 
     def summarize(self, x_surface, geom):

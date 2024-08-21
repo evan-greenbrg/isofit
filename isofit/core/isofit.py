@@ -68,6 +68,7 @@ class Isofit:
         self.config = None
 
         # Load configuration file
+        # This is doing something
         self.config = configs.create_new_config(config_file)
         self.config.get_config_errors()
 
@@ -111,7 +112,9 @@ class Isofit:
         """
 
         logging.info("Building first forward model, will generate any necessary LUTs")
+        # Initialize the forward model with n surfaces and states
         self.fm = fm = ForwardModel(self.config)
+
         if row_column is not None:
             ranges = row_column.split(",")
             if len(ranges) == 1:
@@ -230,7 +233,22 @@ class Worker(object):
             logging.debug("Read chunk of spectra")
             row, col = indices[index, 0], indices[index, 1]
 
+            # Get input data
             input_data = self.io.get_components_at_index(row, col)
+
+            """
+            This may end up being redundant. The self.invs.inversions is a
+            dict that has the secific statevector within it. I'm a little fuzzy
+            on if this fucntion below will mess things up across workers.
+            In effect, I'm defining the surface and state twice. Once in setting
+            up the inversion wrapper, and once below."""
+
+            (self.fm.surface, self.fm.state, pixel_class) = (
+                self.fm.get_surface_and_state(row, col)
+            )
+
+            # finalize the inversion to use
+            self.iv = self.ivs.iv_lookup[pixel_class]
 
             self.completed_spectra += 1
             if input_data is not None:

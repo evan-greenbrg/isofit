@@ -23,104 +23,63 @@ import logging
 
 import numpy as np
 from scipy.interpolate import interp1d
+from spectral.io import envi
 
 from isofit.core.common import load_spectrum, load_wavelen
 
 
 class Surface:
-    """A model of the surface.
-
-    Surface models are stored as MATLAB '.mat' format files.
-    """
+    """A wrapper for the specific surface models"""
 
     def __init__(self, full_config: Config):
+        self.full_config = full_config
+
         config = full_config.forward_model.surface
+        self.surfaces = config
+        for i, surf_dict in config.items():
+            self.surfaces[i]["surface_model"] = Surfaces[surf_dict["surface_category"]]
+        # surfaces = config
+        for i, surf_dict in config.items():
+            config[i]["surface_model"] = Surfaces[surf_dict["surface_category"]]
 
-        self.statevec_names = []
-        self.bounds = np.array([])
-        self.scale = np.array([])
-        self.init = np.array([])
-        self.bvec = []
-        self.bval = np.array([])
-        self.idx_lamb = np.empty(shape=0)
-        self.emissive = False
+        # Set up pixel groups in the init to only read file once
+        if config[0]["surface_class_file"]:
+            classes = envi.open(
+                envi_header(config[0]["surface_class_file"])
+            ).open_memmap(interleave="bip")
 
-        self.wl = None
-        self.fwhm = None
+            self.groups = []
+            for c in self.surfaces.keys():
+                self.groups.append(np.argwhere(classes == c).astype(int).tolist())
 
-        if config.wavelength_file is not None:
-            self.wl, self.fwhm = load_wavelen(config.wavelength_file)
-        elif full_config.implementation.mode == "simulation":
-            logging.info(
-                "No surface wavelength_file provided, getting wavelengths from"
-                " input.reflectance_file"
+    def match_class(self, row, col):
+        matches = np.zeros((len(self.groups))).astype(int)
+        for i, group in enumerate(self.groups):
+            if [row, col, 0] in group:
+                matches[i] = 1
+            else:
+                matches[i] = 0
+
+        if len(matches[np.where(matches)]) > 1:
+            raise ValueError(
+                "Pixel did not match any class. \
+                             Something is wrong"
             )
-            _, self.wl = load_spectrum(full_config.input.reflectance_file)
 
-        if self.wl is not None:
-            self.n_wl = len(self.wl)
+        elif len(matches[np.where(matches)]) > 1:
+            raise ValueError(
+                "Pixel matches too many classes. \
+                             Something is wrong"
+            )
 
-    def resample_reflectance(self):
-        """Make sure model wavelengths align with the wavelength file."""
+        return matches[np.where(matches)][0]
 
-        if hasattr(self, "rwl"):
-            p = interp1d(self.rwl, self.rfl, fill_value="extrapolate")
-            self.rfl = p(self.wl)
+    def call_rowcol_surface(self, row, col):
+        # Easy case, no classification is propogated through
+        if len(self.surfaces) == 1 or not self.surfaces[0]["surface_class_file"]:
+            return self.surfaces[0]["surface_model"](self.full_config)
 
-    def xa(self, x_surface, geom):
-        """Mean of prior state vector distribution calculated at state x."""
-
-        return np.array(self.init)
-
-    def Sa(self, x_surface, geom):
-        """Covariance of prior state vector distribution calculated at state x."""
-
-        return np.zeros((0, 0), dtype=float)
-
-    def fit_params(self, rfl_meas, geom, *args):
-        """Given a directional reflectance estimate and one or more emissive
-        parameters, fit a state vector."""
-
-        return np.array([])
-
-    def calc_lamb(self, x_surface, geom):
-        """Calculate a Lambertian surface reflectance for this state vector."""
-
-        return self.rfl
-
-    def calc_rfl(self, x_surface, geom):
-        """Calculate the directed reflectance (specifically the HRDF) for this
-        state vector."""
-
-        return self.rfl
-
-    def drfl_dsurface(self, x_surface, geom):
-        """Partial derivative of reflectance with respect to state vector,
-        calculated at x_surface. In the case that there are no free
-        paramters our convention is to return the vector of zeros."""
-
-        return np.zeros((self.n_wl, 1))
-
-    def drfl_dsurfaceb(self, x_surface, geom):
-        """Partial derivative of reflectance with respect to unmodeled
-        variables, calculated at x_surface. In the case that there are no
-        free paramters our convention is to return the vector of zeros."""
-
-        return np.zeros((self.n_wl, 1))
-
-    def calc_Ls(self, x_surface, geom):
-        """Emission of surface, as a radiance."""
-
-        return np.zeros((self.n_wl,))
-
-    def dLs_dsurface(self, x_surface, geom):
-        """Partial derivative of surface emission with respect to state vector,
-        calculated at x_surface. In the case that there are no free paramters
-        our convention is to return the vector of zeros."""
-
-        return np.zeros((self.n_wl, 1))
-
-    def summarize(self, x_surface, geom):
-        """Summary of state vector."""
-
-        return ""
+        elif len(self.surfaces) > 1:
+            return self.surfaces[self.match_class(groups, row, col)]["surface_model"](
+                self.full_config
+            )

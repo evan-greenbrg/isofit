@@ -26,7 +26,7 @@ from isofit.core.common import VectorInterpolator
 from isofit.surface.surface import Surface
 
 
-class LUTSurface(Surface):
+class LUTSurface:
     """A model of the surface based on an N-dimensional lookup table
     indexed by one or more state vector elements.  We calculate the
     reflectance by multilinear interpolation.  This is good for
@@ -53,15 +53,15 @@ class LUTSurface(Surface):
 
     """
 
-    def __init__(self, full_config: Config):
+    def __init__(self, config: dict, params: dict):
         """."""
 
-        super().__init__(full_config)
-
-        config = full_config.forward_model.surface
+        if exists(config.get("surface_file", "")):
+            model_dict = loadmat(config["surface_file"])
+        else:
+            raise FileNotFoundError("No surface .mat file exists")
 
         # Models are stored as dictionaries in .mat format
-        model_dict = loadmat(config.surface_file)
         self.lut_grid = [grid[0] for grid in model_dict["grids"][0]]
         self.lut_names = [l.strip() for l in model_dict["lut_names"]]
         self.statevec_names = [sv.strip() for sv in model_dict["statevec_names"]]
