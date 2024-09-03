@@ -3,9 +3,6 @@
 #  Copyright 2018 California Institute of Technology
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
-# For the analytical line, the forward model also needs to carry
-# The full idx_surface and shared idx_lamb across the different
-# state vectors
 #  you may not use this file except in compliance with the License.
 #  You may obtain a copy of the License at
 #
@@ -348,30 +345,29 @@ class InputData:
 class IO:
     """..."""
 
-    def __init__(self, config: Config, forward: ForwardModel):
+    def __init__(self, config: Config, full_statevec: np.array):
         """Initialization specifies retrieval subwindows for calculating
         measurement cost distributions."""
 
         self.config = config
-
-        self.bbl = (
-            "{"
-            + ",".join([str(1) for n in range(len(forward.instrument.wl_init))])
-            + "}"
+        wl_init, fwhm_init = load_wavelen(
+            self.config.forward_model.instrument.wavelength_file
         )
+
+        self.bbl = "{" + ",".join([str(1) for n in range(len(wl_init))]) + "}"
         self.radiance_correction = None
-        self.meas_wl = forward.instrument.wl_init
-        self.meas_fwhm = forward.instrument.fwhm_init
+        self.meas_wl = wl_init
+        self.meas_fwhm = fwhm_init
         self.writes = 0
         self.reads = 0
         self.n_rows = 1
         self.n_cols = 1
 
         # Use the pre-defined full statevec
-        self.full_statevec = forward.full_statevec
+        self.full_statevec = full_statevec
 
         self.n_sv = len(self.full_statevec)
-        self.n_chan = len(forward.instrument.wl_init)
+        self.n_chan = len(wl_init)
         self.flush_rate = config.implementation.io_buffer_size
 
         self.simulation_mode = config.implementation.mode == "simulation"
@@ -671,6 +667,7 @@ class IO:
                 )
 
             if "estimated_reflectance_file" in self.output_datasets:
+
                 to_write["estimated_reflectance_file"] = np.column_stack(
                     (self.meas_wl, lamb_est)
                 )

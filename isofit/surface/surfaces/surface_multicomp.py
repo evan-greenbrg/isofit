@@ -29,7 +29,7 @@ from isofit.surface.surface import Surface
 from .surface_base import BaseSurface
 
 
-class MultiComponentSurface(BaseSurface):
+class MultiComponentSurface(Surface):
     """A model of the surface based on a collection of multivariate
     Gaussians, with one or more equiprobable components and full
     covariance matrices.

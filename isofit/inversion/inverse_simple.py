@@ -272,13 +272,14 @@ def invert_analytical(
     )
     # x_alg contains [rfl_est, Ls_est, coeffs]
 
+    # Why is this is hardcoded for glint surface?
     if fm.RT.glint_model:
         x_surf = fm.surface.fit_params(x_alg[0], geom)
         x[fm.idx_surface] = x_surf
         # Initial guess for reflectance and glint parameters based on the algebraic inversion
         # Glint initialization currently comes from instrument band at ~1020 nm
     else:
-        x[fm.state.idx_surface] = x_alg[0]
+        x[fm.state.idx_surf_rfl] = x_alg[0]
 
     trajectory = []
 

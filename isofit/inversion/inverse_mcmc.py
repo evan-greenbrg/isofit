@@ -27,7 +27,7 @@ from isofit.core.common import eps
 from isofit.inversion.inverse import Inversion
 
 
-class MCMCInversion(Inversion):
+class MCMCInversion(Inverse):
     def __init__(self, full_config: Config, forward: ForwardModel):
         """Initialize and apply defaults."""
 

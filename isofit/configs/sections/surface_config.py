@@ -23,6 +23,7 @@ from typing import Dict, List, Type
 import numpy as np
 
 from isofit.configs.base_config import BaseConfigSection
+from isofit.configs.sections.statevector_config import StateVectorConfig
 
 
 class SurfaceConfig(BaseConfigSection):

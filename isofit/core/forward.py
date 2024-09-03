@@ -144,11 +144,16 @@ class ForwardModel:
         """Needs to retrieve appropriate statevec and save it as a
         class var"""
 
-        i, surface = self.surfaces.retrieve_pixel_surface_class(row, col)
-        state = self.states[i]
+    def construct_surface(self, i):
+        self.surface_params = self.config.surface.surface_params
+        surf_category = self.config.surface.Surfaces[i]["surface_category"]
 
-        # Need to check if this return statement isn't needed
-        return surface, state, i
+        self.surface = Surfaces[surf_category](
+            self.config.surface.Surfaces[i], self.surface_params
+        )
+
+    def construct_state(self):
+        self.state = StateVector(self.instrument, self.RT, self.surface)
 
     def out_of_bounds(self, x):
         """Check if state vector is within bounds."""
@@ -361,61 +366,3 @@ class ForwardModel:
         x_RT = x[self.state.idx_RT]
         x_instrument = x[self.state.idx_instrument]
         return x_surface, x_RT, x_instrument
-
-    def construct_full_state(self):
-        """
-        Looks at all the model-states present in the image and collapses
-        them into a single image-universal statevector. Returns both
-        the names and indexes of the image-wide statevector.
-
-        Returns:
-            self.full_statevec: [m] list of the combined
-                           rfl, surf_non_rfl, RT and instrument state names
-            self.full_idx_surface: [n] np.array of the combined
-                           rfl, surf_non_rfl state indexes
-            self.full_idx_surf_rfl: [n] np.array of the combined
-                           rfl state indexes
-            self.full_idx_surf_nonrfl: [n] np.array of the combined
-                           surf_non_rfl state indexes
-            self.full_idx_RT: [n] np.array of the combined
-                           RT state indexes
-            self.full_idx_instrument: [n] np.array of the combined
-                           instrument state indexes
-        """
-        rfl_states = []
-        nonrfl_states = []
-        RT_states = []
-        instrument_states = []
-
-        # Iterate through the different states to find overlapping state names
-        for i, state in self.states.items():
-            rfl_states += [state.statevec[i] for i in state.idx_surf_rfl]
-            nonrfl_states += [state.statevec[i] for i in state.idx_surf_nonrfl]
-            RT_states += [state.statevec[i] for i in state.idx_RT]
-            instrument_states += [state.statevec[i] for i in state.idx_instrument]
-
-        # Find unique state elements and collapse - ALPHABETICAL
-        rfl_states = sorted(list(set(rfl_states)))
-        nonrfl_states = sorted(list(set(nonrfl_states)))
-        RT_states = sorted(list(set(RT_states)))
-        instrument_states = sorted(list(set(instrument_states)))
-
-        # Rejoin in the same order as the original statevector object
-        self.full_statevec = rfl_states + nonrfl_states + RT_states + instrument_states
-
-        # Set up full idx arrays
-        self.full_idx_surface = np.arange(0, len(rfl_states) + len(nonrfl_states))
-
-        start = 0
-        self.full_idx_surf_rfl = np.arange(start, len(rfl_states))
-
-        start += len(rfl_states)
-        self.full_idx_surf_nonrfl = np.arange(start, start + len(nonrfl_states))
-
-        start += len(nonrfl_states)
-        self.full_idx_RT = np.arange(start, start + len(RT_states))
-
-        start += len(RT_states)
-        self.full_idx_instrument = np.arange(start, start + len(instrument_states))
-
-        return

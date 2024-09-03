@@ -72,6 +72,20 @@ class Isofit:
         self.config = configs.create_new_config(config_file)
         self.config.get_config_errors()
 
+        # Set up the multi-state pixel map
+        if self.config.forward_model.surface.multi_surface_flag:
+            self.state_pixel_index = index_image_by_class(
+                self.config.forward_model.surface
+            )
+        else:
+            self.state_pixel_index = []
+
+        # Construct and cache the full statevector (all multistates)
+        self.full_statevector, *_ = construct_full_state(self.config)
+
+        # Cache the forward models. Comment if not using caching
+        self.fm_cache = cache_forward_models(self.config)
+
         # Initialize ray for parallel execution
         rayargs = {
             "address": self.config.implementation.ip_head,
@@ -100,7 +114,7 @@ class Isofit:
         Attempts to avoid reading the entire file into memory, or hitting
         the physical disk too often.
 
-        row_column: The user can specify
+        row_column: TGhe user can specify
             * a single number, in which case it is interpreted as a row
             * a comma-separated pair, in which case it is interpreted as a
               row/column tuple (i.e. a single spectrum)
@@ -112,8 +126,10 @@ class Isofit:
         """
 
         logging.info("Building first forward model, will generate any necessary LUTs")
+
+        # Commented out to reflect the cached forward model
         # Initialize the forward model with n surfaces and states
-        self.fm = fm = ForwardModel(self.config)
+        # self.fm = fm = ForwardModel(self.config)
 
         if row_column is not None:
             ranges = row_column.split(",")
@@ -127,7 +143,7 @@ class Isofit:
                 self.rows = range(int(row_start), int(row_end) + 1)
                 self.cols = range(int(col_start), int(col_end) + 1)
         else:
-            io = IO(self.config, fm)
+            io = IO(self.config, self.full_statevector)
             self.rows = range(io.n_rows)
             self.cols = range(io.n_cols)
             del io
@@ -148,7 +164,15 @@ class Isofit:
 
         params = [
             ray.put(obj)
-            for obj in [self.config, fm, self.loglevel, self.logfile, n_workers]
+            for obj in [
+                self.config,
+                self.fm_cache,
+                self.full_statevector,
+                self.loglevel,
+                self.logfile,
+                self.state_pixel_index,
+                n_workers,
+            ]
         ]
         self.workers = ray.util.ActorPool(
             [Worker.remote(*params, n) for n in range(n_workers)]
@@ -192,9 +216,12 @@ class Worker(object):
     def __init__(
         self,
         config: configs.Config,
-        forward_model: ForwardModel,
+        # forward_model: ForwardModel,
+        fm_cache: dict,
+        full_statevector: np.array,
         loglevel: str,
         logfile: str,
+        state_pixel_index: list,
         total_workers: int = None,
         worker_id: int = None,
     ):
@@ -235,20 +262,24 @@ class Worker(object):
 
             # Get input data
             input_data = self.io.get_components_at_index(row, col)
+            # Get pixel class
+            pixel_class = match_class(self.state_pixel_index, row, col)
 
-            """
-            This may end up being redundant. The self.invs.inversions is a
-            dict that has the secific statevector within it. I'm a little fuzzy
-            on if this fucntion below will mess things up across workers.
-            In effect, I'm defining the surface and state twice. Once in setting
-            up the inversion wrapper, and once below."""
+            # Select the cached fm
+            self.fm = self.fm_cache[pixel_class]
 
-            (self.fm.surface, self.fm.state, pixel_class) = (
-                self.fm.get_surface_and_state(row, col)
-            )
+            logging.debug(f"Pixel class: {pixel_class}")
+            logging.debug(f"Surface: {self.fm.surface}")
 
-            # finalize the inversion to use
-            self.iv = self.ivs.iv_lookup[pixel_class]
+            # Commented out  caching
+            # Get surface
+            # self.fm.construct_surface(pixel_class)
+            # # Get state
+            # self.fm.construct_state()
+
+            # Get inversion
+            self.iv = Inversion(self.config, self.fm)
+            self.iv = self.iv.construct_inverse(self.fm)
 
             self.completed_spectra += 1
             if input_data is not None:
