@@ -132,7 +132,7 @@ def heuristic_atmosphere(
 
 
 def invert_algebraic(
-    surface: BaseSurface,
+    surface: Surface,
     RT: RadiativeTransfer,
     instrument: Instrument,
     x_surface: np.array,

@@ -34,8 +34,8 @@ from isofit.core.common import envi_header, load_spectrum
 from isofit.core.fileio import IO, write_bil_chunk
 from isofit.core.forward import ForwardModel
 from isofit.core.geometry import Geometry
+from isofit.inversion import Inversions
 from isofit.inversion.inverse_simple import invert_analytical
-from isofit.inversion.inversion import Inversion
 from isofit.utils.atm_interpolation import atm_interpolation
 from isofit.utils.multistate import (
     cache_forward_models,
@@ -43,404 +43,6 @@ from isofit.utils.multistate import (
     index_image_by_class,
     match_class,
 )
-
-
-def analytical_line(
-    rdn_file: str,
-    loc_file: str,
-    obs_file: str,
-    isofit_dir: str,
-    isofit_config: str = None,
-    segmentation_file: str = None,
-    n_atm_neighbors: list = None,
-    n_cores: int = -1,
-    smoothing_sigma: list = None,
-    output_rfl_file: str = None,
-    output_unc_file: str = None,
-    atm_file: str = None,
-    loglevel: str = "INFO",
-    logfile: str = None,
-) -> None:
-    """
-    TODO: Description
-    """
-    if n_atm_neighbors is None:
-        n_atm_neighbors = [20]
-    if smoothing_sigma is None:
-        smoothing_sigma = [2]
-
-    logging.basicConfig(
-        format="%(levelname)s:%(asctime)s ||| %(message)s",
-        level=loglevel,
-        filename=logfile,
-        datefmt="%Y-%m-%d,%H:%M:%S",
-    )
-
-    if isofit_config is None:
-        file = glob(os.path.join(isofit_dir, "config", "") + "*_isofit.json")[0]
-    else:
-        file = isofit_config
-
-    config = configs.create_new_config(file)
-    config.forward_model.instrument.integrations = 1
-
-    subs_state_file = config.output.estimated_state_file
-    subs_loc_file = config.input.loc_file
-    subs_class_file = config.forward_model.surface.surface_class_file
-
-    # Set up the multi-state pixel map
-    if config.forward_model.surface.multi_surface_flag:
-        state_pixel_index = index_image_by_class(
-            config.forward_model.surface, subs=False
-        )
-    else:
-        state_pixel_index = []
-
-    """Why does the glint model surface have to be explicitely stated? 
-    Shouldn't this be handled the same regardless of surface? 
-    If it is important for a reason I'm not aware of, we should handle 
-    it outside of this. If glint -> segmentation_file=None always.
-    I'm leaving the lines in, but commented out for now."""
-    if (
-        segmentation_file
-        is None
-        # or config.forward_model.surface.surface_category == "glint_model_surface"
-    ):
-        lbl_file = subs_state_file.replace("_subs_state", "_lbl")
-    else:
-        lbl_file = segmentation_file
-
-    if (
-        output_rfl_file
-        is None
-        # or config.forward_model.surface.surface_category == "glint_model_surface"
-    ):
-        analytical_state_file = subs_state_file.replace(
-            "_subs_state", "_state_analytical"
-        )
-    else:
-        analytical_state_file = output_rfl_file
-
-    if (
-        output_unc_file
-        is None
-        # or config.forward_model.surface.surface_category == "glint_model_surface"
-    ):
-        analytical_state_unc_file = subs_state_file.replace(
-            "_subs_state", "_state_analytical_uncert"
-        )
-    else:
-        analytical_state_unc_file = output_unc_file
-
-    if (
-        atm_file
-        is None
-        # or config.forward_model.surface.surface_category == "glint_model_surface"
-    ):
-        atm_file = subs_state_file.replace("_subs_state", "_atm_interp")
-    else:
-        atm_file = atm_file
-
-    fm = ForwardModel(config, subs=False)
-    (
-        fm.full_statevec,
-        fm.full_idx_surface,
-        fm.full_idx_surf_rfl,
-        fm.full_idx_surf_nonrfl,
-        fm.full_idx_RT,
-        fm.full_idx_instrument,
-    ) = construct_full_state(config)
-
-    # Initialize inversion
-    iv = Inversion(config, fm)
-
-    if os.path.isfile(atm_file) is False:
-        # This should match the necesary state elements based on the name
-        atm_interpolation(
-            reference_state_file=subs_state_file,
-            reference_locations_file=subs_loc_file,
-            input_locations_file=loc_file,
-            segmentation_file=lbl_file,
-            output_atm_file=atm_file,
-            atm_band_names=fm.RT.statevec_names,
-            nneighbors=n_atm_neighbors,
-            gaussian_smoothing_sigma=smoothing_sigma,
-            n_cores=n_cores,
-        )
-
-    rdn_ds = envi.open(envi_header(rdn_file))
-    rdn = rdn_ds.open_memmap(interleave="bip")
-    rdns = rdn.shape
-
-    """If there are surface states, should they be broken out as separate file,
-    or included into the surface retrieval? First pass, include them in the
-    surface retrieval"""
-    output_metadata = rdn_ds.metadata
-    output_metadata["interleave"] = "bil"
-    output_metadata["description"] = "L2A Analytyical per-pixel surface retrieval"
-    output_metadata["bands"] = str(len(fm.idx_surface))
-    output_metadata["band names"] = fm.surface.statevec_names
-
-    # Get return windows
-    outside_ret_windows = np.zeros(len(fm.full_idx_surf_rfl), dtype=int)
-
-    # Need a way to get the window index, which should be constant with a
-    # constant instrument
-    outside_ret_windows[iv.winidx] = 1
-    # output_metadata["bbl"] = "{" + ",".join([str(x) for x in outside_ret_windows]) + "}"
-    output_metadata["bbl"] = "{" + ",".join([f"{x}" for x in outside_ret_windows]) + "}"
-
-    if "emit pge input files" in list(output_metadata.keys()):
-        del output_metadata["emit pge input files"]
-
-    img = envi.create_image(
-        envi_header(analytical_state_file), ext="", metadata=output_metadata, force=True
-    )
-    del img
-
-    img = envi.create_image(
-        envi_header(analytical_state_unc_file),
-        ext="",
-        metadata=output_metadata,
-        force=True,
-    )
-    del rdn, img
-
-    if n_cores == -1:
-        n_cores = multiprocessing.cpu_count()
-
-    ray_dict = {
-        "ignore_reinit_error": config.implementation.ray_ignore_reinit_error,
-        "address": config.implementation.ip_head,
-        "_temp_dir": config.implementation.ray_temp_dir,
-        "include_dashboard": config.implementation.ray_include_dashboard,
-        "_redis_password": config.implementation.redis_password,
-        "num_cpus": n_cores,
-    }
-    ray.init(**ray_dict)
-
-    n_workers = n_cores
-
-    wargs = [
-        ray.put(obj)
-        for obj in (
-            config,
-            fm,
-            iv,
-            state_pixel_index,
-            atm_file,
-            analytical_state_file,
-            analytical_state_unc_file,
-            rdn_file,
-            loc_file,
-            obs_file,
-            loglevel,
-            logfile,
-        )
-    ]
-    workers = ray.util.ActorPool([Worker.remote(*wargs) for _ in range(n_workers)])
-
-    line_breaks = np.linspace(
-        0, rdns[0], n_workers * config.implementation.task_inflation_factor, dtype=int
-    )
-    line_breaks = [
-        (line_breaks[n], line_breaks[n + 1]) for n in range(len(line_breaks) - 1)
-    ]
-
-    start_time = time.time()
-    res = list(workers.map_unordered(lambda a, b: a.run_lines.remote(b), line_breaks))
-    total_time = time.time() - start_time
-    logging.info(
-        f"Analytical line inversions complete.  {round(total_time,2)}s total, "
-        f"{round(rdns[0]*rdns[1]/total_time,4)} spectra/s, "
-        f"{round(rdns[0]*rdns[1]/total_time/n_workers,4)} spectra/s/core"
-    )
-
-
-@ray.remote(num_cpus=1)
-class Worker(object):
-    def __init__(
-        self,
-        config: configs.Config,
-        # fm: ForwardModel,
-        fm_cache: dict,
-        state_pixel_index: list,
-        full_statevector: list,
-        full_idx_surface: np.array,
-        full_idx_RT: np.array,
-        RT_state_file: str,
-        analytical_state_file: str,
-        analytical_state_unc_file: str,
-        rdn_file: str,
-        loc_file: str,
-        obs_file: str,
-        loglevel: str,
-        logfile: str,
-        subs_state_file: str = None,
-        lbl_file: str = None,
-    ):
-        """
-        Worker class to help run a subset of spectra.
-
-        Args:
-            fm: isofit forward_model
-            loglevel: output logging level
-            logfile: output logging file
-        """
-        logging.basicConfig(
-            format="%(levelname)s:%(asctime)s ||| %(message)s",
-            level=loglevel,
-            filename=logfile,
-            datefmt="%Y-%m-%d,%H:%M:%S",
-        )
-        self.config = config
-
-        self.fm_cache = fm_cache
-        self.state_pixel_index = state_pixel_index
-        self.full_statevector = full_statevector
-        self.full_idx_surface = full_idx_surface
-        self.full_idx_RT = full_idx_RT
-
-        self.rfl_bounds = np.min(fm.bounds, axis=0)[0], np.max(fm.bounds, axis=0)[1]
-        logging.debug(
-            f"Reflectance output will be bounded to the surface bounds: {self.rfl_bounds}"
-        )
-
-        self.completed_spectra = 0
-        self.hash_table = OrderedDict()
-        self.hash_size = 500
-        self.RT_state_file = RT_state_file
-        self.rdn_file = rdn_file
-        self.loc_file = loc_file
-        self.obs_file = obs_file
-        self.analytical_state_file = analytical_state_file
-        self.analytical_state_unc_file = analytical_state_unc_file
-
-        if subs_state_file is not None and lbl_file is not None:
-            self.subs_state_file = subs_state_file
-            self.lbl_file = lbl_file
-        else:
-            self.subs_state_file = None
-            self.lbl_file = None
-
-        if config.input.radiometry_correction_file is not None:
-            self.radiance_correction, wl = load_spectrum(
-                config.input.radiometry_correction_file
-            )
-        else:
-            self.radiance_correction = None
-
-        # Open files at the worker level
-        self.rdn = envi.open(envi_header(self.rdn_file)).open_memmap(interleave="bip")
-
-        self.loc = envi.open(envi_header(self.loc_file)).open_memmap(interleave="bip")
-
-        self.obs = envi.open(envi_header(self.obs_file)).open_memmap(interleave="bip")
-
-        self.rt_state = envi.open(envi_header(self.RT_state_file)).open_memmap(
-            interleave="bip"
-        )
-
-    def run_lines(self, startstop: tuple) -> None:
-        """
-        TODO: Description
-        """
-        start_line, stop_line = startstop
-        output_state = (
-            np.zeros(
-                (
-                    stop_line - start_line,
-                    self.rt_state.shape[1],
-                    len(self.full_idx_surface),
-                )
-            )
-            - 9999
-        )
-
-        output_state_unc = (
-            np.zeros(
-                (
-                    stop_line - start_line,
-                    self.rt_state.shape[1],
-                    len(self.full_idx_surface),
-                )
-            )
-            - 9999
-        )
-
-        esd = IO.load_esd()
-
-        for r in range(start_line, stop_line):
-            for c in range(output_state.shape[1]):
-                # class of pixel
-                pixel_class = match_class(self.state_pixel_index, r, c)
-
-                # get cached fm
-                self.fm = self.fm_cache[pixel_class]
-
-                # Construct inversion
-                self.iv = Inversion(self.config, self.fm)
-                self.iv = self.iv.construct_inverse(self.fm)
-
-                meas = self.rdn[r, c, :]
-                if self.radiance_correction is not None:
-                    meas *= self.radiance_correction
-                if np.all(meas < 0):
-                    continue
-                x_RT = rt_state[r, c, self.fm.idx_RT - len(self.fm.idx_surface)]
-                geom = Geometry(obs=obs[r, c, :], loc=loc[r, c, :], esd=esd)
-
-                states, unc = invert_analytical(
-                    self.fm,
-                    self.iv.winidx,
-                    meas,
-                    geom,
-                    x_RT,
-                    1,
-                    self.hash_table,
-                    self.hash_size,
-                )
-
-                # Match pixel-specific to general statevector
-                state_est = states[-1]
-                full_state_est = match_statevector(
-                    state_est, self.full_statevector, self.fm.state.statevec
-                )
-
-                output_state[r - start_line, c, :] = full_state_est[
-                    self.full_idx_surface
-                ]
-
-                full_unc = match_statevector(
-                    unc, self.full_statevector, self.fm.state.statevec
-                )
-                output_state_unc[r - start_line, c, :] = full_unc[self.full_idx_surface]
-
-            state = output_state[r - start_line, ...]
-            mask = np.logical_and.reduce(
-                [
-                    state < self.rfl_bounds[0],
-                    state > self.rfl_bounds[1],
-                    state != -9999,
-                    state != -0.01,
-                ]
-            )
-            state[mask] = 0
-
-            logging.info(f"Analytical line writing line {r}")
-
-            write_bil_chunk(
-                state.T,
-                self.analytical_state_file,
-                r,
-                (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
-            )
-            write_bil_chunk(
-                output_state_unc[r - start_line, ...].T,
-                self.analytical_state_unc_file,
-                r,
-                (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
-            )
 
 
 def construct_outputs(
@@ -569,8 +171,6 @@ def analytical_line(
         else []
     )
 
-    # Cache forward models
-    fm_cache = cache_forward_models(config)
     # fm = ForwardModel(config, subs=False)
 
     (
@@ -634,8 +234,7 @@ def analytical_line(
         ray.put(obj)
         for obj in (
             config,
-            # fm,
-            fm_cache,
+            fm,
             state_pixel_index,
             full_statevector,
             full_idx_surface,
@@ -663,6 +262,189 @@ def analytical_line(
         f"{round(rdns[0]*rdns[1]/total_time,4)} spectra/s, "
         f"{round(rdns[0]*rdns[1]/total_time/n_cores, 4)} spectra/s/core"
     )
+
+
+@ray.remote(num_cpus=1)
+class Worker(object):
+    def __init__(
+        self,
+        config: configs.Config,
+        # fm: ForwardModel,
+        fm_cache: dict,
+        state_pixel_index: list,
+        full_statevector: list,
+        full_idx_surface: np.array,
+        full_idx_RT: np.array,
+        RT_state_file: str,
+        analytical_state_file: str,
+        analytical_state_unc_file: str,
+        rdn_file: str,
+        loc_file: str,
+        obs_file: str,
+        loglevel: str,
+        logfile: str,
+        subs_state_file: str = None,
+        lbl_file: str = None,
+    ):
+        """
+        Worker class to help run a subset of spectra.
+
+        Args:
+            fm: isofit forward_model
+            loglevel: output logging level
+            logfile: output logging file
+        """
+        logging.basicConfig(
+            format="%(levelname)s:%(asctime)s ||| %(message)s",
+            level=loglevel,
+            filename=logfile,
+            datefmt="%Y-%m-%d,%H:%M:%S",
+        )
+        self.config = config
+
+        self.fm_cache = fm_cache
+        self.state_pixel_index = state_pixel_index
+        self.full_statevector = full_statevector
+        self.full_idx_surface = full_idx_surface
+        self.full_idx_RT = full_idx_RT
+
+        self.completed_spectra = 0
+        self.hash_table = OrderedDict()
+        self.hash_size = 500
+        self.RT_state_file = RT_state_file
+        self.rdn_file = rdn_file
+        self.loc_file = loc_file
+        self.obs_file = obs_file
+        self.analytical_state_file = analytical_state_file
+        self.analytical_state_unc_file = analytical_state_unc_file
+
+        if subs_state_file is not None and lbl_file is not None:
+            self.subs_state_file = subs_state_file
+            self.lbl_file = lbl_file
+        else:
+            self.subs_state_file = None
+            self.lbl_file = None
+
+        if config.input.radiometry_correction_file is not None:
+            self.radiance_correction, wl = load_spectrum(
+                config.input.radiometry_correction_file
+            )
+        else:
+            self.radiance_correction = None
+
+        # Open files at the worker level
+        self.rdn = envi.open(envi_header(self.rdn_file)).open_memmap(interleave="bip")
+
+        self.loc = envi.open(envi_header(self.loc_file)).open_memmap(interleave="bip")
+
+        self.obs = envi.open(envi_header(self.obs_file)).open_memmap(interleave="bip")
+
+        self.rt_state = envi.open(envi_header(self.RT_state_file)).open_memmap(
+            interleave="bip"
+        )
+
+    def run_lines(self, startstop: tuple) -> None:
+        """
+        TODO: Description
+        """
+        start_line, stop_line = startstop
+        output_state = (
+            np.zeros(
+                (
+                    stop_line - start_line,
+                    self.rt_state.shape[1],
+                    len(self.full_idx_surface),
+                )
+            )
+            - 9999
+        )
+
+        output_state_unc = (
+            np.zeros(
+                (
+                    stop_line - start_line,
+                    self.rt_state.shape[1],
+                    len(self.full_idx_surface),
+                )
+            )
+            - 9999
+        )
+
+        for r in range(start_line, stop_line):
+            for c in range(output_state.shape[1]):
+                # class of pixel
+                pixel_class = match_class(self.state_pixel_index, r, c)
+
+                # get cached fm
+                self.fm = self.fm_cache[pixel_class]
+
+                # Construct inversion
+
+                iv = Inversions.get(self.config.implementation.mode, None)
+                if not iv:
+                    logging.exception(
+                        "Inversion implementation: "
+                        f"{self.config.implementation.mode}, "
+                        "did not match options"
+                    )
+                    raise KeyError
+                self.iv = iv(self.config, self.fm)
+
+                meas = self.rdn[r, c, :]
+                if self.radiance_correction is not None:
+                    meas *= self.radiance_correction
+                if np.all(meas < 0):
+                    continue
+
+                # Atmospheric state elements
+                x_RT = self.rt_state[
+                    # r, c, self.full_idx_RT - len(self.full_idx_surface)
+                    r,
+                    c,
+                    self.fm.state.idx_RT - len(self.fm.state.idx_surface),
+                ]
+                geom = Geometry(obs=self.obs[r, c, :], loc=self.loc[r, c, :])
+
+                states, unc = invert_analytical(
+                    self.fm,
+                    self.iv.winidx,
+                    meas,
+                    geom,
+                    x_RT,
+                    1,
+                    self.hash_table,
+                    self.hash_size,
+                )
+
+                # Match pixel-specific to general statevector
+                state_est = states[-1]
+                full_state_est = match_statevector(
+                    state_est, self.full_statevector, self.fm.state.statevec
+                )
+
+                output_state[r - start_line, c, :] = full_state_est[
+                    self.full_idx_surface
+                ]
+
+                full_unc = match_statevector(
+                    unc, self.full_statevector, self.fm.state.statevec
+                )
+                output_state_unc[r - start_line, c, :] = full_unc[self.full_idx_surface]
+
+            logging.info(f"Analytical line writing line {r}")
+
+            write_bil_chunk(
+                output_state[r - start_line, ...].T,
+                self.analytical_state_file,
+                r,
+                (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
+            )
+            write_bil_chunk(
+                output_state_unc[r - start_line, ...].T,
+                self.analytical_state_unc_file,
+                r,
+                (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
+            )
 
 
 @click.command(name="analytical_line")
