@@ -2,21 +2,23 @@
   "ISOFIT_base": "../../..",
 
   "input": {
-    "measured_radiance_file":     "../remote/prm20151026t173213_rawrdn_v1h3_D8W_clip.txt",
-    "obs_file":                   "../remote/prm20151026t173213_obs_D8W.txt",
-    "reference_reflectance_file": "../insitu/D8W.txt"
+    "measured_radiance_file":     "../remote/prm20151026t173213_rawrdn_v1h3_D9p5W_clip.txt",
+    "obs_file":                   "../remote/prm20151026t173213_obs_D9p5W.txt",
+    "radiometry_correction_file": "../data/prm20151026t173213_rdn_6s_factors.txt",
+    "reference_reflectance_file": "../insitu/D9p5W.txt"
   },
 
   "output": {
-    "estimated_reflectance_file": "../remote/prm20151026t173213_rfl_v1h3_D8W_6s.txt",
-    "modeled_radiance_file":      "../remote/prm20151026t173213_mdl_v1h3_D8W_6s.txt",
-    "state_file":                 "../remote/prm20151026t173213_state_v1h3_D8W_6s.txt",
-    "posterior_uncertainty_file": "../remote/prm20151026t173213_post_v1h3_D8W_6s.txt",
-    "data_dump_file":             "../remote/prm20151026t173213_data_D8W_6s.mat",
+    "estimated_reflectance_file": "../remote/prm20151026t173213_rfl_v1h3_D9p5W_6s.txt",
+    "modeled_radiance_file":      "../remote/prm20151026t173213_mdl_v1h3_D9p5W_6s.txt",
+    "state_file":                 "../remote/prm20151026t173213_state_v1h3_D9p5W_6s.txt",
+    "posterior_uncertainty_file": "../remote/prm20151026t173213_post_v1h3_D9p5W_6s.txt",
+    "data_dump_file":             "../remote/prm20151026t173213_data_D9p5W_6s.mat",
     "plot_directory":             "../images/"
   },
 
   "forward_model":{
+
     "instrument": {
       "wavelength_file":      "../data/20140221_PRISM_wavelengths_truncated_clip.txt",
       "SNR": 500,
@@ -76,9 +78,8 @@
           "month": 10,
           "day": 26,
           "sim_path": "../lut/",
-          "lut_path": "../lut/D8W_6s.nc",
-          "lut_names": {"H2OSTR": null, "AOT550": null},
-          "statevector_names": ["H2OSTR", "AOT550"]
+          "lut_path": "../lut/D9p5W_6s.nc",
+          "lut_names": {"H2OSTR": null, "AOT550": null}
         }
       }
     }

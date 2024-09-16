@@ -23,9 +23,9 @@ import logging
 
 import numpy as np
 from scipy.interpolate import interp1d
-from spectral.io import envi
 
-from isofit.core.common import load_spectrum, load_wavelen
+from isofit.configs import Config
+from isofit.core.common import envi_header, load_spectrum, load_wavelen
 
 
 class Surface:

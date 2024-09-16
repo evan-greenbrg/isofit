@@ -18,7 +18,7 @@
   "forward_model":{
 
     "instrument": {
-      "wavelength_file": "../data/20170320_ang20170228_wavelength_fit.txt",
+      "wavelength_file": "../remote/20170320_ang20170228_wavelength_fit.txt",
       "parametric_noise_file": "../../../data/avirisng_noise.txt",
       "integrations":10,
       "unknowns": {
@@ -31,17 +31,16 @@
         "Surfaces": {
             "0": {
                 "surface_category": "multicomponent_surface",
-                "surface_file": "../data/ang20170228_surface_model.mat",
+                "surface_file": "../remote/ang20170228_surface_model.mat",
                 "surface_type": "base"
             },
             "1": {
-                "surface_category": "test_surface",
-                "surface_file": "../data/ang20170228_surface_model.mat",
+                "surface_category": "glint_model_surface",
+                "surface_file": "../remote/ang20170228_surface_model.mat",
                 "surface_type": "test"
             }
         },
-        "multi_surface_flag": true,
-        "statevector": {},
+        "multi_surface_flag": false,
         "surface_params": {
             "select_on_init": true,
             "selection_metric": "Euclidean"
@@ -73,20 +72,11 @@
       },
       "radiative_transfer_engines": {
         "vswir": {
-          "irradiance_file": "../data/prism_optimized_irr.dat",
-          "earth_sun_distance_file": "../../../data/earth_sun_distance.txt",
-          "engine_base_dir": "${SIXS_DIR}",
-          "engine_name": "6s",
-          "solzen": 55.21,
-          "solaz": 141.70,
-          "elev": 0.0,
-          "alt": 20.0,
-          "viewaz": 202.89063,
-          "viewzen": 1.08,
-          "month": 10,
-          "day": 26,
+          "engine_name": "modtran",
+          "wavelength_range":[370,2505],
           "sim_path": "../lut/",
-          "lut_path": "../lut/D8W_6s.nc",
+          "lut_path": "../lut/ang20171108t184829_post_v2p11_darklot.nc",
+          "template_file": "ang20171108t184227_modtran.json",
           "lut_names": {"H2OSTR": null, "AOT550": null}
         }
       }

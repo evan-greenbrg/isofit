@@ -2,16 +2,16 @@
   "ISOFIT_BASE": "../../..",
 
   "input": {
-    "measured_radiance_file": "../remote/ang20171108t184227_rdn_v2p11_AstroGreenBaseball.txt",
-    "reference_reflectance_file": "../insitu/AstroGreenBaseball.txt"
+    "measured_radiance_file": "../remote/ang20171108t184227_rdn_v2p11_BeckmanLawn.txt",
+    "reference_reflectance_file": "../insitu/BeckmanLawn.txt"
   },
 
   "output": {
-    "estimated_reflectance_file": "../output/ang20171108t184227_rfl_v2p11_AstroGreenBaseball.txt",
-    "algebraic_inverse_file": "../output/ang20171108t184227_alg_v2p11_AstroGreenBaseball.txt",
-    "modeled_radiance_file":  "../output/ang20171108t184227_mdl_v2p11_AstroGreenBaseball.txt",
-    "data_dump_file":         "../output/ang20171108t184227_data_v2p11_AstroGreenBaseball.mat",
-    "posterior_errors_file":  "../output/ang20171108t184227_post_v2p11_AstroGreenBaseball.mat",
+    "estimated_reflectance_file": "../output/ang20171108t184227_rfl_v2p11_BeckmanLawn-oversmoothed.txt",
+    "algebraic_inverse_file": "../output/ang20171108t184227_alg_v2p11_BeckmanLawn-oversmoothed.txt",
+    "modeled_radiance_file":  "../output/ang20171108t184227_mdl_v2p11_BeckmanLawn-oversmoothed.txt",
+    "data_dump_file":         "../output/ang20171108t184227_data_v2p11_BeckmanLawn-oversmoothed.mat",
+    "posterior_errors_file":  "../output/ang20171108t184227_post_v2p11_BeckmanLawn-oversmoothed.mat",
     "plot_directory": "../images/"
   },
 
@@ -20,19 +20,27 @@
     "instrument": {
       "wavelength_file": "../remote/20170320_ang20170228_wavelength_fit.txt",
       "parametric_noise_file": "../../../data/avirisng_noise.txt",
-      "integrations":240,
+      "integrations":294,
       "unknowns": {
         "channelized_radiometric_uncertainty_file":
           "../../../data/avirisng_systematic_error.txt",
-        "uncorrelated_radiometric_uncertainty": 0.01
+        "uncorrelated_radiometric_uncertainty": 0.05
       }
     },
-
     "surface": {
-      "surface_category": "multicomponent_surface",
-      "surface_file": "../remote/ang20170228_surface_model.mat"
+        "Surfaces": {
+            "0": {
+                "surface_category": "multicomponent_surface",
+                "surface_file": "../remote/ang20170228_surface_model.mat",
+                "surface_type": "base"
+            }
+        },
+        "multi_surface_flag": false,
+        "surface_params": {
+            "select_on_init": true,
+            "selection_metric": "Euclidean"
+        }
     },
-
     "radiative_transfer": {
       "statevector": {
         "H2OSTR": {
@@ -62,7 +70,7 @@
           "engine_name": "modtran",
           "wavelength_range":[370,2505],
           "sim_path": "../lut/",
-          "lut_path": "../lut/ang20171108t184227_post_v2p11_AstroGreenBaseball.nc",
+          "lut_path": "../lut/ang20171108t184227_post_v2p11_BeckmanLawn-oversmoothed.nc",
           "template_file": "ang20171108t184227_modtran.json",
           "lut_names": {"H2OSTR": null, "AOT550": null}
         }
@@ -72,7 +80,7 @@
 
   "implementation": {
     "inversion": {
-      "windows": [[380.0,1300.0],[1450,1780.0],[1950.0,2450.0]]
+      "windows": [[380.0, 1300.0], [1450, 1780.0], [1950.0, 2450.0]]
     }
   }
 }

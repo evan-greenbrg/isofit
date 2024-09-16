@@ -38,12 +38,7 @@ from isofit.configs import configs
 from isofit.core.fileio import IO
 from isofit.core.forward import ForwardModel
 from isofit.inversion import Inversions
-from isofit.utils.multistate import (
-    cache_forward_models,
-    construct_full_state,
-    index_image_by_class,
-    match_class,
-)
+from isofit.utils.multistate import construct_full_state, index_image_by_class
 
 
 class Isofit:
@@ -74,7 +69,6 @@ class Isofit:
         self.config = None
 
         # Load configuration file
-        # This is doing something
         self.config = configs.create_new_config(config_file)
         self.config.get_config_errors()
 
@@ -117,7 +111,7 @@ class Isofit:
         Attempts to avoid reading the entire file into memory, or hitting
         the physical disk too often.
 
-        row_column: TGhe user can specify
+        row_column: The user can specify
             * a single number, in which case it is interpreted as a row
             * a comma-separated pair, in which case it is interpreted as a
               row/column tuple (i.e. a single spectrum)
@@ -166,17 +160,15 @@ class Isofit:
         # Save this for logging
         total_samples = index_pairs.shape[0]
 
-        # Split into class if pixel classes are being propogated
-        # If this is a multistate run
+        # If multistate, split into class
         if len(self.state_pixel_index):
             index_pairs_class = []
             for class_row_col in self.state_pixel_index:
+
                 if not len(class_row_col):
                     continue
 
-                class_row_col = np.array(class_row_col)
-                index_pairs_class.append(index_pairs[class_row_col[:, 0]])
-
+                index_pairs_class.append(np.delete(np.array(class_row_col), 2, axis=1))
             index_pairs = index_pairs_class
 
         # Else it's not a multistate run
@@ -193,13 +185,14 @@ class Isofit:
         Another pair of eyes on the mutiprocessing would be great here.
         There may easily be a better way to do this. Mostly setting 
         worker number on the samples within the loop rather than
-        across the entire scene.
+        across the entire scene. It seems like we are losing
+        some performance.
         """
         # Loop through index pairs and run workers
         class_loop_start_time = time.time()
         for i, index_pair in enumerate(index_pairs):
 
-            # Max out number of workers based on number of tasks
+            # Don't want more workers than tasks
             n_iter = index_pair.shape[0]
             n_workers = min(n_workers, n_iter)
 
@@ -219,10 +212,7 @@ class Isofit:
                 ]
 
             # Construct full fm
-            self.fm = fm = ForwardModel(self.config)
-            # Have to split these out to update the surface dynamically
-            self.fm.construct_surface(str(i))
-            self.fm.construct_state()
+            self.fm = fm = ForwardModel(self.config, str(i))
 
             logging.debug(f"Pixel class: {str(i)}")
             logging.debug(f"Surface: {self.fm.surface}")

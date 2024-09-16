@@ -119,7 +119,7 @@ class SpectrumFile:
                 raise IOError("MATLAB format in input block not supported")
 
         elif self.fname.endswith(".nc"):
-            logging.debug(f"Inferred MATLAB file format for {self.fname}")
+            logging.debug(f"Inferred NETCDF file format for {self.fname}")
             self.format = "NETCDF"
 
             if not self.write:
@@ -550,7 +550,12 @@ class IO:
             self.flush_buffers()
 
     def build_output(
-        self, states: List, input_data: InputData, fm: ForwardModel, iv: Inversion
+        self,
+        states: List,
+        input_data: InputData,
+        fm: ForwardModel,
+        iv: Inversion,
+        fill_value=-9999.0,
     ):
         """
         Build the output to be written to disk as a dictionary
@@ -566,9 +571,9 @@ class IO:
 
         if len(states) == 0:
             # Write a bad data flag
-            atm_bad = np.zeros(len(fm.instrument.n_chan) * 5) * -9999.0
-            state_bad = np.zeros(len(fm.statevec)) * -9999.0
-            data_bad = np.zeros(fm.instrument.n_chan) * -9999.0
+            atm_bad = np.zeros(len(fm.instrument.n_chan) * 5) + fill_value
+            state_bad = np.zeros(len(fm.statevec)) + fill_value
+            data_bad = np.zeros(fm.instrument.n_chan) + fill_value
             to_write = {
                 "estimated_state_file": state_bad,
                 "estimated_reflectance_file": data_bad,
@@ -600,7 +605,7 @@ class IO:
             if "estimated_state_file" in self.output_datasets:
                 # state_est transformed to reflect io.full_statevec
                 to_write["estimated_state_file"] = match_statevector(
-                    state_est, self.full_statevec, fm.state.statevec
+                    state_est, self.full_statevec, fm.statevec
                 )
 
             if "path_radiance_file" in self.output_datasets:
@@ -623,7 +628,7 @@ class IO:
                 S_hat, K, G = iv.calc_posterior(state_est, geom, meas)
                 # psterior uncertainty transformed to reflect io.full_statevec
                 to_write["posterior_uncertainty_file"] = match_statevector(
-                    np.sqrt(np.diag(S_hat)), self.full_statevec, fm.state.statevec
+                    np.sqrt(np.diag(S_hat)), self.full_statevec, fm.statevec
                 )
 
             ############ Now proceed to the calcs where they may be some overlap
@@ -805,4 +810,46 @@ def write_bil_chunk(
     outfile = open(outfile, "rb+")
     outfile.seek(line * shape[1] * shape[2] * np.dtype(dtype).itemsize)
     outfile.write(dat.astype(dtype).tobytes())
+    outfile.close()
+
+
+def write_bil_spectra(
+    dat: np.array,
+    outfile: str,
+    r: int,
+    c: int,
+    bands: int,
+    columns: int,
+    dtype: str = np.float32,
+) -> None:
+    """
+    Need to test this that it gives the same answer as the BIL line.
+    BIP would be so much easier for writing by spectra.
+
+    Write a entry of data to a binary, BIL formatted data cube.
+    Args:
+        dat: data to write
+        outfile: output file to write to
+        row:
+        col:
+        bands:
+        shape: shape of the output file
+        dtype: output data type
+
+    Returns:
+        None
+    """
+    outfile = open(outfile, "rb+")
+
+    # Go to row
+    row_position = r * columns * bands * np.dtype(dtype).itemsize
+
+    # Constant column position
+    column_position = c * np.dtype(dtype).itemsize
+    for b, v in enumerate(dat):
+        band_position = b * columns * np.dtype(dtype).itemsize
+
+        # It would be more efficient to move the pointer from band to band
+        outfile.seek((row_position + band_position + column_position))
+        outfile.write(v.astype(dtype).tobytes())
     outfile.close()

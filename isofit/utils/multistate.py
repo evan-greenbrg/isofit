@@ -27,70 +27,8 @@ from isofit.configs import Config
 from isofit.core.common import envi_header, load_spectrum, load_wavelen
 from isofit.core.forward import ForwardModel
 from isofit.core.instrument import Instrument
-from isofit.core.state import StateVector
 from isofit.radiative_transfer.radiative_transfer import RadiativeTransfer
 from isofit.surface.surfaces import Surfaces
-
-
-def index_image_by_class(surface_config, subs=True):
-    """
-    Indexes an image by a provided surface class file.
-    Could extend it to be indexed by an atomspheric classification
-    file as well if you want to vary both surface and atmospheric
-    state.
-
-    Args:
-        surface_config: (Config object) The surface component of the
-                        main config.
-        subs: (optional) (bool) that tells function which classification
-              file to use.
-
-    Returns:
-        class_groups: (dict) where keys are the pixel classification (index)
-                      and values are tuples of rows and columns for each
-                      group.
-    """
-
-    if vars(surface_config).get("sub_surface_class_file"):
-        class_file = surface_config.sub_surface_class_file
-    else:
-        class_file = surface_config.surface_class_file
-
-    classes = envi.open(envi_header(class_file)).open_memmap(interleave="bip")
-
-    class_groups = []
-    for c in surface_config.Surfaces.keys():
-        pixel_list = np.argwhere(classes == int(c)).astype(int).tolist()
-        class_groups.append(pixel_list)
-
-    del classes
-
-    return class_groups
-
-
-def cache_forward_models(config):
-    """
-    Used to speed up processing. Rather than initializing the surfaces
-    and states on a per-pixel basis, this function allows the program
-    to cache the states present in the image.
-
-    Args:
-        config: (Config object) The full isofit config object.
-
-    Returns
-        fm_cache: (dict) cached lookup table with forward models by
-                  pixel state classification.
-
-    """
-    fm_cache = {}
-    for i, surface in config.forward_model.surface.Surfaces.items():
-        fm = ForwardModel(config)
-        fm.construct_surface(i)
-        fm.construct_state()
-
-        fm_cache[i] = fm
-
-    return fm_cache
 
 
 def match_class(class_groups, row, col):
@@ -100,7 +38,7 @@ def match_class(class_groups, row, col):
 
     Args:
 
-        class_groups: (dict) Keys are the pixel groups. Values are tuples
+        class_groups: (list) of pixel groups. Values are tuples
                       of rows and column that belong in the respective groups.
         row: (int) row of queried pixel
         col: (int) col of queried pixel
@@ -112,7 +50,7 @@ def match_class(class_groups, row, col):
     # else match
     matches = np.zeros((len(class_groups))).astype(int)
     for i, group in enumerate(class_groups):
-        if [row, col, 0] in group:
+        if len(group[(group[:, 0] == row) & (group[:, 1] == col)]):
             matches[i] = 1
         else:
             matches[i] = 0
@@ -131,7 +69,7 @@ def match_class(class_groups, row, col):
         )
         raise ValueError
 
-    return str(np.argwhere(matches)[0][0])
+    return np.argwhere(matches)[0][0]
 
 
 def construct_full_state(full_config):
@@ -164,17 +102,31 @@ def construct_full_state(full_config):
     instrument = Instrument(full_config)
     instrument_states = instrument.statevec_names
 
-    # This is how it would be nice to pull every statevector element
+    # Pull the rt names from the config. Seems to be most commonly present.
     rt_config = full_config.forward_model.radiative_transfer
-    rt_states = rt_config.radiative_transfer_engines[0].statevector_names
+
+    """
+    This method of retrieving the rt states is giving me issues between
+    legacy configs and current configs. What is the most stable place
+    to pull the statevector name list?.
+    statevector_names not always present.
+    is lut_names always present? Is always a dict?
+
+    most stable is to iterate across statevector config, 
+    but I have to match out the _type -> bad
+    """
+
+    rt_states = vars(rt_config.radiative_transfer_engines[0])["statevector_names"]
+    if not rt_states:
+        rt_states = sorted(rt_config.radiative_transfer_engines[0].lut_names.keys())
 
     # Without changing where the nonrfl surface elements are defined
     surface_config = full_config.forward_model.surface
     params = surface_config.surface_params
 
     # Iterate through the different surfaces to find overlapping state names
-    for i, surface in full_config.forward_model.surface.Surfaces.items():
-        surface = Surfaces[surface["surface_category"]](surface, params)
+    for i, surface_config in full_config.forward_model.surface.Surfaces.items():
+        surface = Surfaces[surface_config["surface_category"]](surface_config, params)
         rfl_states += surface.statevec_names[: len(surface.idx_lamb)]
         nonrfl_states += surface.statevec_names[len(surface.idx_lamb) :]
 
@@ -201,3 +153,79 @@ def construct_full_state(full_config):
     full_idx_instrument = np.arange(start, start + len(instrument_states))
 
     return full_statevec, full_idx_surface, full_idx_surf_rfl, full_idx_rt
+
+
+def index_image_by_class(surface_config, subs=True):
+    """
+    Indexes an image by a provided surface class file.
+    Could extend it to be indexed by an atomspheric classification
+    file as well if you want to vary both surface and atmospheric
+    state.
+
+    Args:
+        surface_config: (Config object) The surface component of the
+                        main config.
+        subs: (optional) (bool) that tells function which classification
+              file to use.
+
+    Returns:
+        class_groups: (dict) where keys are the pixel classification (index)
+                      and values are tuples of rows and columns for each
+                      group.
+    """
+
+    if vars(surface_config).get("sub_surface_class_file") and subs:
+        class_file = surface_config.sub_surface_class_file
+    else:
+        class_file = surface_config.surface_class_file
+
+    classes = envi.open(envi_header(class_file)).open_memmap(interleave="bip")
+
+    class_groups = []
+    for c in surface_config.Surfaces.keys():
+        pixel_list = np.argwhere(classes == int(c)).astype(int).tolist()
+        class_groups.append(pixel_list)
+
+    del classes
+
+    return class_groups
+
+
+def index_image_by_class_and_sub(config, lbl_file):
+    """
+    Indexes an image by surface class file and lbl_file.
+    This is needed for the analytical line where each pixel needs to
+    inherit the surface classification of the slic pixel that is belongs
+    to. This function looks at the slic pixel indexing and then creates
+    a list of all full img pixels found within each slic pixel for each
+    surface class.
+
+    Args:
+        config: (Config object) Full isofit config object.
+              file to use.
+        lbl_file: Path to the label file produced by the slic algorithm.
+
+    Returns:
+        pixel_index: (list) List of row-col pairs in each class.
+                     index of list matches the class key. Empty list
+                     returned if there is no multistate.
+    """
+    ds = envi.open(envi_header(lbl_file))
+    im = ds.load()
+    if config.forward_model.surface.multi_surface_flag:
+        sub_pixel_index = index_image_by_class(config.forward_model.surface)
+        pixel_index = []
+        for class_subs in sub_pixel_index:
+            if not len(class_subs):
+                pixel_index.append([])
+                continue
+
+            class_pixel_index = []
+            for i in class_subs:
+                class_pixel_index += np.argwhere(im == i).tolist()
+
+            pixel_index.append(class_pixel_index)
+    else:
+        pixel_index = []
+
+    return pixel_index
