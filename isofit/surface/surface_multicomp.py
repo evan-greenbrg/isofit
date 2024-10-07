@@ -20,7 +20,6 @@
 from __future__ import annotations
 
 import numpy as np
-from scipy.io import loadmat
 from scipy.linalg import block_diag, norm
 
 from isofit.core.common import svd_inv
@@ -39,22 +38,17 @@ class MultiComponentSurface(Surface):
     Multivariate Gaussian surface model.
     """
 
-    def __init__(self, config: dict, params: dict):
-        super().__init__(config)
+    def __init__(self, full_config):
+        super().__init__(full_config)
 
-        # Check to see if .mat surface file exists
-        if exists(config.get("surface_file", "")):
-            model_dict = loadmat(config["surface_file"])
-        else:
-            raise FileNotFoundError("No surface .mat file exists")
+        self.components = list(zip(self.model_dict["means"], self.model_dict["covs"]))
 
-        self.components = list(zip(model_dict["means"], model_dict["covs"]))
         self.n_comp = len(self.components)
-        self.wl = model_dict["wl"][0]
+        self.wl = self.model_dict["wl"][0]
         self.n_wl = len(self.wl)
 
         # Set up normalization method
-        self.normalize = model_dict["normalize"]
+        self.normalize = self.model_dict["normalize"]
         if self.normalize == "Euclidean":
             self.norm = lambda r: norm(r)
         elif self.normalize == "RMS":
@@ -64,13 +58,13 @@ class MultiComponentSurface(Surface):
         else:
             raise ValueError("Unrecognized Normalization: %s\n" % self.normalize)
 
-        self.selection_metric = params.get("selection_metric", "Euclidean")
-        self.select_on_init = params.get("select_on_init", True)
+        self.selection_metric = full_config.forward_model.surface.selection_metric
+        self.select_on_init = full_config.forward_model.surface.select_on_init
 
         # Reference values are used for normalizing the reflectances.
         # in the VSWIR regime, reflectances are normalized so that the model
         # is agnostic to absolute magnitude.
-        self.refwl = np.squeeze(model_dict["refwl"])
+        self.refwl = np.squeeze(self.model_dict["refwl"])
         self.idx_ref = [np.argmin(abs(self.wl - w)) for w in np.squeeze(self.refwl)]
         self.idx_ref = np.array(self.idx_ref)
 

@@ -2,16 +2,16 @@
   "ISOFIT_BASE": "../../..",
 
   "input": {
-    "measured_radiance_file": "../remote/ang20171108t184829_rdn_v2p11_horse.txt",
-    "reference_reflectance_file": "../insitu/Horse_Trial2.txt"
+    "measured_radiance_file": "../remote/ang20171108t184227_rdn_v2p11_BeckmanLawn.txt",
+    "reference_reflectance_file": "../insitu/BeckmanLawn.txt"
   },
 
   "output": {
-    "estimated_reflectance_file": "../output/ang20171108t184829_rfl_v2p11_horse.txt",
-    "algebraic_inverse_file": "../output/ang20171108t184829_alg_v2p11_horse.txt",
-    "modeled_radiance_file":  "../output/ang20171108t184829_mdl_v2p11_horse.txt",
-    "data_dump_file":         "../output/ang20171108t184829_data_v2p11_horse.mat",
-    "posterior_errors_file":  "../output/ang20171108t184829_post_v2p11_horse.mat",
+    "estimated_reflectance_file": "../output/ang20171108t184227_rfl_v2p11_BeckmanLawn.txt",
+    "algebraic_inverse_file": "../output/ang20171108t184227_alg_v2p11_BeckmanLawn.txt",
+    "modeled_radiance_file":  "../output/ang20171108t184227_mdl_v2p11_BeckmanLawn.txt",
+    "data_dump_file":         "../output/ang20171108t184227_data_v2p11_BeckmanLawn.mat",
+    "posterior_uncertainty_file":  "../output/ang20171108t184227_uncert_v2p11_BeckmanLawn.txt",
     "plot_directory": "../images/"
   },
 
@@ -20,7 +20,7 @@
     "instrument": {
       "wavelength_file": "../remote/20170320_ang20170228_wavelength_fit.txt",
       "parametric_noise_file": "../../../data/avirisng_noise.txt",
-      "integrations":10,
+      "integrations":294,
       "unknowns": {
         "channelized_radiometric_uncertainty_file":
           "../../../data/avirisng_systematic_error.txt",
@@ -28,8 +28,8 @@
       }
     },
     "surface": {
-        "surface_category": "multicomponent_surface",
-        "surface_file": "../remote/ang20170228_surface_model.mat"
+      "surface_category": "multicomponent_surface",
+      "surface_file": "../remote/ang20170228_surface_model.mat"
     },
     "radiative_transfer": {
       "statevector": {
@@ -37,14 +37,14 @@
           "bounds": [1.5, 2.0],
           "scale": 0.01,
           "prior_mean": 1.75,
-          "prior_sigma": 0.5,
+          "prior_sigma":0.5,
           "init": 1.75
         },
         "AOT550": {
           "bounds": [0.01, 0.1],
           "scale": 0.01,
           "prior_mean": 0.05,
-          "prior_sigma": 0.2,
+          "prior_sigma":0.2,
           "init": 0.05
         }
       },
@@ -58,10 +58,11 @@
       "radiative_transfer_engines": {
         "vswir": {
           "engine_name": "modtran",
+          "multipart_transmittance": true,
           "wavelength_range":[370,2505],
-          "sim_path": "../lut/",
-          "lut_path": "../lut/ang20171108t184829_post_v2p11_horse.nc",
-          "template_file": "ang20171108t184227_modtran.json",
+          "sim_path": "../lut_multi/",
+          "lut_path": "../lut_multi/ang20171108t184227_uncert_v2p11_BeckmanLawn.nc",
+          "template_file": "ang20171108t184227_multimodtran.json",
           "lut_names": {"H2OSTR": null, "AOT550": null}
         }
       }
@@ -69,8 +70,10 @@
   },
 
   "implementation": {
+    "mode": "inversion",
     "inversion": {
-      "windows": [[400.0, 1300.0], [1450, 1780.0], [1950.0, 2450.0]]
-    }
+      "windows": [[380.0, 1300.0], [1450, 1780.0], [1950.0, 2450.0]]
+    },
+    "rte_auto_rebuild": true
   }
 }

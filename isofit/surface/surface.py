@@ -23,6 +23,7 @@ import logging
 
 import numpy as np
 from scipy.interpolate import interp1d
+from scipy.io import loadmat
 
 from isofit.configs import Config
 from isofit.core.common import envi_header, load_spectrum, load_wavelen
@@ -31,8 +32,9 @@ from isofit.core.common import envi_header, load_spectrum, load_wavelen
 class Surface:
     """A wrapper for the specific surface models"""
 
-    def __init__(self, full_config: Config):
-        self.full_config = full_config
+    def __init__(self, full_config):
+        config = full_config.forward_model.surface
+        self.model_dict = loadmat(config.surface_file)
 
         config = full_config.forward_model.surface
         self.surfaces = config
@@ -42,15 +44,26 @@ class Surface:
         for i, surf_dict in config.items():
             config[i]["surface_model"] = Surfaces[surf_dict["surface_category"]]
 
-        # Set up pixel groups in the init to only read file once
-        if config[0]["surface_class_file"]:
-            classes = envi.open(
-                envi_header(config[0]["surface_class_file"])
-            ).open_memmap(interleave="bip")
+        # These are overwritten by specific surface model
+        self.wl = None
+        self.fwhm = None
+        self.n_wl = None
 
-            self.groups = []
-            for c in self.surfaces.keys():
-                self.groups.append(np.argwhere(classes == c).astype(int).tolist())
+        if config.wavelength_file is not None:
+            self.wl, self.fwhm = load_wavelen(config.wavelength_file)
+
+        elif "wl" in self.model_dict:
+            self.wl = self.model_dict["wl"][0]
+
+        elif full_config.implementation.mode == "simulation":
+            logging.info(
+                "No surface wavelength_file provided, getting wavelengths from"
+                " input.reflectance_file"
+            )
+            _, self.wl = load_spectrum(full_config.input.reflectance_file)
+
+        if self.wl is not None:
+            self.n_wl = len(self.wl)
 
     def match_class(self, row, col):
         matches = np.zeros((len(self.groups))).astype(int)

@@ -17,59 +17,18 @@
 # ISOFIT: Imaging Spectrometer Optimal FITting
 # Author: David R Thompson, david.r.thompson@jpl.nasa.gov
 #
+from __future__ import annotations
+
 import logging
 
 import numpy as np
 from scipy.interpolate import interp1d
 from spectral.io import envi
 
-from isofit.configs import Config
-from isofit.core.common import envi_header, load_spectrum, load_wavelen
-from isofit.core.forward import ForwardModel
+from isofit.configs.sections.statevector_config import StateVectorElementConfig
+from isofit.core.common import envi_header
 from isofit.core.instrument import Instrument
-from isofit.radiative_transfer.radiative_transfer import RadiativeTransfer
-from isofit.surface.surfaces import Surfaces
-
-
-def match_class(class_groups, row, col):
-    """
-    Pass this function the row column pair and it will return the
-    key from class_groups for which that row-col belongs.
-
-    Args:
-
-        class_groups: (list) of pixel groups. Values are tuples
-                      of rows and column that belong in the respective groups.
-        row: (int) row of queried pixel
-        col: (int) col of queried pixel
-    """
-    # If there is no class index, return base
-    if not len(class_groups):
-        return "0"
-
-    # else match
-    matches = np.zeros((len(class_groups))).astype(int)
-    for i, group in enumerate(class_groups):
-        if len(group[(group[:, 0] == row) & (group[:, 1] == col)]):
-            matches[i] = 1
-        else:
-            matches[i] = 0
-
-    if len(matches[np.where(matches)]) < 1:
-        logging.exception(
-            "Pixel did not match any class. \
-                         Something is wrong"
-        )
-        raise ValueError
-
-    elif len(matches[np.where(matches)]) > 1:
-        logging.exception(
-            "Pixel matches too many classes. \
-                         Something is wrong"
-        )
-        raise ValueError
-
-    return np.argwhere(matches)[0][0]
+from isofit.surface import Surface
 
 
 def construct_full_state(full_config):
@@ -105,28 +64,21 @@ def construct_full_state(full_config):
     # Pull the rt names from the config. Seems to be most commonly present.
     rt_config = full_config.forward_model.radiative_transfer
 
-    """
-    This method of retrieving the rt states is giving me issues between
-    legacy configs and current configs. What is the most stable place
-    to pull the statevector name list?.
-    statevector_names not always present.
-    is lut_names always present? Is always a dict?
-
-    most stable is to iterate across statevector config, 
-    but I have to match out the _type -> bad
-    """
-
     rt_states = vars(rt_config.radiative_transfer_engines[0])["statevector_names"]
     if not rt_states:
         rt_states = sorted(rt_config.radiative_transfer_engines[0].lut_names.keys())
 
-    # Without changing where the nonrfl surface elements are defined
-    surface_config = full_config.forward_model.surface
-    params = surface_config.surface_params
+    # Check for config type
+    if full_config.forward_model.surface.multi_surface_flag:
+        # Iterate through the different surfaces to find overlapping state names
+        for surface_class_str in full_config.forward_model.surface.Surfaces.keys():
+            full_config = update_config_for_surface(full_config, surface_class_str)
+            surface = Surface(full_config)
+            rfl_states += surface.statevec_names[: len(surface.idx_lamb)]
+            nonrfl_states += surface.statevec_names[len(surface.idx_lamb) :]
 
-    # Iterate through the different surfaces to find overlapping state names
-    for i, surface_config in full_config.forward_model.surface.Surfaces.items():
-        surface = Surfaces[surface_config["surface_category"]](surface_config, params)
+    else:
+        surface = Surface(full_config)
         rfl_states += surface.statevec_names[: len(surface.idx_lamb)]
         nonrfl_states += surface.statevec_names[len(surface.idx_lamb) :]
 
@@ -155,7 +107,7 @@ def construct_full_state(full_config):
     return full_statevec, full_idx_surface, full_idx_surf_rfl, full_idx_rt
 
 
-def index_image_by_class(surface_config, subs=True):
+def index_spectra_by_surface(config, index_pairs):
     """
     Indexes an image by a provided surface class file.
     Could extend it to be indexed by an atomspheric classification
@@ -165,37 +117,58 @@ def index_image_by_class(surface_config, subs=True):
     Args:
         surface_config: (Config object) The surface component of the
                         main config.
-        subs: (optional) (bool) that tells function which classification
-              file to use.
 
     Returns:
-        class_groups: (dict) where keys are the pixel classification (index)
+        class_groups: (dict) where keys are the pixel classification (name)
                       and values are tuples of rows and columns for each
                       group.
     """
 
-    if vars(surface_config).get("sub_surface_class_file") and subs:
+    surface_config = config.forward_model.surface
+    # Check if the class files exist. Defaults to run all pixels.
+    # This accomodates examples where we test the multi-surface,
+    # but there is no classification rile
+    if (
+        not surface_config.sub_surface_class_file
+        and not surface_config.surface_class_file
+    ):
+        return {"all": index_pairs}
+
+    if vars(surface_config).get("sub_surface_class_file"):
         class_file = surface_config.sub_surface_class_file
     else:
         class_file = surface_config.surface_class_file
 
-    classes = envi.open(envi_header(class_file)).open_memmap(interleave="bip")
+    classes = np.squeeze(
+        envi.open(envi_header(class_file)).open_memmap(interleave="bip"), axis=-1
+    )
 
-    class_groups = []
-    for c in surface_config.Surfaces.keys():
-        pixel_list = np.argwhere(classes == int(c)).astype(int).tolist()
-        class_groups.append(pixel_list)
+    class_groups = {}
+    for c, surface_sub_config in surface_config.Surfaces.items():
+        surface_pixel_list = np.argwhere(
+            classes == surface_sub_config["surface_int"]
+        ).astype(int)
+
+        if not len(surface_pixel_list):
+            continue
+
+        # Find intersection between index_pairs and pixel_list
+        in_surface_index = (index_pairs[:, None] == surface_pixel_list).all(-1).any(1)
+
+        surface_index_pairs = index_pairs[in_surface_index, ...]
+
+        class_groups[c] = surface_index_pairs
 
     del classes
 
     return class_groups
 
 
-def index_image_by_class_and_sub(config, lbl_file):
+def index_spectra_by_surface_and_sub(config, lbl_file):
     """
     Indexes an image by surface class file and lbl_file.
     This is needed for the analytical line where each pixel needs to
-    inherit the surface classification of the slic pixel that is belongs
+    inherit the surface classification of the slic pixel that it belongs
     to. This function looks at the slic pixel indexing and then creates
     a list of all full img pixels found within each slic pixel for each
     surface class.
@@ -210,22 +183,65 @@ def index_image_by_class_and_sub(config, lbl_file):
                      index of list matches the class key. Empty list
                      returned if there is no multistate.
     """
-    ds = envi.open(envi_header(lbl_file))
-    im = ds.load()
-    if config.forward_model.surface.multi_surface_flag:
-        sub_pixel_index = index_image_by_class(config.forward_model.surface)
-        pixel_index = []
-        for class_subs in sub_pixel_index:
-            if not len(class_subs):
-                pixel_index.append([])
-                continue
+    # Get all index pairs in image
+    lbl = envi.open(envi_header(lbl_file)).open_memmap(interleave="bip")
+    lbl_shape = (range(lbl.shape[0]), range(lbl.shape[1]))
+    index_pairs = np.vstack([x.flatten(order="f") for x in np.meshgrid(*lbl_shape)]).T
 
-            class_pixel_index = []
-            for i in class_subs:
-                class_pixel_index += np.argwhere(im == i).tolist()
+    sub_pixel_index = index_spectra_by_surface(config, index_pairs)
 
-            pixel_index.append(class_pixel_index)
-    else:
-        pixel_index = []
+    pixel_index = {}
+    class_groups = {}
+    for surface_class_str, class_subs in sub_pixel_index.items():
+        if not len(class_subs):
+            continue
 
-    return pixel_index
+        class_pixel_index = []
+        for i in class_subs:
+            class_pixel_index += np.argwhere(lbl == i).tolist()
+
+        class_groups[surface_class_str] = class_pixel_index
+
+    return class_groups
+
+
+def update_config_for_surface(config, surface_class_str, clouds=True):
+    """
+    This is the primary mechanism by which isofit changes its configuration
+    across surface classifications. It will leverage the Surfaces dict,
+    and then update the primary config key to reflect that surface.
+
+    Args:
+        config: (Config object) Full isofit config object.
+        surface_class_str: (str) string that corresponds to a surface class.
+
+    Returns:
+        config: (Config object) Update full isofit config object
+    """
+    isurface = config.forward_model.surface.Surfaces.get(surface_class_str)
+
+    if not isurface:
+        raise KeyError("Multi-surface flag used, but no multi-surface config")
+
+    surface_category = isurface.get("surface_category")
+    surface_file = isurface.get("surface_file")
+
+    if (not surface_category) or (not surface_file):
+        raise KeyError("Failed to parse multi-surface config")
+
+    config.forward_model.surface.surface_category = surface_category
+    config.forward_model.surface.surface_file = surface_file
+
+    # Experimental flag: added statevector elements
+    for key, value in isurface.get("rt_statevector_elements", {}).items():
+        # Add the statevector params
+        config.forward_model.radiative_transfer.statevector.surface_elevation_km = (
+            StateVectorElementConfig(value)
+        )
+
+        # Add the statevector names
+        config.forward_model.radiative_transfer.radiative_transfer_engines[
+            0
+        ].statevector_names.append(key)
+
+    return config

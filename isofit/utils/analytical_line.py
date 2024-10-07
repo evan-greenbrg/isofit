@@ -22,6 +22,7 @@ import multiprocessing
 import os
 import time
 from collections import OrderedDict
+from copy import deepcopy
 from glob import glob
 
 import click
@@ -41,7 +42,12 @@ from isofit.core.forward import ForwardModel
 from isofit.core.geometry import Geometry
 from isofit.inversion.inverse_simple import invert_analytical
 from isofit.utils.atm_interpolation import atm_interpolation
-from isofit.utils.multistate import construct_full_state, index_image_by_class_and_sub
+from isofit.utils.multistate import (
+    construct_full_state,
+    index_spectra_by_surface,
+    index_spectra_by_surface_and_sub,
+    update_config_for_surface,
+)
 
 
 @ray.remote(num_cpus=1)
@@ -49,16 +55,18 @@ class Worker(object):
     def __init__(
         self,
         config: configs.Config,
-        pixel_index: list,
         full_statevector: list,
         full_idx_surface: np.array,
         full_idx_RT: np.array,
         full_idx_surf_rfl: np.array,
-        input_files: dict,
+        rdn_file: str,
+        loc_file: str,
+        obs_file: str,
+        atm_file: str,
         output_files: dict,
+        output_shape: tuple,
         loglevel: str,
         logfile: str,
-        subs_state_file: str = None,
     ):
         """
         Worker class to help run a subset of spectra.
@@ -75,7 +83,6 @@ class Worker(object):
             datefmt="%Y-%m-%d,%H:%M:%S",
         )
         self.config = config
-        self.pixel_index = pixel_index
 
         self.esd = IO.load_esd(IO.earth_sun_distance_path)
 
@@ -86,17 +93,18 @@ class Worker(object):
 
         self.winidx = retrieve_winidx(self.config)
 
+        self.rdn = envi.open(envi_header(rdn_file)).open_memmap(interleave="bip")
+        self.loc = envi.open(envi_header(loc_file)).open_memmap(interleave="bip")
+        self.obs = envi.open(envi_header(obs_file)).open_memmap(interleave="bip")
+        self.rt_state = envi.open(envi_header(atm_file)).open_memmap(interleave="bip")
+
+        self.output_shape = output_shape
+        self.rfl_output = output_files["rfl_output"]
+        self.unc_output = output_files["unc_output"]
+
         self.completed_spectra = 0
         self.hash_table = OrderedDict()
         self.hash_size = 500
-
-        self.rdn_file = input_files["rdn_file"]
-        self.loc_file = input_files["loc_file"]
-        self.obs_file = input_files["obs_file"]
-        self.RT_state_file = input_files["atm_file"]
-
-        self.rfl_output = output_files["rfl_output"]
-        self.unc_output = output_files["unc_output"]
 
         if config.input.radiometry_correction_file is not None:
             self.radiance_correction, wl = load_spectrum(
@@ -105,24 +113,12 @@ class Worker(object):
         else:
             self.radiance_correction = None
 
-        # Open files at the worker level
-        self.rdn = envi.open(envi_header(self.rdn_file)).open_memmap(interleave="bip")
-        self.rdns = self.rdn.shape
-
-        self.loc = envi.open(envi_header(self.loc_file)).open_memmap(interleave="bip")
-
-        self.obs = envi.open(envi_header(self.obs_file)).open_memmap(interleave="bip")
-
-        self.rt_state = envi.open(envi_header(self.RT_state_file)).open_memmap(
-            interleave="bip"
-        )
-
-    def run_chunks(self, startstop: tuple, fill_value: float = -9999.0) -> None:
+    def run_chunks(self, line_breaks: tuple, fill_value: float = -9999.0) -> None:
         """
         TODO: Description
         """
-        # Unpack argument
-        start_line, stop_line = startstop
+        # Unpack arguments
+        start_line, stop_line = line_breaks
 
         # Set up outputs
         output_state = (
@@ -147,14 +143,29 @@ class Worker(object):
         )
 
         # Index chunk
-        state_indexes = group_pixels_by_class(
-            start_line, stop_line, self.rdns[1], self.pixel_index
-        )
-        for class_i, class_idx_pairs in enumerate(state_indexes):
-            fm = ForwardModel(self.config, f"{class_i}")
+        index_pairs = np.vstack(
+            [
+                x.flatten(order="f")
+                for x in np.meshgrid(
+                    range(start_line, stop_line), range(self.rdn.shape[1])
+                )
+            ]
+        ).T
 
-            # Find bounds from the fm
-            for r, c in class_idx_pairs:
+        input_config = deepcopy(self.config)
+        for surface_class_str, class_idx_pairs in index_spectra_by_surface(
+            self.config, index_pairs
+        ).items():
+            if self.config.forward_model.surface.multi_surface_flag:
+                config = update_config_for_surface(
+                    deepcopy(input_config), surface_class_str
+                )
+            else:
+                config = input_config
+
+            fm = ForwardModel(config)
+
+            for r, c, *_ in class_idx_pairs:
                 meas = self.rdn[r, c, :]
 
                 if self.radiance_correction is not None:
@@ -167,7 +178,9 @@ class Worker(object):
                     r, c, self.full_idx_RT - len(self.full_idx_surface)
                 ]
                 geom = Geometry(
-                    obs=self.obs[r, c, :], loc=self.loc[r, c, :], esd=self.esd
+                    obs=self.obs[r, c, :],
+                    loc=self.loc[r, c, :],
+                    esd=self.esd,
                 )
 
                 states, unc = invert_analytical(
@@ -192,14 +205,17 @@ class Worker(object):
                 full_unc_est = match_statevector(
                     unc, self.full_statevector, fm.statevec
                 )
-                output_state_unc[r - start_line, c, :] = unc[self.full_idx_surface]
+                output_state_unc[r - start_line, c, :] = full_unc_est[
+                    self.full_idx_surface
+                ]
 
         # Only apply rfl check. Bounds vary between glint and rfl terms
         output_state = output_state[..., self.full_idx_surface]
 
         rfl_bounds = (np.min(fm.bounds, axis=0)[0], np.max(fm.bounds, axis=0)[1])
+
         logging.debug(
-            "Reflectance output will be bounded to the surface" f"bounds: {rfl_bounds}"
+            f"Reflectance output will be bounded to the surface bounds: {rfl_bounds}"
         )
 
         mask = np.logical_and.reduce(
@@ -213,21 +229,19 @@ class Worker(object):
         output_state[mask] = 0
 
         # Output surface rfl
-        save_output_state = np.swapaxes(output_state, 1, 2)
         write_bil_chunk(
-            save_output_state,
+            np.swapaxes(output_state, 1, 2),
             self.rfl_output,
             start_line,
-            (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
+            (self.output_shape[0], self.output_shape[1], len(self.full_idx_surface)),
         )
 
         # Save surface state uncertainty
-        save_output_state_unc = np.swapaxes(output_state_unc, 1, 2)
         write_bil_chunk(
-            save_output_state_unc.T,
+            np.swapaxes(output_state_unc, 1, 2),
             self.unc_output,
             start_line,
-            (self.rdn.shape[0], self.rdn.shape[1], len(self.full_idx_surface)),
+            (self.output_shape[0], self.output_shape[1], len(self.full_idx_surface)),
         )
 
 
@@ -260,7 +274,7 @@ def construct_output(output_metadata, outpath, buffer_size=100, **kwargs):
     return outpath
 
 
-def group_pixels_by_class(start_line, stop_line, n_cols, pixel_index):
+def chunk_surface_spectra(start_line, stop_line, n_cols, pixel_index):
     # Form the row-column pairs (pixels to run)
     index_pairs = np.vstack(
         [
@@ -270,19 +284,19 @@ def group_pixels_by_class(start_line, stop_line, n_cols, pixel_index):
     ).T
 
     if not len(pixel_index):
-        return [index_pairs]
+        return {"base": index_pairs}
 
-    index_pairs_class = []
-    for i, class_row_col in enumerate(pixel_index):
-        if not len(class_row_col):
+    class_spectra = {}
+    for key, spectra in pixel_index.items():
+
+        spectra = np.array(spectra)
+        spectra = spectra[(spectra[:, 0] >= start_line) & (spectra[:, 0] < stop_line)]
+        if not len(spectra):
             continue
 
-        class_row_col = np.delete(np.array(class_row_col), -1, axis=1)
-        class_row_col = class_row_col[class_row_col[:, 0] < stop_line]
-        class_row_col = class_row_col[class_row_col[:, 0] >= start_line]
-        index_pairs_class.append(class_row_col)
+        class_spectra[key] = spectra.tolist()
 
-    return index_pairs_class
+    return class_spectra
 
 
 def analytical_line(
@@ -350,14 +364,33 @@ def analytical_line(
         else (subs_state_file.replace("_subs_state", "_atm_interp"))
     )
 
-    # Set up the multi-state pixel map by sub
-    pixel_index = index_image_by_class_and_sub(config, lbl_file)
+    # Get output shape
+    rdn_ds = envi.open(envi_header(rdn_file))
+    rdns = rdn_ds.shape
+    output_metadata = rdn_ds.metadata
+    del rdn_ds
 
+    # Set up the multi-state pixel map by sub
     # Initialize fm (if no lut, will create here)
-    for i, indexes in enumerate(pixel_index):
-        if not len(indexes):
-            continue
-        fm = ForwardModel(config, f"{i}")
+    if config.forward_model.surface.multi_surface_flag:
+        index_pairs = np.vstack(
+            [
+                x.flatten(order="f")
+                for x in np.meshgrid(*(range(rdns[0]), range(rdns[1])))
+            ]
+        ).T
+        input_config = deepcopy(config)
+        for surface_class_str, class_idx_pairs in index_spectra_by_surface(
+            input_config, index_pairs
+        ).items():
+            config = update_config_for_surface(
+                deepcopy(input_config), surface_class_str
+            )
+            fm = ForwardModel(config)
+        config = input_config
+    else:
+        fm = ForwardModel(config)
+    del fm
 
     (
         full_statevector,
@@ -381,12 +414,6 @@ def analytical_line(
             n_cores=n_cores,
         )
 
-    # Get output shape
-    rdn_ds = envi.open(envi_header(rdn_file))
-    rdns = rdn_ds.shape
-    output_metadata = rdn_ds.metadata
-    del rdn_ds
-
     # Find the winidx
     winidx = retrieve_winidx(config)
 
@@ -401,32 +428,24 @@ def analytical_line(
         analytical_rfl_path,
         bbl=bbl,
         interleave="bil",
-        bands=f"{len(full_idx_surf_rfl)}",
-        band_names=[("Channel %i" % i) for i in range(len(full_idx_surf_rfl))],
+        bands=f"{len(full_idx_surface)}",
+        band_names=[full_statevector[i] for i in range(len(full_idx_surface))],
         wavelength_unts="Nanometers",
         description=("L2A Analytyical per-pixel surface retrieval"),
     )
 
     # Construct surf rfl uncertainty output
-    bbl = "{" + ",".join([f"{x}" for x in outside_ret_windows])
+    bbl = "{" + ",".join([f"{x}" for x in outside_ret_windows]) + "}"
     unc_output = construct_output(
         output_metadata,
         analytical_state_unc_path,
         bbl=bbl,
         interleave="bil",
         bands=f"{len(full_idx_surface)}",
-        band_names=[full_statevector[i] for i in full_idx_surf_rfl],
+        band_names=[full_statevector[i] for i in range(len(full_idx_surface))],
         wavelength_unts="Nanometers",
         description=("L2A Analytyical per-pixel surface retrieval uncertainty"),
     )
-
-    # Set up input files
-    input_files = {
-        "rdn_file": rdn_file,
-        "loc_file": loc_file,
-        "obs_file": obs_file,
-        "atm_file": atm_file,
-    }
 
     # Set up the output files
     output_files = {
@@ -445,9 +464,6 @@ def analytical_line(
     }
     ray.init(**ray_dict)
 
-    """
-    The looping over classes is very similar to isofit.run
-    """
     n_workers = n_cores
 
     # Initialize workers
@@ -455,13 +471,16 @@ def analytical_line(
         ray.put(obj)
         for obj in (
             config,
-            pixel_index,
             full_statevector,
             full_idx_surface,
             full_idx_RT,
             full_idx_surf_rfl,
-            input_files,
+            rdn_file,
+            loc_file,
+            obs_file,
+            atm_file,
             output_files,
+            rdns,
             loglevel,
             logfile,
         )
@@ -469,6 +488,7 @@ def analytical_line(
     workers = ray.util.ActorPool([Worker.remote(*wargs) for _ in range(n_workers)])
 
     n_iter = min(rdns[0], n_workers * config.implementation.task_inflation_factor)
+
     line_breaks = np.linspace(0, rdns[0], n_iter, dtype=int)
     line_breaks = [
         (line_breaks[n], line_breaks[n + 1]) for n in range(len(line_breaks) - 1)
@@ -476,7 +496,9 @@ def analytical_line(
 
     # run workers
     start_time = time.time()
-    res = list(workers.map_unordered(lambda a, b: a.run_chunks.remote(b), line_breaks))
+    results = list(
+        workers.map_unordered(lambda a, b: a.run_chunks.remote(b), line_breaks)
+    )
     total_time = time.time() - start_time
     print(total_time)
 

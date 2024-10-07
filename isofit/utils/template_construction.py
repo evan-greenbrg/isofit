@@ -923,7 +923,9 @@ def build_main_config(
                     "uncorrelated_radiometric_uncertainty": uncorrelated_radiometric_uncertainty
                 },
             },
-            "surface": make_surface_config(paths, surface_category),
+            "surface": make_surface_config(
+                paths, surface_category, pressure_elevation, elevation_lut_grid
+            ),
             "radiative_transfer": radiative_transfer_config,
         },
         "implementation": {
@@ -1679,7 +1681,12 @@ def reassemble_cube(matching_indices: np.array, paths: Pathnames):
             )[:, :, : int(header["bands"])].copy()[:, 0, :]
 
 
-def make_surface_config(paths: Pathnames, surface_category="multicomponent_surface"):
+def make_surface_config(
+    paths: Pathnames,
+    surface_category="multicomponent_surface",
+    pressure_elevation=None,
+    elevation_lut_grid=[],
+):
     """
     Constructs the surface component of the config
 
@@ -1695,16 +1702,11 @@ def make_surface_config(paths: Pathnames, surface_category="multicomponent_surfa
     # Initialize config dict
     surface_config_dict = {
         "multi_surface_flag": False,
-        "Surfaces": {},
-        "Statevector": {},
-        "surface_params": {
-            "select_on_init": True,
-            "selection_metric": "Euclidean",
-        },
     }
 
     # Check to see if a classification file is being propogated
     if paths.surface_class_file:
+        surface_config_dict["Surfaces"] = {}
         surface_config_dict["surface_class_file"] = paths.surface_class_file
 
         if vars(paths).get("subs_class_path", None):
@@ -1723,6 +1725,7 @@ def make_surface_config(paths: Pathnames, surface_category="multicomponent_surfa
             "water": "glint_model_surface",
             "land": "multicomponent_surface",
             "cloud": "multicomponent_surface",
+            "all": "multicomponent_surface",
         }
 
         # Iterate through all classes present in class image
@@ -1757,22 +1760,31 @@ def make_surface_config(paths: Pathnames, surface_category="multicomponent_surfa
                 raise FileNotFoundError
 
             # Set up "Surfaces" component of surface config
-            surface_config_dict["Surfaces"][str(i)] = {
-                "surface_type": name,
+            surface_config_dict["Surfaces"][name] = {
+                "surface_int": i,
                 "surface_file": surface_path,
                 "surface_category": surface_category,
             }
-    else:
 
+            # Handle clouds if pressure elevation
+            if not pressure_elevation and len(elevation_lut_grid) and name == "cloud":
+                surface_config_dict["Surfaces"][name]["rt_statevector_elements"] = {
+                    "surface_elevation_km": {
+                        "bounds": [elevation_lut_grid[0], elevation_lut_grid[-1]],
+                        "scale": 100,
+                        "init": (elevation_lut_grid[0] + elevation_lut_grid[-1]) / 2.0,
+                        "prior_sigma": 1000.0,
+                        "prior_mean": (elevation_lut_grid[0] + elevation_lut_grid[-1])
+                        / 2.0,
+                    }
+                }
+
+    else:
         if not paths.surface_path:
             logging.exception("No surface prior path found.")
             raise FileNotFoundError
 
-        surface_config_dict["Surfaces"] = {
-            "0": {
-                "surface_file": paths.surface_path,
-                "surface_category": surface_category,
-            }
-        }
+        surface_config_dict["surface_file"] = paths.surface_path
+        surface_config_dict["surface_category"] = surface_category
 
     return surface_config_dict

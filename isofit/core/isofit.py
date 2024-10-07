@@ -19,6 +19,7 @@
 #          Philip G Brodrick, philip.brodrick@jpl.nasa.gov
 #          Adam Erickson, adam.m.erickson@nasa.gov
 #
+import copy
 import logging
 import multiprocessing
 import os
@@ -37,8 +38,12 @@ from isofit import checkNumThreads, ray
 from isofit.configs import configs
 from isofit.core.fileio import IO
 from isofit.core.forward import ForwardModel
-from isofit.inversion import Inversions
-from isofit.utils.multistate import construct_full_state, index_image_by_class
+from isofit.inversion import Inversion
+from isofit.utils.multistate import (
+    construct_full_state,
+    index_spectra_by_surface,
+    update_config_for_surface,
+)
 
 
 class Isofit:
@@ -72,16 +77,8 @@ class Isofit:
         self.config = configs.create_new_config(config_file)
         self.config.get_config_errors()
 
-        # Set up the multi-state pixel map
-        if self.config.forward_model.surface.multi_surface_flag:
-            self.state_pixel_index = index_image_by_class(
-                self.config.forward_model.surface
-            )
-        else:
-            self.state_pixel_index = []
-
         # Construct and cache the full statevector (all multistates)
-        self.full_statevector, *_ = construct_full_state(self.config)
+        self.full_statevector, *_ = construct_full_state(copy.deepcopy(self.config))
 
         # Initialize ray for parallel execution
         rayargs = {
@@ -160,40 +157,17 @@ class Isofit:
         # Save this for logging
         total_samples = index_pairs.shape[0]
 
-        # If multistate, split into class
-        if len(self.state_pixel_index):
-            index_pairs_class = []
-            for class_row_col in self.state_pixel_index:
+        # Keep track of input version of config
+        input_config = copy.deepcopy(self.config)
 
-                if not len(class_row_col):
-                    continue
-
-                index_pairs_class.append(np.delete(np.array(class_row_col), 2, axis=1))
-            index_pairs = index_pairs_class
-
-        # Else it's not a multistate run
-        else:
-            index_pairs = [index_pairs]
-
-        # Some logging that might be nice
-        if len(index_pairs):
-            logging.info("Multi-state inversion started.")
-        else:
-            logging.info("Single-state inversion started.")
-
-        """
-        Another pair of eyes on the mutiprocessing would be great here.
-        There may easily be a better way to do this. Mostly setting 
-        worker number on the samples within the loop rather than
-        across the entire scene. It seems like we are losing
-        some performance.
-        """
         # Loop through index pairs and run workers
         class_loop_start_time = time.time()
-        for i, index_pair in enumerate(index_pairs):
-
+        # for surface_class_str, index_pair in index_pairs.items():
+        for surface_class_str, class_idx_pairs in index_spectra_by_surface(
+            self.config, index_pairs
+        ).items():
             # Don't want more workers than tasks
-            n_iter = index_pair.shape[0]
+            n_iter = class_idx_pairs.shape[0]
             n_workers = min(n_workers, n_iter)
 
             # The number of tasks to be initialized
@@ -204,17 +178,23 @@ class Isofit:
             # Get indices to pass to each worker
             index_sets = np.linspace(0, n_iter, num=n_tasks, dtype=int)
             if len(index_sets) == 1:
-                indices_to_run = [index_pair[0:1, :]]
+                indices_to_run = [class_idx_pairs[0:1, :]]
             else:
                 indices_to_run = [
-                    index_pair[index_sets[l] : index_sets[l + 1], :]
+                    class_idx_pairs[index_sets[l] : index_sets[l + 1], :]
                     for l in range(len(index_sets) - 1)
                 ]
 
-            # Construct full fm
-            self.fm = fm = ForwardModel(self.config, str(i))
+            # If multistate, update config to reflect surface
+            if self.config.forward_model.surface.multi_surface_flag:
+                self.config = update_config_for_surface(
+                    copy.deepcopy(input_config), surface_class_str
+                )
 
-            logging.debug(f"Pixel class: {str(i)}")
+            # Set forward model
+            self.fm = fm = ForwardModel(self.config)
+
+            logging.debug(f"Pixel class: {surface_class_str}")
             logging.debug(f"Surface: {self.fm.surface}")
 
             # Put worker args into Ray object
