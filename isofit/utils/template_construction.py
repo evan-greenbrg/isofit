@@ -65,9 +65,6 @@ class Pathnames:
 
         logging.info("Flightline ID: %s" % self.fid)
 
-        # Surface classification here so it doesn't get lost
-        self.surface_class_file = vars(args).get("surface_class", None)
-
         # Names from inputs
         self.aerosol_climatology = args.aerosol_climatology_path
         self.input_radiance_file = args.input_radiance
@@ -78,7 +75,7 @@ class Pathnames:
         self.full_lut_directory = abspath(join(self.working_directory, "lut_full/"))
 
         self.surface_path = vars(args).get("surface_path", None)
-        self.surface_path_dir = vars(args).get("surface_path_dir", None)
+        self.surface_class_file = vars(args).get("surface_class", None)
 
         # set up some sub-directories
         self.lut_h2o_directory = abspath(join(self.working_directory, "lut_h2o/"))
@@ -113,10 +110,16 @@ class Pathnames:
             self.loc_working_path = abspath(
                 join(self.input_data_directory, self.fid + "_loc")
             )
+            self.surface_class_file = (
+                abspath(self.surface_class_file) if self.surface_class_file else None
+            )
         else:
             self.radiance_working_path = abspath(self.input_radiance_file)
             self.obs_working_path = abspath(self.input_obs_file)
             self.loc_working_path = abspath(self.input_loc_file)
+            self.surface_class_file = (
+                abspath(self.surface_class_file) if self.surface_class_file else None
+            )
 
         if args.channelized_uncertainty_path:
             self.input_channelized_uncertainty_path = args.channelized_uncertainty_path
@@ -495,6 +498,7 @@ def build_presolve_config(
     debug: bool = False,
     inversion_windows=[[350.0, 1360.0], [1410, 1800.0], [1970.0, 2500.0]],
     prebuilt_lut_path: str = None,
+    multipart_transmittance: bool = False,
 ) -> None:
     """Write an isofit config file for a presolve, with limited info.
 
@@ -530,7 +534,7 @@ def build_presolve_config(
         multipart_transmittance = True
     else:
         glint_model = False
-        multipart_transmittance = False
+        multipart_transmittance = multipart_transmittance
 
     if prebuilt_lut_path is None:
         lut_path = join(paths.lut_h2o_directory, "lut.nc")
@@ -614,7 +618,7 @@ def build_presolve_config(
                     "uncorrelated_radiometric_uncertainty": uncorrelated_radiometric_uncertainty
                 },
             },
-            "surface": make_surface_config(paths, surface_category),
+            "surface": make_surface_config(paths, surface_category, presolve=True),
             "radiative_transfer": radiative_transfer_config,
         },
         "implementation": {
@@ -687,6 +691,8 @@ def build_main_config(
     debug: bool = False,
     inversion_windows=[[350.0, 1360.0], [1410, 1800.0], [1970.0, 2500.0]],
     prebuilt_lut_path: str = None,
+    multipart_transmittance: bool = False,
+    surface_mapping: dict = None,
 ) -> None:
     """Write an isofit config file for the main solve, using the specified pathnames and all given info
 
@@ -713,6 +719,8 @@ def build_main_config(
         segmentation_size:                    image segmentation size if empirical line is used
         pressure_elevation:                   if true, retrieve pressure elevation
         debug:                                if true, run ISOFIT in debug mode
+        multipart_transmittance:              if true, uses separated dif and dir transmittancies
+        surface_mapping:                      optional object to pass mapping between surface class and surface model
     """
 
     # Determine number of spectra included in each retrieval.  If we are
@@ -739,20 +747,17 @@ def build_main_config(
         multipart_transmittance = True
     else:
         glint_model = False
-        multipart_transmittance = False
+        multipart_transmittance = multipart_transmittance
 
     radiative_transfer_config = {
         "radiative_transfer_engines": {
             "vswir": {
                 "engine_name": engine_name,
                 "multipart_transmittance": multipart_transmittance,
-                "glint_model": glint_model,
                 "sim_path": paths.full_lut_directory,
                 "lut_path": lut_path,
                 "aerosol_template_file": paths.aerosol_tpl_path,
                 "template_file": paths.modtran_template_path,
-                # lut_names - populated below
-                # statevector_names - populated below
             }
         },
         "statevector": {},
@@ -847,10 +852,12 @@ def build_main_config(
 
         # first, check if observer zenith angle in prebuilt LUT comes in MODTRAN convention
         # and convert lut grid as needed
-        if any(np.array(ncds["observer_zenith"]) > 90.0):
-            to_sensor_zenith_lut_grid = np.sort(
-                [180 - x for x in to_sensor_zenith_lut_grid]
-            )
+
+        if "observer_zenith" in ncds.variables:
+            if any(np.array(ncds["observer_zenith"]) > 90.0):
+                to_sensor_zenith_lut_grid = np.sort(
+                    [180 - x for x in to_sensor_zenith_lut_grid]
+                )
 
         radiative_transfer_config["radiative_transfer_engines"]["vswir"]["lut_names"][
             "H2OSTR"
@@ -924,7 +931,11 @@ def build_main_config(
                 },
             },
             "surface": make_surface_config(
-                paths, surface_category, pressure_elevation, elevation_lut_grid
+                paths,
+                surface_category,
+                pressure_elevation,
+                elevation_lut_grid,
+                surface_mapping=surface_mapping,
             ),
             "radiative_transfer": radiative_transfer_config,
         },
@@ -1476,7 +1487,7 @@ def get_metadata_from_obs(
     to_sensor_zenith = obs[:, :, 2]
     to_sun_azimuth = obs[:, :, 3]
     to_sun_zenith = obs[:, :, 4]
-    time = obs[:, :, 9]
+    time = np.copy(obs[:, :, 9])
 
     # calculate relative to-sun azimuth
     delta_phi = np.abs(to_sun_azimuth - to_sensor_azimuth)
@@ -1686,6 +1697,8 @@ def make_surface_config(
     surface_category="multicomponent_surface",
     pressure_elevation=None,
     elevation_lut_grid=[],
+    presolve=False,
+    surface_mapping: dict = None,
 ):
     """
     Constructs the surface component of the config
@@ -1705,7 +1718,7 @@ def make_surface_config(
     }
 
     # Check to see if a classification file is being propogated
-    if paths.surface_class_file:
+    if paths.surface_class_file and not presolve:
         surface_config_dict["Surfaces"] = {}
         surface_config_dict["surface_class_file"] = paths.surface_class_file
 
@@ -1716,54 +1729,58 @@ def make_surface_config(
 
         surface_class_ds = envi.open(envi_header(paths.surface_class_file))
 
-        # Get the class mapping
-        class_mapping = surface_class_ds.metadata["mapping"]
+        # Get the class mapping. Tried to build in some insensitivity here.
+        # Will use first option it hits
+        options = [
+            "mapping",
+            "Mapping",
+            "class names",
+            "Class names",
+            "class",
+            "Class",
+            "surfaces",
+            "Surfaces",
+            "surface names" "Surface names",
+        ]
+        class_mapping = None
+        for option in options:
+            if class_mapping:
+                continue
+            class_mapping = surface_class_ds.metadata.get(option)
 
         # mapping name to surface name - terrible way to do this
         # Could house this in a standalone file and call it in
-        surface_mapping = {
-            "water": "glint_model_surface",
-            "land": "multicomponent_surface",
-            "cloud": "multicomponent_surface",
-            "all": "multicomponent_surface",
-        }
+        if not surface_mapping:
+            surface_mapping = {
+                "water": "glint_model_surface",
+                "glint": "glint_model_surface",
+                "land": "multicomponent_surface",
+                "nonwater": "multicomponent_surface",
+                "cloud": "multicomponent_surface",
+                "uniform_surface": "multicomponent_surface",
+            }
 
         # Iterate through all classes present in class image
         for i, name in enumerate(class_mapping):
             surface_category = surface_mapping.get(name, "multicomponent_surface")
 
             # If surface_path given, use for all surfaces
-            if paths.surface_path:
-                surface_path = paths.surface_path
+            surface_path = paths.surface_working_path
 
-            # If only directory is given. Find surfaces for each class.
-            elif paths.surface_path_dir:
-                regex = f"*_{name}_*.mat"
-                matched_paths = glob.glob(os.path.join(paths.surface_path_dir, regex))
-
-                # Rigid and errors if no surface file for class
-                if not len(matched_paths):
-                    logging.exception(
-                        "No surface path or surface path or surface \
-                        path directory found in surface_path_dir"
-                    )
-                    raise FileNotFoundError
-
-                surface_path = matched_paths[0]
-
-            # Handles case if no dir or file is given
-            else:
-                logging.exception(
-                    "No surface path or surface path or surface \
-                    path directory given"
-                )
+            if not paths.surface_working_path:
+                logging.exception("No surface prior path found.")
                 raise FileNotFoundError
+
+            # TODO: Extend s.t. you could give each surface a different surface file
 
             # Set up "Surfaces" component of surface config
             surface_config_dict["Surfaces"][name] = {
                 "surface_int": i,
                 "surface_file": surface_path,
                 "surface_category": surface_category,
+                "glint_model": (
+                    True if surface_category == "glint_model_surface" else False
+                ),
             }
 
             # Handle clouds if pressure elevation
@@ -1778,13 +1795,12 @@ def make_surface_config(
                         / 2.0,
                     }
                 }
-
     else:
-        if not paths.surface_path:
+        if not paths.surface_working_path:
             logging.exception("No surface prior path found.")
             raise FileNotFoundError
 
-        surface_config_dict["surface_file"] = paths.surface_path
+        surface_config_dict["surface_file"] = paths.surface_working_path
         surface_config_dict["surface_category"] = surface_category
 
     return surface_config_dict

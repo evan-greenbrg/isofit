@@ -53,6 +53,7 @@ INVERSION_WINDOWS = [[350.0, 1360.0], [1410, 1800.0], [1970.0, 2500.0]]
 @click.option("--modtran_path")
 @click.option("--wavelength_path")
 @click.option("--surface_category", default="multicomponent_surface")
+@click.option("--surface_class", default=None)
 @click.option("--aerosol_climatology_path")
 @click.option("--rdn_factors_path")
 @click.option("--atmosphere_type", default="ATM_MIDLAT_SUMMER")
@@ -77,6 +78,7 @@ INVERSION_WINDOWS = [[350.0, 1360.0], [1410, 1800.0], [1970.0, 2500.0]]
 @click.option("--prebuilt_lut", type=str)
 @click.option("--inversion_windows", type=float, nargs=2, multiple=True, default=None)
 @click.option("--no_min_lut_spacing", is_flag=True, default=False)
+@click.option("--multipart_transmittance", is_flag=True, default=False)
 @click.option(
     "--debug-args",
     help="Prints the arguments list without executing the command",
@@ -644,6 +646,7 @@ def apply_oe(args):
             pressure_elevation=args.pressure_elevation,
             prebuilt_lut_path=args.prebuilt_lut,
             inversion_windows=INVERSION_WINDOWS,
+            multipart_transmittance=args.multipart_transmittance,
         )
 
         # Run retrieval

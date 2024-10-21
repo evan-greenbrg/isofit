@@ -15,7 +15,7 @@
 #  limitations under the License.
 #
 # ISOFIT: Imaging Spectrometer Optimal FITting
-# Author: David R Thompson, david.r.thompson@jpl.nasa.gov
+# Author: Evan Greenberg, evan.greenberg@jpl.nasa.gov
 #
 from __future__ import annotations
 
@@ -107,7 +107,7 @@ def construct_full_state(full_config):
     return full_statevec, full_idx_surface, full_idx_surf_rfl, full_idx_rt
 
 
-def index_spectra_by_surface(config, index_pairs):
+def index_spectra_by_surface(config, index_pairs, sub=True):
     """
     Indexes an image by a provided surface class file.
     Could extend it to be indexed by an atomspheric classification
@@ -125,16 +125,17 @@ def index_spectra_by_surface(config, index_pairs):
     """
 
     surface_config = config.forward_model.surface
-    # Check if the class files exist. Defaults to run all pixels.
-    # This accomodates examples where we test the multi-surface,
-    # but there is no classification rile
+
+    """Check if the class files exist. Defaults to run all pixels.
+    This accomodates the test cases where we test the multi-surface,
+    but don't use a classification file."""
     if (
         not surface_config.sub_surface_class_file
         and not surface_config.surface_class_file
     ):
-        return {"all": index_pairs}
+        return {"uniform_surface": index_pairs}
 
-    if vars(surface_config).get("sub_surface_class_file"):
+    if vars(surface_config).get("sub_surface_class_file") and sub:
         class_file = surface_config.sub_surface_class_file
     else:
         class_file = surface_config.surface_class_file
@@ -145,17 +146,27 @@ def index_spectra_by_surface(config, index_pairs):
 
     class_groups = {}
     for c, surface_sub_config in surface_config.Surfaces.items():
-        surface_pixel_list = np.argwhere(
-            classes == surface_sub_config["surface_int"]
-        ).astype(int)
+        surface_pixel_list = np.ascontiguousarray(
+            np.argwhere(classes == surface_sub_config["surface_int"]).astype(int)
+        )
 
         if not len(surface_pixel_list):
             continue
 
-        # Find intersection between index_pairs and pixel_list
-        in_surface_index = (index_pairs[:, None] == surface_pixel_list).all(-1).any(1)
+        # The strategy here is to produce a view where the columns are read together.
+        # Both the index_pairs and surface_pixel_list have to be contiguous arrays.
+        ncols = index_pairs.shape[1]
+        dtype = {
+            "names": ["{}".format(i) for i in range(ncols)],
+            "formats": ncols * [index_pairs.dtype],
+        }
 
-        surface_index_pairs = index_pairs[in_surface_index, ...]
+        surface_index_pairs = np.intersect1d(
+            index_pairs.view(dtype), surface_pixel_list.view(dtype)
+        )
+        surface_index_pairs = np.reshape(
+            surface_index_pairs.view(index_pairs.dtype), (len(surface_index_pairs), 2)
+        )
 
         class_groups[c] = surface_index_pairs
 
@@ -225,14 +236,16 @@ def update_config_for_surface(config, surface_class_str, clouds=True):
 
     surface_category = isurface.get("surface_category")
     surface_file = isurface.get("surface_file")
+    glint_model = isurface.get("glint_model")
 
     if (not surface_category) or (not surface_file):
         raise KeyError("Failed to parse multi-surface config")
 
     config.forward_model.surface.surface_category = surface_category
     config.forward_model.surface.surface_file = surface_file
+    config.forward_model.surface.glint_model = glint_model
 
-    # Experimental flag: added statevector elements
+    # Experimental: added statevector elements
     for key, value in isurface.get("rt_statevector_elements", {}).items():
         # Add the statevector params
         config.forward_model.radiative_transfer.statevector.surface_elevation_km = (
