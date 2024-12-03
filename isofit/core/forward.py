@@ -156,6 +156,13 @@ class ForwardModel:
             + len(self.RT_b_inds)
         )
 
+        # Load model discrepancy correction
+        if full_config.forward_model.model_discrepancy_file is not None:
+            D = loadmat(full_config.forward_model.model_discrepancy_file)
+            self.model_discrepancy = D["cov"]
+        else:
+            self.model_discrepancy = None
+
     def out_of_bounds(self, x):
         """Check if state vector is within bounds."""
 

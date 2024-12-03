@@ -292,7 +292,6 @@ class Worker(object):
         )
         self.config = config
         self.fm = forward_model
-
         self.io = IO(self.config, full_statevector)
 
         self.total_samples = None
@@ -311,15 +310,7 @@ class Worker(object):
             input_data = self.io.get_components_at_index(row, col)
 
             # Get inversion
-            iv = Inversions.get(self.config.implementation.mode, None)
-            if not iv:
-                logging.exception(
-                    "Inversion implementation: "
-                    f"{self.config.implementation.mode}, "
-                    "did not match options"
-                )
-                raise KeyError
-            self.iv = iv(self.config, self.fm)
+            self.iv = Inversion(self.config, self.fm)
 
             self.completed_spectra += 1
             if input_data is not None:
