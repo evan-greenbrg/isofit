@@ -110,7 +110,7 @@ class GlintModelSurface(MultiComponentSurface):
         x[self.glint_ind + 1] = g_dsf_est  # SKY_GLINT g_dsf
         return x
 
-    def glint_spectrum(self, geom, L_down_dir, L_down_dif):
+    def glint_spectra(self, geom, L_down_dir, L_down_dif):
         """Calculates the sun (dir) and sky (dif) glint spectrums"""
         rho_ls = self.fresnel_rf(geom.observer_zenith)
         # direct sky transmittance
@@ -123,7 +123,7 @@ class GlintModelSurface(MultiComponentSurface):
     def calc_rfl(self, x_surface, geom, L_down_dir=None, L_down_dif=None):
         """Direct and diffuse Reflectance (includes sun and sky glint)."""
         # fresnel reflectance factor (approx. 0.02 for nadir view)
-        g_dir, g_dif = self.glint_spectrum(geom, L_down_dir, L_down_dif)
+        g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
 
         sun_glint = x_surface[-2] * g_dir
         sky_glint = x_surface[-1] * g_dif
@@ -138,7 +138,7 @@ class GlintModelSurface(MultiComponentSurface):
         calculated at x_surface."""
         drfl = self.dlamb_dsurface(x_surface, geom)
 
-        g_dir, g_dif = self.glint_spectrum(geom, L_down_dir, L_down_dif)
+        g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
 
         # TODO make the indexing better for the surface state elements
         # Sun glint derivative
@@ -209,7 +209,7 @@ class GlintModelSurface(MultiComponentSurface):
         value, which makes the AOE inner loop inversion possible.
         """
         # Get glint spectrum
-        g_dir, g_dif = self.glint_spectrum(geom, L_down_dir, L_down_dif)
+        g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
 
         # Construct the H matrix from:
         # theta (rho portion)
