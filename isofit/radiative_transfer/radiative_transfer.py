@@ -409,9 +409,9 @@ class RadiativeTransfer:
     def drdn_dRT(
         self,
         x_RT,
-        rho_dir_dir_hi,
-        rho_dif_dir_hi,
-        Ls_hi,
+        rho_dir_dir,
+        rho_dif_dir,
+        Ls,
         L_tot,
         L_dir_dir,
         L_dif_dir,
@@ -428,9 +428,9 @@ class RadiativeTransfer:
         for x_RT_perturb in list(x_RTs_perturb):
             rdne = self.calc_rdn(
                 x_RT_perturb,
-                rho_dir_dir_hi,
-                rho_dif_dir_hi,
-                Ls_hi,
+                rho_dir_dir,
+                rho_dif_dir,
+                Ls,
                 L_tot,
                 L_dir_dir,
                 L_dif_dir,
@@ -447,9 +447,9 @@ class RadiativeTransfer:
     def drdn_dRTb(
         self,
         x_RT,
-        rho_dir_dir_hi,
-        rho_dif_dir_hi,
-        Ls_hi,
+        rho_dir_dir,
+        rho_dif_dir,
+        Ls,
         L_tot,
         L_dir_dir,
         L_dif_dir,
@@ -482,9 +482,9 @@ class RadiativeTransfer:
                     x_RT_perturb[i] = x_RT[i] * perturb
                     rdne = self.calc_rdn(
                         x_RT_perturb,
-                        rho_dir_dir_hi,
-                        rho_dif_dir_hi,
-                        Ls_hi,
+                        rho_dir_dir,
+                        rho_dif_dir,
+                        Ls,
                         L_tot,
                         L_dir_dir,
                         L_dif_dir,
