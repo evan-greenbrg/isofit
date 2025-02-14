@@ -52,7 +52,9 @@ class GlintModelSurface(MultiComponentSurface):
         # To accomodate for the fact that we don't analytically solve
         # for the diffuse glint term used in the analytical line
         self.analytical_interp_names = ["SKY_GLINT"]
+        # self.analytical_interp_names = []
         self.analytical_iv_idx = np.arange(len(self.statevec_names))[:-1]
+        # self.analytical_iv_idx = np.arange(len(self.statevec_names))
 
         self.f = np.array(
             [[(1000000 * np.array(self.scale[self.glint_ind :])) ** 2]]
