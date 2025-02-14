@@ -184,7 +184,7 @@ class ForwardModel:
 
         return block_diag(Sa_surface, Sa_RT, Sa_instrument)
 
-    def calc_surface_quantities(self, x_surface, geom, L_down_dir, L_down_dif):
+    def upsample_surface_quantities(self, x_surface, geom, L_down_dir, L_down_dif):
         # Call surface reflectance and derivative w.r.t. surface, upsample
         rho_dir_dir, rho_dif_dir = self.calc_rfl(
             x_surface, geom, L_down_dir, L_down_dif
@@ -210,34 +210,6 @@ class ForwardModel:
             drfl_dsurface_hi,
             Ls_hi,
             dLs_dsurface_hi,
-        )
-
-    def calc_RT_quantities(self, x_RT, geom):
-        # Propogate LUT
-        r = self.RT.get_shared_rtm_quantities(x_RT, geom)
-
-        # Default: get directional radiances
-        L_dir_dir, L_dif_dir, L_dir_dif, L_dif_dif = self.RT.get_L_coupled(r, geom)
-        L_tot = L_dir_dir + L_dif_dir + L_dir_dif + L_dif_dif
-
-        # Handle case for 1c vs 4c model
-        if not isinstance(L_tot, np.ndarray) or len(L_tot) == 1:
-            # 1c model w/in if clause
-            L_tot, L_down_dir, L_down_dif = self.RT.get_L_down_transmitted(x_RT, geom)
-        else:
-            # 4c model w/in else clause
-            L_down_dir = L_dir_dir + L_dif_dir
-            L_down_dif = L_dif_dir + L_dif_dir
-
-        return (
-            r,
-            L_tot,
-            L_down_dir,
-            L_down_dif,
-            L_dir_dir,
-            L_dif_dir,
-            L_dir_dif,
-            L_dif_dif,
         )
 
     def calc_rdn(
@@ -293,11 +265,11 @@ class ForwardModel:
             L_dif_dir,
             L_dir_dif,
             L_dif_dif,
-        ) = self.calc_RT_quantities(x_RT, geom)
+        ) = self.RT.calc_RT_quantities(x_RT, geom)
 
         # Get Surface quantities - handles upsampling
-        (rho_dir_dir, rho_dif_dir, _, Ls, _) = self.calc_surface_quantities(
-            x_surface, geom, L_down_dir, L_down_dif
+        (rho_dir_dir, rho_dif_dir, drfl_dsurface, Ls, dLs_dsurface) = (
+            self.upsample_surface_quantities(x_surface, geom, L_down_dir, L_down_dif)
         )
 
         rdn = self.calc_rdn(
@@ -367,11 +339,11 @@ class ForwardModel:
             L_dif_dir,
             L_dir_dif,
             L_dif_dif,
-        ) = self.calc_RT_quantities(x_RT, geom)
+        ) = self.RT.calc_RT_quantities(x_RT, geom)
 
         # Get Surface quantities - handles upsampling
         (rho_dir_dir, rho_dif_dir, drfl_dsurface, Ls, dLs_dsurface) = (
-            self.calc_surface_quantities(x_surface, geom, L_down_dir, L_down_dif)
+            self.upsample_surface_quantities(x_surface, geom, L_down_dir, L_down_dif)
         )
 
         # Need to pass calc rdn into instrument derivative
@@ -392,16 +364,10 @@ class ForwardModel:
         # To get the derivative w.r.t. RT
         drdn_dRT = self.RT.drdn_dRT(
             x_RT,
+            geom,
             rho_dir_dir,
             rho_dif_dir,
             Ls,
-            L_tot,
-            L_dir_dir,
-            L_dif_dir,
-            L_dir_dif,
-            L_dif_dif,
-            r,
-            geom,
             rdn,
         )
 
@@ -452,11 +418,11 @@ class ForwardModel:
             L_dif_dir,
             L_dir_dif,
             L_dif_dif,
-        ) = self.calc_RT_quantities(x_RT, geom)
+        ) = self.RT.calc_RT_quantities(x_RT, geom)
 
         # Get Surface quantities - handles upsampling
-        (rho_dir_dir, rho_dif_dir, _, Ls, _) = self.calc_surface_quantities(
-            x_surface, geom, L_down_dir, L_down_dif
+        (rho_dir_dir, rho_dif_dir, drfl_dsurface, Ls, dLs_dsurface) = (
+            self.upsample_surface_quantities(x_surface, geom, L_down_dir, L_down_dif)
         )
 
         rdn = self.calc_rdn(
@@ -475,16 +441,10 @@ class ForwardModel:
 
         drdn_dRTb = self.RT.drdn_dRTb(
             x_RT,
+            geom,
             rho_dir_dir,
             rho_dif_dir,
             Ls,
-            L_tot,
-            L_dir_dir,
-            L_dif_dir,
-            L_dir_dif,
-            L_dif_dif,
-            r,
-            geom,
             rdn,
         )
         dmeas_dRTb = self.instrument.sample(x_instrument, self.RT.wl, drdn_dRTb.T).T
