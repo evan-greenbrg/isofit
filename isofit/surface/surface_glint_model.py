@@ -244,10 +244,9 @@ class GlintModelSurface(MultiComponentSurface):
     def summarize(self, x_surface, geom):
         """Summary of state vector."""
 
-        if len(x_surface) < 1:
-            return ""
-
-        return "Component: %i" % self.component(x_surface, geom)
+        return MultiComponentSurface.summarize(
+            self, x_surface, geom
+        ) + " Sun Glint: %5.3f, Sky Glint: %5.3f" % (x_surface[-2], x_surface[-1])
 
     @staticmethod
     def fresnel_rf(vza):
