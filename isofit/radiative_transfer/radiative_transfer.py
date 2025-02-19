@@ -448,7 +448,7 @@ class RadiativeTransfer:
                 L_dif_dif,
             ) = self.calc_RT_quantities(x_RT_perturb, geom)
 
-            # Surface state is held constant
+            # Surface state is held constant?
             rdne = self.calc_rdn(
                 x_RT_perturb,
                 rho_dir_dir,

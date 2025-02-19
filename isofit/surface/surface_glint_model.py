@@ -40,7 +40,7 @@ class GlintModelSurface(MultiComponentSurface):
         )  # Numbers from Marcel Koenig; used for prior mean
 
         # Special glint bounds
-        rmin, rmax = -0.02, 2.0
+        rmin, rmax = -0.05, 2.0
         self.bounds = [[rmin, rmax] for w in self.wl]
         self.bounds.extend([[-1, 10], [0, 10]])  # Gege (2021), WASI user manual
         self.n_state = self.n_state + 2
@@ -140,13 +140,18 @@ class GlintModelSurface(MultiComponentSurface):
         calculated at x_surface."""
         drfl = self.dlamb_dsurface(x_surface, geom)
 
-        g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
+        # g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
+        # drfl = (
+        #     drfl
+        #     * (
+        #         np.reshape(g_dir, (len(g_dir), 1))
+        #         + np.reshape(g_dif, (len(g_dir), 1))
+        #     )
+        # )
 
         # TODO make the indexing better for the surface state elements
-        # Sun glint derivative
-        drfl[:, self.glint_ind] = g_dir
-        # Sky glint derivative
-        drfl[:, self.glint_ind + 1] = g_dif
+        drfl[:, self.glint_ind] = 1
+        drfl[:, self.glint_ind + 1] = 1
 
         return drfl
 
