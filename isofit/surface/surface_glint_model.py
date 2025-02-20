@@ -137,7 +137,13 @@ class GlintModelSurface(MultiComponentSurface):
 
     def drfl_dsurface(self, x_surface, geom, L_down_dir=None, L_down_dif=None):
         """Partial derivative of reflectance with respect to state vector,
-        calculated at x_surface."""
+        calculated at x_surface.
+
+        We have found that this arrangement provides the most stable results.
+        However, we need to double check the math. This implementation
+        reflects a need to apply the chain rule to construct the full derivative
+        where the dependence of Rho_dif on alpha_dif (and g_dif) has to be
+        incorporated. Discuss."""
         drfl = self.dlamb_dsurface(x_surface, geom)
 
         g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
@@ -179,6 +185,7 @@ class GlintModelSurface(MultiComponentSurface):
 
         # Glint derivatives
         drdn_dgdd, drdn_dgdsf = self.drdn_dglint(L_tot, L_down_dir, s_alb, rho_dif_dir)
+
         # Store the glint derivatives as last two rows in drdn_drfl
         drdn_drfl[:, -2] = drdn_dgdd
         drdn_drfl[:, -1] = drdn_dgdsf
@@ -239,6 +246,7 @@ class GlintModelSurface(MultiComponentSurface):
         # ep = (L_dif_dir + L_dif_dif) + ((L_tot * background * g_dif) / (1 - background))
         # ep = np.reshape(ep, (len(ep), 1))
         # H = np.append(H, ep, axis=1)
+        # TODO test adding this back in
 
         return H
 
