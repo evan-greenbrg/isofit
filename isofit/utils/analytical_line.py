@@ -38,6 +38,8 @@ from isofit.inversion.inverse import Inversion
 from isofit.inversion.inverse_simple import invert_algebraic, invert_analytical
 from isofit.utils.atm_interpolation import atm_interpolation
 
+PERTURB = 0.03
+
 
 def analytical_line(
     rdn_file: str,
@@ -349,6 +351,8 @@ class Worker(object):
 
                 iv_idx = self.fm.surface.analytical_iv_idx
                 init_state = subs_state[int(lbl[r, c, 0]), 0, iv_idx]
+                init_state += PERTURB
+                # init_state += np.abs(np.random.normal(scale=eps))
 
                 # Concatenate full statevector to use for initialization
                 # This only works with the correct indexing.

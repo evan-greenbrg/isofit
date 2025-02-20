@@ -140,18 +140,12 @@ class GlintModelSurface(MultiComponentSurface):
         calculated at x_surface."""
         drfl = self.dlamb_dsurface(x_surface, geom)
 
-        # g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
-        # drfl = (
-        #     drfl
-        #     * (
-        #         np.reshape(g_dir, (len(g_dir), 1))
-        #         + np.reshape(g_dif, (len(g_dir), 1))
-        #     )
-        # )
+        g_dir, g_dif = self.glint_spectra(geom, L_down_dir, L_down_dif)
+        drfl = drfl * np.reshape(g_dif, (len(g_dif), 1))
 
         # TODO make the indexing better for the surface state elements
         drfl[:, self.glint_ind] = 1
-        drfl[:, self.glint_ind + 1] = 1
+        drfl[:, self.glint_ind + 1] = g_dif
 
         return drfl
 
