@@ -273,6 +273,7 @@ class MultiComponentSurface(Surface):
 
     def drdn_dsurface(
         self,
+        rho_dir_dir,
         rho_dif_dir,
         drfl_dsurface,
         dLs_dsurface,
@@ -280,6 +281,8 @@ class MultiComponentSurface(Surface):
         t_total_up,
         L_tot,
         L_down_dir,
+        L_down_dif,
+        geom,
     ):
         """Derivative of radiance with respect to
         full surface vector"""
@@ -301,7 +304,8 @@ class MultiComponentSurface(Surface):
 
     def analytical_model(
         self,
-        background,
+        bg_rho,
+        s,
         L_down_dir,
         L_down_dif,
         L_tot,
@@ -318,14 +322,14 @@ class MultiComponentSurface(Surface):
         simplifies the linearization
         background = s * rho_bg
         """
-        # If you ignore multi-scattering
+        background = bg_rho * s
         theta = L_tot + (L_tot * background / (1 - background))
         # theta = L_tot
 
         H = np.eye(self.n_wl, self.n_wl)
         H = theta[:, np.newaxis] * H
 
-        return H
+        return H, np.zeros(H.shape[0])
 
     def summarize(self, x_surface, geom):
         """Summary of state vector."""

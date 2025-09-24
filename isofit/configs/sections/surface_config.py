@@ -85,6 +85,7 @@ class SurfaceConfig(BaseConfigSection):
             "glint_model_surface",
             "thermal_surface",
             "lut_surface",
+            "topo_surface",
         ]
         if (self.surface_category is None) and not len(self.Surfaces):
             errors.append("surface->surface_category or Surfaces must be specified")

@@ -264,6 +264,8 @@ def invert_analytical(
         x: MAP estimate of the mean
         S: diagonal conditional posterior covariance estimate
     """
+    from copy import deepcopy
+
     from scipy.linalg.blas import dsymv
     from scipy.linalg.lapack import dpotrf, dpotri
 
@@ -278,18 +280,19 @@ def invert_analytical(
 
     x = x0.copy()
     x_surface, x_RT, x_instrument = fm.unpack(x)
+    sub_surface, sub_RT, sub_instrument = fm.unpack(sub_state)
+
+    # Set background topography if it's in statevector
+    sub_geom = fm.surface.fit_topography(sub_surface, deepcopy(geom))
 
     # Get all the RT quantities
     (r, L_tot, L_down_dir, L_down_dif, L_dir_dir, L_dif_dir, L_dir_dif, L_dif_dif) = (
-        fm.RT.calc_RT_quantities(x_RT, geom)
+        fm.RT.calc_RT_quantities(x_RT, sub_geom)
     )
 
     # Path radiance and spherical albedo
     L_atm = fm.RT.get_L_atm(x_RT, geom)
     s = r["sphalb"]
-
-    # Get all the surface quantities for the super pixel
-    sub_surface, sub_RT, sub_instrument = fm.unpack(sub_state)
 
     # Surface reflectance at the wl resolution of fm.RT
     rho_dir_dir, rho_dif_dir = fm.calc_rfl(sub_surface, geom)
@@ -297,7 +300,7 @@ def invert_analytical(
     rho_dif_dir = fm.upsample(fm.surface.wl, rho_dif_dir)
 
     # Background conditions equal to the superpixel reflectance
-    bg = s * rho_dif_dir
+    bg_rho = rho_dif_dir
 
     # Special case: 1-component model
     if type(L_tot) != np.ndarray or len(L_tot) == 1:
@@ -311,12 +314,13 @@ def invert_analytical(
     iv_idx = fm.surface.analytical_iv_idx
 
     # The H matrix does not change as a function of x-vector
-    H = fm.surface.analytical_model(
-        bg,
+    H, O = fm.surface.analytical_model(
+        bg_rho,
+        s,
         L_down_dir,
         L_down_dif,
         L_tot,
-        geom,
+        sub_geom,
         L_dir_dir=L_dir_dir,
         L_dir_dif=L_dir_dif,
         L_dif_dir=L_dif_dir,
@@ -329,7 +333,7 @@ def invert_analytical(
     trajectory[0, :] = x
     for n in range(num_iter):
         # Measurement uncertainty
-        Seps = fm.Seps(x, meas, geom)[winidx, :][:, winidx]
+        Seps = fm.Seps(x, meas, deepcopy(geom))[winidx, :][:, winidx]
 
         # Prior covariance
         try:
@@ -367,7 +371,10 @@ def invert_analytical(
         xk = dsymv(
             1,
             C_rcond,
-            (L.T @ dsymv(1, P, meas[winidx] - L_atm[winidx]) + prprod[iv_idx]),
+            (
+                L.T @ dsymv(1, P, meas[winidx] - L_atm[winidx] - O[winidx])
+                + prprod[iv_idx]
+            ),
         )
 
         # Save trajectory step:

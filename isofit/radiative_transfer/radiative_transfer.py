@@ -421,7 +421,7 @@ class RadiativeTransfer:
         else:
             # 4c model w/in else clause
             L_down_dir = L_dir_dir + L_dif_dir
-            L_down_dif = L_dif_dir + L_dif_dir
+            L_down_dif = L_dif_dir + L_dif_dif
 
         return (
             r,

@@ -22,14 +22,18 @@ import datetime
 import logging
 import os
 from copy import deepcopy
+from functools import partial
 from pathlib import Path
 
 import dask.array as da
 import h5py
+import jax
+import jax.numpy as jnp
 import numpy as np
 import yaml
 from scipy.interpolate import interp1d
 
+from isofit import ray
 from isofit.core import units
 from isofit.core.common import calculate_resample_matrix, resample_spectrum
 from isofit.radiative_transfer import luts
@@ -45,6 +49,7 @@ class tfLikeModel:
             # If we have weights and biases provided directly
             self.weights = weights
             self.biases = biases
+
             self.input_file = None
 
         elif input_file is not None:
@@ -53,7 +58,7 @@ class tfLikeModel:
 
             weights = []
             biases = []
-            for n in model["model_weights"].keys():
+            for i, n in enumerate(model["model_weights"].keys()):
                 if "dense" in n:
                     if "kernel:0" in model["model_weights"][n][n]:
                         weights.append(
@@ -110,6 +115,7 @@ class SimulatedModtranRT(RadiativeTransferEngine):
         simulations itself
         """
 
+        ray.shutdown()
         Logger.info("Creating a simulator configuration")
         # Create a copy of the engine_config and populate it with 6S parameters
         config = build_sixs_config(self.engine_config)
@@ -235,11 +241,12 @@ class SimulatedModtranRT(RadiativeTransferEngine):
                     emulator = tfLikeModel(
                         None, weights=aux[f"weights_{key}"], biases=aux[f"biases_{key}"]
                     )
-                    Logger.debug(f"Emulating {key}")
+                    Logger.info(f"Emulating {key}")
                     if len(feature_point_names) > 0:
                         lp = emulator.predict(np.hstack((sixs[key].values, add_vector)))
                     else:
                         lp = emulator.predict(sixs[key].values)
+
                     Logger.debug(f"Cleanup {key}")
                     lp /= aux["response_scaler"].item()[key]
                     lp += aux["response_offset"].item()[key]

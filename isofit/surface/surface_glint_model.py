@@ -228,6 +228,7 @@ class GlintModelSurface(MultiComponentSurface):
 
     def drdn_dsurface(
         self,
+        rho_dir_dir,
         rho_dif_dir,
         drfl_dsurface,
         dLs_dsurface,
@@ -235,6 +236,7 @@ class GlintModelSurface(MultiComponentSurface):
         t_total_up,
         L_tot,
         L_down_dir,
+        geom,
     ):
         """Derivative of radiance with respect to
         full surface vector"""
@@ -265,7 +267,8 @@ class GlintModelSurface(MultiComponentSurface):
 
     def analytical_model(
         self,
-        background,
+        bg_rho,
+        s,
         L_down_dir,
         L_down_dif,
         L_tot,
@@ -283,13 +286,15 @@ class GlintModelSurface(MultiComponentSurface):
         value, which makes the AOE inner loop inversion possible.
         """
         rho_ls = self.fresnel_rf(geom.observer_zenith)
+        background = bg_rho * s
 
         # Construct the H matrix from:
         # theta (rho portion)
         # gam (sun glint portion)
         # ep (sky glint portion)
         H = super().analytical_model(
-            background,
+            bg_rho,
+            s,
             L_down_dir,
             L_down_dif,
             L_tot,
@@ -317,7 +322,7 @@ class GlintModelSurface(MultiComponentSurface):
         gam = np.reshape(gam, (len(gam), 1))
         H = np.append(H, gam, axis=1)
 
-        return H
+        return H, np.zeros(H.shape[0])
 
     def summarize(self, x_surface, geom):
         """Summary of state vector."""

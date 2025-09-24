@@ -233,7 +233,8 @@ class LUTSurface(Surface):
 
     def analytical_model(
         self,
-        background,
+        bg_rho,
+        s,
         L_down_dir,
         L_down_dif,
         L_tot,

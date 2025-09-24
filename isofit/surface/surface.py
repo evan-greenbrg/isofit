@@ -92,6 +92,13 @@ class Surface:
 
         return np.array([])
 
+    def fit_topography(self, x_surface, geom):
+        """To accomodate cos_i within the statevector
+        and to update it within RT, we update the value within
+        the geom object during inversion"""
+
+        return geom
+
     def calc_lamb(self, x_surface, geom):
         """Calculate a Lambertian surface reflectance for this state vector."""
 

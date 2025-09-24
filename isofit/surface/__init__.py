@@ -1,4 +1,5 @@
 from isofit.surface.surface import Surface as BaseSurface
+from isofit.surface.surface_cosi import CosiSurface
 from isofit.surface.surface_glint_model import GlintModelSurface
 from isofit.surface.surface_lut import LUTSurface
 from isofit.surface.surface_multicomp import MultiComponentSurface
@@ -32,6 +33,9 @@ def Surface(config):
 
     elif category == "thermal_surface":
         return ThermalSurface(config)
+
+    elif category == "topo_surface":
+        return CosiSurface(config)
 
     elif category == "lut_surface":
         return LUTSurface(config)

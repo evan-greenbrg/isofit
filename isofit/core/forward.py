@@ -200,6 +200,9 @@ class ForwardModel:
         # Unpack state vector - Copy to not change x fm-wide
         x_surface, x_RT, x_instrument = self.unpack(np.copy(x))
 
+        # Check topography for topography surface model
+        geom = self.surface.fit_topography(x_surface, geom)
+
         # if rfl passed, have to explicitely use those values
         if len(rfl):
             x_surface[self.idx_surf_rfl] = rfl
@@ -281,6 +284,9 @@ class ForwardModel:
         # Unpack state vector
         x_surface, x_RT, x_instrument = self.unpack(x)
 
+        # Check topography for topography surface model
+        geom = self.surface.fit_topography(x_surface, geom)
+
         # Get RT quantities
         (
             r,
@@ -339,6 +345,7 @@ class ForwardModel:
 
         # To get the derivative w.r.t. Surface
         drdn_dsurface = self.surface.drdn_dsurface(
+            rho_dir_dir=rho_dir_dir_hi,
             rho_dif_dir=rho_dif_dir_hi,
             drfl_dsurface=drfl_dsurface_hi,
             dLs_dsurface=dLs_dsurface_hi,
@@ -346,6 +353,8 @@ class ForwardModel:
             t_total_up=r["transm_up_dir"] + r["transm_up_dif"],
             L_tot=L_tot,
             L_down_dir=L_dir_dir + L_dir_dif,
+            L_down_dif=L_dif_dir + L_dif_dif,
+            geom=geom,
         )
 
         # To get derivatives w.r.t. instrument, downsample to instrument wavelengths
@@ -373,6 +382,9 @@ class ForwardModel:
 
         # Unpack state vector
         x_surface, x_RT, x_instrument = self.unpack(x)
+
+        # Check topography for topography surface model
+        # geom = self.surface.fit_topography(x_surface, geom)
 
         # Get RT quantities
         (
