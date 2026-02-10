@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Ini - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Ini";
+        var mkdocs_page_input_path = "api/isofit/data/ini.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >isofit</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >isofit.data</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../download/">Download</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Ini</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.data.ini.getWorkingDir">getWorkingDir</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.data.ini.Ini">Ini</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+          <li class="breadcrumb-item">isofit</li>
+          <li class="breadcrumb-item">isofit.data</li>
+      <li class="breadcrumb-item active">Ini</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-source" id="isofit.data.ini">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.data.ini" title="isofit.data.ini">isofit.data.ini</a></span>
+</p>
+<div class="mkapi-document">
+<p>ISOFIT environment module</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle classes">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Classes</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a></span></p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle functions">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Functions</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.getWorkingDir" title="isofit.data.ini.getWorkingDir">getWorkingDir</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Attempts to detect if a configuration file sits in an ISOFIT working_directory</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.getWorkingDir">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.getWorkingDir" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.data.ini.getWorkingDir" title="isofit.data.ini.getWorkingDir">getWorkingDir</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">config</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Attempts to detect if a configuration file sits in an ISOFIT working_directory</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">config</span> : 
+<span class="mkapi-item-type">pathlib.<span class="mkapi-tooltip" title="pathlib._local.Path">Path</span></span> <span class="mkapi-dash">&mdash;</span>
+Path to a config json file</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">wd</span> : 
+<span class="mkapi-item-type">pathlib.<span class="mkapi-tooltip" title="pathlib._local.Path">Path</span> | None</span> <span class="mkapi-dash">&mdash;</span>
+Path to the working directory, if it's detected to be valid</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle methods">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Methods</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.keys" title="isofit.data.ini.Ini.keys">keys</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.items" title="isofit.data.ini.Ini.items">items</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Passthrough to the items() function on the working section of the config.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.changeBase" title="isofit.data.ini.Ini.changeBase">changeBase</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Changes the base path for each directory.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.changeKey" title="isofit.data.ini.Ini.changeKey">changeKey</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Change the value associated with the specified key in the CONFIG[SECTION].</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.changeSection" title="isofit.data.ini.Ini.changeSection">changeSection</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Changes the working section of the config.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.changePath" title="isofit.data.ini.Ini.changePath">changePath</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Change the path associated with the specified key in the CONFIG[SECTION].</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.load" title="isofit.data.ini.Ini.load">load</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Load environment variables from an ini file.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.save" title="isofit.data.ini.Ini.save">save</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Save CONFIG variables to the INI (ini) file.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.path" title="isofit.data.ini.Ini.path">path</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Retrieves a path under one of the env directories and validates the path exists.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.toTemplate" title="isofit.data.ini.Ini.toTemplate">toTemplate</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Recursively converts string values in a dict to be template values which can be
+converted back using Ini.fromTemplate(). Template values are in the form of
+"{env.[value]}".</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.fromTemplate" title="isofit.data.ini.Ini.fromTemplate">fromTemplate</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Recursively replaces the template values in found in string values with the
+real value from the ini. Template values are in the form of "{env.[value]}".
+This is an in-place operation.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.reset" title="isofit.data.ini.Ini.reset">reset</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Resets the object to the defaults defined by ISOFIT</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.data.ini.Ini.validate" title="isofit.data.ini.Ini.validate">validate</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Validates known products.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.keys">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.keys" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.keys" title="isofit.data.ini.Ini.keys">keys</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">Iterable[str]</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.items">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.items" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.items" title="isofit.data.ini.Ini.items">items</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">kind</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">Iterable[Tuple[str, str]]</span></span>
+</p>
+<div class="mkapi-document">
+<p>Passthrough to the items() function on the working section of the config.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">kind</span> : 
+<span class="mkapi-item-type">"dirs" | "keys" | None</span> <span class="mkapi-dash">&mdash;</span>
+Returns an iterable for the specific items:</p>
+<ul>
+<li>"dirs" only keys in Ini._dirs</li>
+<li>"dirs" only keys in Ini._keys</li>
+<li>None returns combined both</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.changeBase">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.changeBase" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.changeBase" title="isofit.data.ini.Ini.changeBase">changeBase</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">base</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Changes the base path for each directory.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">base</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Path to base directory to set</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.changeKey">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.changeKey" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.changeKey" title="isofit.data.ini.Ini.changeKey">changeKey</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">key</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">value</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">''</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Change the value associated with the specified key in the CONFIG[SECTION].</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">key</span> : 
+<span class="mkapi-item-type">str, dict</span> <span class="mkapi-dash">&mdash;</span>
+Key to set. Alternatively, can be a dict to iterate over setting multiple
+keys at once.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">value</span> : 
+<span class="mkapi-item-type">str, default=""</span> <span class="mkapi-dash">&mdash;</span>
+The new value to associate with the key.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.changeSection">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.changeSection" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.changeSection" title="isofit.data.ini.Ini.changeSection">changeSection</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">section</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Changes the working section of the config.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">section</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+The section of the config to reference for lookups.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.changePath">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.changePath" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.changePath" title="isofit.data.ini.Ini.changePath">changePath</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">key</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">value</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Change the path associated with the specified key in the CONFIG[SECTION].</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">key</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+The key whose path needs to be changed.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">value</span> : 
+<span class="mkapi-item-type">str or <span class="mkapi-tooltip" title="pathlib._local.Path">Path</span></span> <span class="mkapi-dash">&mdash;</span>
+The new path to associate with the key.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.load">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.load" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.load" title="isofit.data.ini.Ini.load">load</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ini</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Optional[str]</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">section</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Optional[str]</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Load environment variables from an ini file.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ini</span> : 
+<span class="mkapi-item-type">str or <span class="mkapi-tooltip" title="pathlib._local.Path">Path</span>, optional</span> <span class="mkapi-dash">&mdash;</span>
+The path to the INI file containing config variables. If None, the default INI file path is used.
+If provided, sets the global INI for the remainder of the session.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">section</span> : 
+<span class="mkapi-item-type">str, optional</span> <span class="mkapi-dash">&mdash;</span>
+Sets the working section for the session. Key lookups will use this section.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.save">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.save" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.save" title="isofit.data.ini.Ini.save">save</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ini</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Optional[str]</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">diff_only</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">True</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Save CONFIG variables to the INI (ini) file.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ini</span> : 
+<span class="mkapi-item-type">str or <span class="mkapi-tooltip" title="pathlib._local.Path">Path</span>, optional</span> <span class="mkapi-dash">&mdash;</span>
+The path to save the config variables to. If None, the default INI file path is used.
+If provided, sets the global INI for the remainder of the session.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">diff_only</span> : 
+<span class="mkapi-item-type">bool, default=True</span> <span class="mkapi-dash">&mdash;</span>
+Only save if there is a difference between the currently existing ini file and the config in memory.
+If False, will save regardless, possibly overwriting an existing file</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.path">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.path" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.path" title="isofit.data.ini.Ini.path">path</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dir</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-star">*</span><span class="mkapi-arg">path</span><span class="mkapi-colon">: </span><span class="mkapi-ann">List[str]</span><span class="mkapi-comma">, </span><span class="mkapi-arg">key</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">template</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="pathlib._local.Path">Path</span></span></span>
+</p>
+<div class="mkapi-document">
+<p>Retrieves a path under one of the env directories and validates the path exists.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dir</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+One of the env directories, eg. "data", "examples"</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">*path</span> : 
+<span class="mkapi-item-type">List[str]</span> <span class="mkapi-dash">&mdash;</span>
+Path to a file under the <code>dir</code></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">key</span> : 
+<span class="mkapi-item-type">str, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Optional key value to append to the resolved path. Assumes the path is a
+directory and the key will be a file name</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">template</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Returns the path as a template string. The path will still be validated,
+but the return will be "{env.[dir]}/*path", to be used with Ini.replace</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">pathlib.<span class="mkapi-tooltip" title="pathlib._local.Path">Path</span></span> <span class="mkapi-dash">&mdash;</span>
+Validated full path</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle examples">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Examples</span>
+</p>
+<div class="mkapi-section-content">
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">isofit.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">env</span>
+<span class="n">env</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">env</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>~/.isofit/data
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">env</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;examples&quot;</span><span class="p">,</span> <span class="s2">&quot;20171108_Pasadena&quot;</span><span class="p">,</span> <span class="s2">&quot;configs&quot;</span><span class="p">,</span> <span class="s2">&quot;ang20171108t184227_surface.json&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>~/.isofit/examples/20171108_Pasadena/configs/ang20171108t184227_surface.json
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">env</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;srtmnet&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;srtmnet.file&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>~/.isofit/srtmnet/sRTMnet_v120.h5
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">env</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;srtmnet&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;srtmnet.aux&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>~/.isofit/srtmnet/sRTMnet_v120_aux.npz
+</code></pre></div>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">FileNotFoundError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.toTemplate">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.toTemplate" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.toTemplate" title="isofit.data.ini.Ini.toTemplate">toTemplate</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">data</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str | dict</span><span class="mkapi-comma">, </span><span class="mkapi-arg">replace</span><span class="mkapi-equal">=</span><span class="mkapi-default">'dirs'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">save</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-arg">report</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-star">**</span><span class="mkapi-arg">kwargs</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">dict</span></span>
+</p>
+<div class="mkapi-document">
+<p>Recursively converts string values in a dict to be template values which can be
+converted back using Ini.fromTemplate(). Template values are in the form of
+"{env.[value]}".</p>
+<p>
+Parameters</p>
+<hr />
+<p>data : str | dict
+    The dictionary to walk over and update values. If string, checks if this
+    exists as a file and loads that in as the data dict
+replace : "dirs" | "keys" | None, default="dirs"
+    Defines what kind of values from the ini to replace in strings:
+    - "dirs" only replace directory paths
+    - "keys" only replace key strings
+    - None replaces both
+    Recommended to only use "dirs" to remain consistent. "keys" can have
+    unintended consequences and may replace more than it should
+save : bool, default=True
+    If the data was a file and this is enabled, saves the converted data dict
+    to another file. The new file will simply append ".tmpl" to its name
+report : bool, default=True
+    Reports if no value in the input data was changed
+**kwargs : dict
+    Additional strings to replace. The values are replaced in a string with the
+    key of the kwarg. For example:
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;xyz&quot;</span><span class="p">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">}</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;some_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;replace abc here&quot;</span>
+</code></pre></div></p>
+<div class="mkapi-example-output highlight"><pre><span></span><code>will be replaced as:
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">data</span><span class="p">[</span><span class="s2">&quot;some_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;replace </span><span class="si">{xyz}</span><span class="s2"> here&quot;</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>This is to be used with Ini.fromTemplate to replace values that are not
+found in the ini object
+</code></pre></div>
+<p>
+Returns</p>
+<hr />
+<p>data : dict | pathlib.Path
+    In-place replaced string values with template values
+    If saved as a new file, returns the path instead</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">FileNotFoundError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.fromTemplate">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.fromTemplate" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.fromTemplate" title="isofit.data.ini.Ini.fromTemplate">fromTemplate</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">data</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str | dict</span><span class="mkapi-comma">, </span><span class="mkapi-arg">save</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-arg">prepend</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-star">**</span><span class="mkapi-arg">kwargs</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">dict</span></span>
+</p>
+<div class="mkapi-document">
+<p>Recursively replaces the template values in found in string values with the
+real value from the ini. Template values are in the form of "{env.[value]}".
+This is an in-place operation.</p>
+<p>
+Parameters</p>
+<hr />
+<p>data : str | dict
+    The dictionary to walk over and update values. If string, checks if this
+    exists as a file and loads that in as the data dict
+save : bool, default=True
+    If the data was a file and this is enabled, saves the converted data dict
+    to another file. If the input file ends with ".tmpl" then it will simply be
+    cut. If it doesn't or already exists, then the output filename will be the
+    input filename prepended with <span class="mkapi-tooltip" title="isofit.data.ini.Ini.fromTemplate.prepend"><code>prepend</code></span> value.
+prepend : str, default=None
+    Prepend a string to the output filename. If not set and the input filename
+    doesn't end with ".tmpl", then this is auto-set to "replaced"
+**kwargs : dict
+    Additional strings to replace. The values are replaced in a string with the
+    key of the kwarg. For example:
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;xyz&quot;</span><span class="p">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">}</span>
+<span class="n">data</span><span class="p">[</span><span class="s2">&quot;some_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;replace </span><span class="si">{xyz}</span><span class="s2"> here&quot;</span>
+</code></pre></div></p>
+<div class="mkapi-example-output highlight"><pre><span></span><code>will be replaced as:
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">data</span><span class="p">[</span><span class="s2">&quot;some_key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;replace abc here&quot;</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>This is to be used with Ini.toTemplate to replace values that are not found
+in the ini object
+</code></pre></div>
+<p>
+Returns</p>
+<hr />
+<p>data : dict | pathlib.Path
+    In-place replaced template values with actual from a loaded ini
+    If saved as a new file, returns the path instead</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">FileNotFoundError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.reset">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.reset" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.reset" title="isofit.data.ini.Ini.reset">reset</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">save</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Resets the object to the defaults defined by ISOFIT</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">save</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Saves the reset to the default ini file: ~/.isofit/isofit.ini</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.data.ini.Ini.validate">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/data/ini/#isofit.data.ini.Ini.validate" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">staticmethod</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.data.ini.Ini" title="isofit.data.ini.Ini">Ini</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.data.ini.Ini.validate" title="isofit.data.ini.Ini.validate">validate</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">keys</span><span class="mkapi-colon">: </span><span class="mkapi-ann">List</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">bool</span></span>
+</p>
+<div class="mkapi-document">
+<p>Validates known products.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">keys</span> : 
+<span class="mkapi-item-type">list</span> <span class="mkapi-dash">&mdash;</span>
+List of products to validate</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">NotImplementedError</span></p>
+</li>
+</ul>
+</div>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../download/" class="btn btn-neutral float-left" title="Download"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../shared/" class="btn btn-neutral float-right" title="Shared">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../download/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../shared/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Radiative transfer - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Radiative transfer";
+        var mkdocs_page_input_path = "src/isofit/radiative_transfer/radiative_transfer.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Radiative transfer</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-object" id="isofit.radiative_transfer.radiative_transfer">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer" title="Go to docs">[docs]</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.radiative_transfer" title="isofit.radiative_transfer.radiative_transfer">isofit.radiative_transfer.radiative_transfer</a></span>
+</p>
+<div class="mkapi-source no-copy highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2018 California Institute of Technology</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ISOFIT: Imaging Spectrometer Optimal FITting</span>
+<span class="c1"># Authors: Philip G. Brodrick, philip.brodrick@jpl.nasa.gov</span>
+<span class="c1">#          Niklas Bohn, urs.n.bohn@jpl.nasa.gov</span>
+<span class="c1">#          Jay E. Fahlen, jay.e.fahlen@jpl.nasa.gov</span>
+<span class="c1">#</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">eps</span><span class="p">,</span> <span class="n">svd_inv_sqrt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.radiative_transfer.engines</span><span class="w"> </span><span class="kn">import</span> <span class="n">Engines</span>
+
+<span class="n">Logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">confPriority</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">configs</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.confPriority"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.confPriority" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Selects a key from a config if the value for that key is not None</span>
+<span class="sd">    Prioritizes returning the first value found in the configs list</span>
+
+<span class="sd">    TODO: ISOFIT configs are annoying and will create keys to NoneTypes</span>
+<span class="sd">    Should use mlky to handle key discovery at runtime instead of like this</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">configs</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">RadiativeTransfer</span><span class="p">:</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class controls the radiative transfer component of the forward</span>
+<span class="sd">    model. An ordered dictionary is maintained of individual RTMs (MODTRAN,</span>
+<span class="sd">    for example). We loop over the dictionary concatenating the radiation</span>
+<span class="sd">    and derivatives from each RTM and interval to form the complete result.</span>
+
+<span class="sd">    In general, some of the state vector components will be shared between</span>
+<span class="sd">    RTMs and bands. For example, H20STR is shared between both VISNIR and</span>
+<span class="sd">    TIR. This class maintains the master list of statevectors.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Keys to retrieve from 3 sections to use the preferred</span>
+    <span class="c1"># Prioritizes retrieving from radiative_transfer_engines first, then instrument, then radiative_transfer</span>
+    <span class="n">_keys</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;interpolator_style&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;overwrite_interpolator&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lut_grid&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lut_path&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;wavelength_file&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">full_config</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">full_config</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">radiative_transfer</span>
+        <span class="n">confIT</span> <span class="o">=</span> <span class="n">full_config</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">instrument</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lut_grid</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">lut_grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">statevector</span><span class="o">.</span><span class="n">get_element_names</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terrain_style</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">terrain_style</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_cos_i</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">min_cos_i</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">radiative_transfer_engines</span><span class="p">)):</span>
+            <span class="n">confRT</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">radiative_transfer_engines</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">confRT</span><span class="o">.</span><span class="n">engine_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">Engines</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Invalid radiative transfer engine choice. Got: </span><span class="si">{</span><span class="n">confRT</span><span class="o">.</span><span class="n">engine_name</span><span class="si">}</span><span class="s2">; Must be one of: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">Engines</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Generate the params for this RTE</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">key</span><span class="p">:</span> <span class="n">confPriority</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="n">confRT</span><span class="p">,</span> <span class="n">confIT</span><span class="p">,</span> <span class="n">config</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_keys</span>
+            <span class="p">}</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;engine_config&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">confRT</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;n_cores&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">full_config</span><span class="o">.</span><span class="n">implementation</span><span class="o">.</span><span class="n">n_cores</span>
+
+            <span class="c1"># Select the right RTE and initialize it</span>
+            <span class="n">rte</span> <span class="o">=</span> <span class="n">Engines</span><span class="p">[</span><span class="n">confRT</span><span class="o">.</span><span class="n">engine_name</span><span class="p">](</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rte</span><span class="p">)</span>
+
+            <span class="c1"># Make sure the length of the config statevectores match the engine&#39;s assumed statevectors</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">expected</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">statevector</span><span class="o">.</span><span class="n">get_element_names</span><span class="p">()))</span> <span class="o">!=</span> <span class="p">(</span>
+                <span class="n">got</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rte</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">x_RT</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Mismatch between the number of elements for the config statevector and LUT.indices.x_RT: </span><span class="si">{</span><span class="n">expected</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">got</span><span class="si">=}</span><span class="s2">&quot;</span>
+                <span class="n">Logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+        <span class="c1"># The rest of the code relies on sorted order of the individual RT engines which cannot</span>
+        <span class="c1"># be guaranteed by the dict JSON or YAML input</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">wl</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="c1"># Retrieved variables.  We establish scaling, bounds, and</span>
+        <span class="c1"># initial guesses for each state vector element.  The state</span>
+        <span class="c1"># vector elements are all free parameters in the RT lookup table,</span>
+        <span class="c1"># and they all have associated dimensions in the LUT grid.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_sigma</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">sv</span><span class="p">,</span> <span class="n">sv_name</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">config</span><span class="o">.</span><span class="n">statevector</span><span class="o">.</span><span class="n">get_elements</span><span class="p">()):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prior_sigma</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">prior_sigma</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sv</span><span class="o">.</span><span class="n">prior_mean</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prior_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_sigma</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Sa_cached</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagflat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prior_sigma</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Sa_normalized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_cached</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Sa_cached</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_normalized</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_sqrt_normalized</span> <span class="o">=</span> <span class="n">svd_inv_sqrt</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Sa_normalized</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">wl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">RT</span><span class="o">.</span><span class="n">wl</span> <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bvec</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">unknowns</span><span class="o">.</span><span class="n">get_element_names</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">unknowns</span><span class="o">.</span><span class="n">get_elements</span><span class="p">()[</span><span class="mi">0</span><span class="p">]])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">solar_irr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">RT</span><span class="o">.</span><span class="n">solar_irr</span> <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">])</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">xa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.xa"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.xa" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pull the priors from each of the individual RTs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">prior_mean</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">Sa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.Sa"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.Sa" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pull the priors from each of the individual RTs.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_cached</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">Sb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.Sb"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.Sb" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Uncertainty due to unmodeled variables.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diagflat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bval</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_shared_rtm_quantities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_shared_rtm_quantities"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_shared_rtm_quantities" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return only the set of RTM quantities (transup, sphalb, etc.) that are contained</span>
+<span class="sd">        in all RT engines.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pack_arrays</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coszen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.coszen"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.coszen" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Backwards compatibility until Geometry takes over this param</span>
+<span class="sd">        Return some child RTE coszen</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;coszen&quot;</span> <span class="ow">in</span> <span class="n">child</span><span class="o">.</span><span class="n">lut</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">child</span><span class="o">.</span><span class="n">lut</span><span class="o">.</span><span class="n">coszen</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_rdn</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.calc_rdn"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.calc_rdn" title="Go to docs">[docs]</a></div>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x_RT</span><span class="p">,</span>
+        <span class="n">rho_dir_dir</span><span class="p">,</span>
+        <span class="n">rho_dif_dir</span><span class="p">,</span>
+        <span class="n">Ls</span><span class="p">,</span>
+        <span class="n">L_tot</span><span class="p">,</span>
+        <span class="n">L_dir_dir</span><span class="p">,</span>
+        <span class="n">L_dif_dir</span><span class="p">,</span>
+        <span class="n">L_dir_dif</span><span class="p">,</span>
+        <span class="n">L_dif_dif</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">,</span>
+        <span class="n">geom</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Physics-based forward model to calculate at-sensor radiance.</span>
+<span class="sd">        Includes topography, background reflectance, and glint.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Adjacency effects</span>
+        <span class="c1"># ToDo: we need to think about if we want to obtain the background reflectance from the Geometry object</span>
+        <span class="c1">#  or from the surface model, i.e., the same way as we do with the target pixel reflectance</span>
+
+        <span class="n">rho_dir_dif</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">geom</span><span class="o">.</span><span class="n">bg_rfl</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">bg_rfl</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">rho_dir_dir</span>
+        <span class="p">)</span>
+        <span class="n">rho_dif_dif</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">geom</span><span class="o">.</span><span class="n">bg_rfl</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geom</span><span class="o">.</span><span class="n">bg_rfl</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">rho_dif_dir</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Atmospheric path radiance</span>
+        <span class="n">L_atm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_L_atm</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+
+        <span class="c1"># Atmospheric spherical albedo</span>
+        <span class="n">s_alb</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;sphalb&quot;</span><span class="p">]</span>
+        <span class="n">atm_surface_scattering</span> <span class="o">=</span> <span class="n">s_alb</span> <span class="o">*</span> <span class="n">rho_dif_dif</span>
+        <span class="n">eq_11_term</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">atm_surface_scattering</span>
+
+        <span class="c1"># Special case: 1-component model</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">L_dir_dir</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">L_dir_dir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># we assume rho_dir_dir = rho_dif_dir = rho_dir_dif = rho_dif_dif</span>
+            <span class="n">rho_dif_dif</span> <span class="o">=</span> <span class="n">rho_dir_dir</span>
+            <span class="c1"># eliminate spherical albedo and one reflectance term from numerator if using 1-component model</span>
+            <span class="n">atm_surface_scattering</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">eq_11_term</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Thermal transmittance</span>
+        <span class="n">L_up</span> <span class="o">=</span> <span class="n">Ls</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_upward_transm</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="n">geom</span><span class="p">)</span>
+
+        <span class="c1"># Our radiance model follows the physics as presented in Guanter (2006), Vermote et al. (1997), and</span>
+        <span class="c1"># Tanre et al. (1983). This particular formulation facilitates the consideration of topographic effects,</span>
+        <span class="c1"># glint, or BRDF modeling in general. The contribution of the target to the signal at the top of the atmosphere</span>
+        <span class="c1"># is decomposed as the sum of four terms:</span>
+
+        <span class="c1"># 1. photons directly transmitted from the sun to the target and directly reflected back to the sensor</span>
+        <span class="c1">#    rho_dir_dir =&gt; directional-directional surface reflectance of the target</span>
+        <span class="c1"># 2. photons scattered by the atmosphere then reflected by the target and directly transmitted to the sensor</span>
+        <span class="c1">#    rho_dif_dir =&gt; surface diffuse-directional reflectance</span>
+        <span class="c1"># 3. photons directly transmitted to the target but scattered by the atmosphere on their way to the sensor</span>
+        <span class="c1">#    rho_dir_dif =&gt; surface directional-diffuse reflectance</span>
+        <span class="c1"># 4. photons having at least two interactions with the atmosphere and one with the target</span>
+        <span class="c1">#    rho_dif_dif =&gt; surface diffuse-diffuse reflectance</span>
+
+        <span class="c1"># These terms are also called coupling terms, as they are responsible for the coupling between atmospheric</span>
+        <span class="c1"># radiative transfer and the surface reflectance properties.</span>
+
+        <span class="c1"># The coupling terms are multiplied by four different combinations of direct and diffuse radiance terms:</span>
+        <span class="c1"># 1. L_dir_dir =&gt; downward direct * upward direct</span>
+        <span class="c1"># 2. L_dif_dir =&gt; downward diffuse * upward direct</span>
+        <span class="c1"># 3. L_dir_dif =&gt; downward direct * upward diffuse</span>
+        <span class="c1"># 4. L_dif_dif =&gt; downward diffuse * upward diffuse</span>
+
+        <span class="c1"># When separated radiance terms and/or a BRDF model of the surface are not available,</span>
+        <span class="c1"># the Lambertian assumption is made for the target reflectance:</span>
+        <span class="c1"># rho_dir_dir = rho_dif_dir = rho_dir_dif = rho_dif_dif</span>
+        <span class="c1"># In this case, our radiance model reduces to:</span>
+        <span class="c1"># L_atm + (L_tot * rho_dir_dir) / (1 - S * rho_dir_dir) + L_up,</span>
+        <span class="c1"># with L_tot being the total radiance (downward * upward, direct + diffuse).</span>
+
+        <span class="c1"># TOA radiance model</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">L_atm</span>
+            <span class="o">+</span> <span class="n">L_dir_dir</span> <span class="o">*</span> <span class="n">rho_dir_dir</span>
+            <span class="o">+</span> <span class="n">L_dif_dir</span> <span class="o">*</span> <span class="n">rho_dif_dir</span> <span class="o">/</span> <span class="n">eq_11_term</span>
+            <span class="o">+</span> <span class="n">L_dir_dif</span> <span class="o">*</span> <span class="n">rho_dir_dif</span>
+            <span class="o">+</span> <span class="n">L_dif_dif</span> <span class="o">*</span> <span class="n">rho_dif_dif</span> <span class="o">/</span> <span class="n">eq_11_term</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">L_tot</span> <span class="o">*</span> <span class="n">atm_surface_scattering</span> <span class="o">*</span> <span class="n">rho_dif_dif</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_alb</span> <span class="o">*</span> <span class="n">rho_dif_dif</span><span class="p">)</span>
+            <span class="o">+</span> <span class="n">L_up</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_L_atm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_L_atm"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_L_atm" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the interpolated modeled atmospheric path radiance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x_RT: radiative-transfer portion of the statevector</span>
+<span class="sd">            geom: local geometry conditions for lookup</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            interpolated modeled atmospheric path radiance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">L_atms</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">verified_geom</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coszen</span><span class="p">)</span>
+        <span class="n">coszen</span><span class="p">,</span> <span class="n">cos_i</span> <span class="o">=</span> <span class="n">verified_geom</span><span class="p">[</span><span class="s2">&quot;coszen&quot;</span><span class="p">],</span> <span class="n">verified_geom</span><span class="p">[</span><span class="s2">&quot;cos_i&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">RT</span><span class="o">.</span><span class="n">treat_as_emissive</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+                <span class="n">rdn</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;thermal_upwelling&quot;</span><span class="p">]</span>
+                <span class="n">L_atms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rdn</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">RT</span><span class="o">.</span><span class="n">rt_mode</span> <span class="o">==</span> <span class="s2">&quot;rdn&quot;</span><span class="p">:</span>
+                    <span class="n">L_atm</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;rhoatm&quot;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">rho_atm</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;rhoatm&quot;</span><span class="p">]</span>
+                    <span class="n">L_atm</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">transm_to_rdn</span><span class="p">(</span><span class="n">rho_atm</span><span class="p">,</span> <span class="n">coszen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">solar_irr</span><span class="p">)</span>
+                <span class="n">L_atms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_atm</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">L_atms</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_L_coupled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_L_coupled"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_L_coupled" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the interpolated radiance terms on the sun-to-surface-to-sensor path.</span>
+<span class="sd">        These follow the physics as presented in Guanter (2006), Vermote et al. (1997), and Tanre et al. (1983).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            r:      interpolated radiative transfer quantities from the LUT</span>
+<span class="sd">            coszen: top-of-atmosphere solar zenith angle</span>
+<span class="sd">            cos_i:  local solar zenith angle at the surface</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            interpolated radiances along all optical paths:</span>
+<span class="sd">            L_dir_dir =&gt; downward direct * upward direct</span>
+<span class="sd">            L_dif_dir =&gt; downward diffuse * upward direct</span>
+<span class="sd">            L_dir_dif =&gt; downward direct * upward diffuse</span>
+<span class="sd">            L_dif_dif =&gt; downward diffuse * upward diffuse</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check coszen against cos_i</span>
+        <span class="n">verified_geom</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coszen</span><span class="p">)</span>
+        <span class="n">coszen</span><span class="p">,</span> <span class="n">cos_i</span><span class="p">,</span> <span class="n">skyview_factor</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">verified_geom</span><span class="p">[</span><span class="s2">&quot;coszen&quot;</span><span class="p">],</span>
+            <span class="n">verified_geom</span><span class="p">[</span><span class="s2">&quot;cos_i&quot;</span><span class="p">],</span>
+            <span class="n">verified_geom</span><span class="p">[</span><span class="s2">&quot;skyview_factor&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="c1"># Pretend that the surface is flat, regardless of input geometry</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terrain_style</span> <span class="o">==</span> <span class="s2">&quot;flat&quot;</span><span class="p">:</span>
+            <span class="n">cos_i</span> <span class="o">=</span> <span class="n">coszen</span>
+
+        <span class="n">cos_i</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_cos_i</span><span class="p">,</span> <span class="n">cos_i</span><span class="p">)</span>
+
+        <span class="c1"># radiances along all optical paths</span>
+        <span class="n">L_coupled</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coupling_terms</span>
+            <span class="p">]</span>
+        <span class="p">):</span>
+            <span class="c1"># In case of the 1-component model, we cannot populate the coupling terms</span>
+            <span class="n">L_coupled</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coupling_terms</span><span class="p">:</span>
+                <span class="n">L_coupled</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">units</span><span class="o">.</span><span class="n">transm_to_rdn</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">coszen</span><span class="o">=</span><span class="n">coszen</span><span class="p">,</span> <span class="n">solar_irr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">solar_irr</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">rt_mode</span> <span class="o">==</span> <span class="s2">&quot;transm&quot;</span>
+                    <span class="k">else</span> <span class="n">r</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="p">)</span>
+        <span class="c1"># Topographic shadow mask (0=shadow, 1=sunlit pixel).</span>
+        <span class="c1"># for now, this is always set to 1.0.</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="c1"># Assigning coupled terms, unscaling and rescaling downward direct radiance by local solar zenith angle.</span>
+        <span class="c1"># Downward diffuse components are scaled by viewable sky fraction (i.e., &quot;ungula&quot; of viewable sky in solid geometry terms).</span>
+        <span class="n">L_dir_dir</span> <span class="o">=</span> <span class="n">L_coupled</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">coszen</span> <span class="o">*</span> <span class="n">cos_i</span> <span class="o">*</span> <span class="n">b</span>
+        <span class="n">L_dif_dir</span> <span class="o">=</span> <span class="n">L_coupled</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">L_dir_dif</span> <span class="o">=</span> <span class="n">L_coupled</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">coszen</span> <span class="o">*</span> <span class="n">cos_i</span> <span class="o">*</span> <span class="n">b</span>
+        <span class="n">L_dif_dif</span> <span class="o">=</span> <span class="n">L_coupled</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="c1"># Note - we should really be doing the multiplication upstream before convolution - this is an approximation</span>
+        <span class="c1"># Correct downward diffuse term for topographic assuming Hay&#39;s model (Hay 1979; Richter 1998; Guanter et al., 2009)</span>
+        <span class="n">t_down_dir</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;transm_down_dir&quot;</span><span class="p">]</span>
+        <span class="n">hays_model</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">t_down_dir</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos_i</span> <span class="o">/</span> <span class="n">coszen</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">t_down_dir</span><span class="p">)</span> <span class="o">*</span> <span class="n">skyview_factor</span>
+        <span class="p">)</span>
+        <span class="c1"># applies to the downward diffuse terms</span>
+        <span class="n">L_dif_dir</span> <span class="o">*=</span> <span class="n">hays_model</span>
+        <span class="n">L_dif_dif</span> <span class="o">*=</span> <span class="n">hays_model</span>
+
+        <span class="k">return</span> <span class="n">L_dir_dir</span><span class="p">,</span> <span class="n">L_dif_dir</span><span class="p">,</span> <span class="n">L_dir_dif</span><span class="p">,</span> <span class="n">L_dif_dif</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_RT_quantities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.calc_RT_quantities"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.calc_RT_quantities" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the RT quantities including the LUT sample (r),</span>
+<span class="sd">        and the radiances (L). This function handles the hand-off between</span>
+<span class="sd">        the 1c and 4c model.</span>
+
+<span class="sd">        In the 1c case, L_dir_dir, L_dif_dir, L_dir_dif, L_dif_dif = 0,</span>
+<span class="sd">        and L_tot, L_down_dir, and L_down_dif are populated within the</span>
+<span class="sd">        if statement.</span>
+
+<span class="sd">        In the 4c case, we always use returns from get_L_coupled</span>
+
+<span class="sd">        All quantities are on the sun-to-surface-to-sensor path.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Propogate LUT</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_shared_rtm_quantities</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+
+        <span class="c1"># Default: get directional radiances</span>
+        <span class="n">L_dir_dir</span><span class="p">,</span> <span class="n">L_dif_dir</span><span class="p">,</span> <span class="n">L_dir_dif</span><span class="p">,</span> <span class="n">L_dif_dif</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_L_coupled</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">L_tot</span> <span class="o">=</span> <span class="n">L_dir_dir</span> <span class="o">+</span> <span class="n">L_dif_dir</span> <span class="o">+</span> <span class="n">L_dir_dif</span> <span class="o">+</span> <span class="n">L_dif_dif</span>
+
+        <span class="c1"># Handle 1c L_tot. NOTE: transm_down_dif = total transm for 1c case.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">L_tot</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">L_tot</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">coszen</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">coszen</span><span class="p">)[</span><span class="s2">&quot;coszen&quot;</span><span class="p">]</span>
+            <span class="n">L_tots</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">RT</span><span class="o">.</span><span class="n">treat_as_emissive</span><span class="p">:</span>
+                    <span class="n">rdn</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;thermal_downwelling&quot;</span><span class="p">]</span>
+                    <span class="n">L_tots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rdn</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">RT</span><span class="o">.</span><span class="n">rt_mode</span> <span class="o">==</span> <span class="s2">&quot;rdn&quot;</span><span class="p">:</span>
+                        <span class="n">L_tot</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;transm_down_dif&quot;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">L_tot</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">transm_to_rdn</span><span class="p">(</span>
+                            <span class="n">r</span><span class="p">[</span><span class="s2">&quot;transm_down_dif&quot;</span><span class="p">],</span>
+                            <span class="n">coszen</span><span class="p">,</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">solar_irr</span><span class="p">,</span>
+                        <span class="p">)</span>
+                    <span class="n">L_tots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">L_tot</span><span class="p">)</span>
+            <span class="n">L_tot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">L_tots</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">r</span><span class="p">,</span>
+            <span class="n">L_tot</span><span class="p">,</span>
+            <span class="n">L_dir_dir</span><span class="p">,</span>
+            <span class="n">L_dif_dir</span><span class="p">,</span>
+            <span class="n">L_dir_dif</span><span class="p">,</span>
+            <span class="n">L_dif_dif</span><span class="p">,</span>
+        <span class="p">)</span>
+<div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_upward_transm"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.get_upward_transm" title="Go to docs">[docs]</a></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_upward_transm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">,</span> <span class="n">max_transm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.05</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get total upward transmittance w/physical check enforced (max_transm) and hand-off between 1c and 4c model.</span>
+
+<span class="sd">        This is called for all surfaces to handle thermal downwelling/upwelling component.</span>
+<span class="sd">        While rt can be either rdn or transm modes, this must be in units of transmittance.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">transm_up_dir</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;transm_up_dir&quot;</span><span class="p">]</span>
+        <span class="n">transm_up_dif</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;transm_up_dif&quot;</span><span class="p">]</span>
+
+        <span class="c1"># NOTE for 1c case transm-up is not a key, and therefore Ls and transup is zero.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transm_up_dir</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">transm_up_dir</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">solar_irr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">transup</span> <span class="o">=</span> <span class="n">transm_up_dir</span> <span class="o">+</span> <span class="n">transm_up_dif</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">transup</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_transm</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Upward transmittance (max:</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">transup</span><span class="p">)</span><span class="si">}</span><span class="s2">) is greater than </span><span class="si">{</span><span class="n">max_transm</span><span class="si">}</span><span class="s2">. &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;Verify &#39;transm_up_dir&#39; and &#39;transm_up_dif&#39; keys are in units of transmittance.&quot;</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="n">transup</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">drdn_dRT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">,</span> <span class="n">rho_dir_dir</span><span class="p">,</span> <span class="n">rho_dif_dir</span><span class="p">,</span> <span class="n">Ls</span><span class="p">,</span> <span class="n">rdn</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.drdn_dRT"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.drdn_dRT" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative of estimated radiance w.r.t. RT statevector elements.</span>
+<span class="sd">        We use a numerical approach to approximate dRT with a constant surface</span>
+<span class="sd">        reflectance. This is a reasonable approx. for the multicomponent surface.</span>
+
+<span class="sd">        When using the glint model however, this does not take into account</span>
+<span class="sd">        the dependence of the surface reflectance on the atmosphere.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># perturb each element of the RT state vector (finite difference)</span>
+        <span class="n">K_RT</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">x_RTs_perturb</span> <span class="o">=</span> <span class="n">x_RT</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_RT</span><span class="p">))</span> <span class="o">*</span> <span class="n">eps</span>
+        <span class="k">for</span> <span class="n">x_RT_perturb</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_RTs_perturb</span><span class="p">):</span>
+            <span class="p">(</span>
+                <span class="n">r</span><span class="p">,</span>
+                <span class="n">L_tot</span><span class="p">,</span>
+                <span class="n">L_dir_dir</span><span class="p">,</span>
+                <span class="n">L_dif_dir</span><span class="p">,</span>
+                <span class="n">L_dir_dif</span><span class="p">,</span>
+                <span class="n">L_dif_dif</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_RT_quantities</span><span class="p">(</span><span class="n">x_RT_perturb</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+
+            <span class="c1"># Surface state is held constant?</span>
+            <span class="n">rdne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_rdn</span><span class="p">(</span>
+                <span class="n">x_RT_perturb</span><span class="p">,</span>
+                <span class="n">rho_dir_dir</span><span class="p">,</span>
+                <span class="n">rho_dif_dir</span><span class="p">,</span>
+                <span class="n">Ls</span><span class="p">,</span>
+                <span class="n">L_tot</span><span class="p">,</span>
+                <span class="n">L_dir_dir</span><span class="p">,</span>
+                <span class="n">L_dif_dir</span><span class="p">,</span>
+                <span class="n">L_dir_dif</span><span class="p">,</span>
+                <span class="n">L_dif_dif</span><span class="p">,</span>
+                <span class="n">r</span><span class="p">,</span>
+                <span class="n">geom</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">K_RT</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">rdne</span> <span class="o">-</span> <span class="n">rdn</span><span class="p">)</span> <span class="o">/</span> <span class="n">eps</span><span class="p">)</span>
+
+        <span class="n">K_RT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">K_RT</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="n">K_RT</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">drdn_dRTb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">,</span> <span class="n">rho_dir_dir</span><span class="p">,</span> <span class="n">rho_dif_dir</span><span class="p">,</span> <span class="n">Ls</span><span class="p">,</span> <span class="n">rdn</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.drdn_dRTb"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.drdn_dRTb" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative of estimated rdn w.r.t. H2O_ABSCO</span>
+
+<span class="sd">        Currently, the K_b matrix only covers forward model derivatives</span>
+<span class="sd">        due to H2O_ABSCO unknowns, so that subsequent errors might occur</span>
+<span class="sd">        when water vapor is not part of the statevector</span>
+<span class="sd">        (which is very unlikely though).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bvec</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">Kb_RT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wl</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+
+        <span class="c1"># ToDo: might require modification in case more unknowns are added</span>
+        <span class="c1"># The following statement captures the case that H2O is not part</span>
+        <span class="c1"># of the statevector.</span>
+        <span class="c1"># but might need to be modified as soon as we add more unknowns</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bvec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;H2OSTR&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">:</span>
+            <span class="n">Kb_RT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wl</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># unknown parameters modeled as random variables per</span>
+            <span class="c1"># Rodgers et al (2000) K_b matrix.  We calculate these derivatives</span>
+            <span class="c1"># by finite differences</span>
+            <span class="n">Kb_RT</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">perturb</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">eps</span>
+            <span class="k">for</span> <span class="n">unknown</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bvec</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">unknown</span> <span class="o">==</span> <span class="s2">&quot;H2O_ABSCO&quot;</span> <span class="ow">and</span> <span class="s2">&quot;H2OSTR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;H2OSTR&quot;</span><span class="p">)</span>
+                    <span class="n">x_RT_perturb</span> <span class="o">=</span> <span class="n">x_RT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">x_RT_perturb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_RT</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">perturb</span>
+                    <span class="p">(</span>
+                        <span class="n">r</span><span class="p">,</span>
+                        <span class="n">L_tot</span><span class="p">,</span>
+                        <span class="n">L_dir_dir</span><span class="p">,</span>
+                        <span class="n">L_dif_dir</span><span class="p">,</span>
+                        <span class="n">L_dir_dif</span><span class="p">,</span>
+                        <span class="n">L_dif_dif</span><span class="p">,</span>
+                    <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_RT_quantities</span><span class="p">(</span><span class="n">x_RT_perturb</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+
+                    <span class="n">rdne</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_rdn</span><span class="p">(</span>
+                        <span class="n">x_RT_perturb</span><span class="p">,</span>
+                        <span class="n">rho_dir_dir</span><span class="p">,</span>
+                        <span class="n">rho_dif_dir</span><span class="p">,</span>
+                        <span class="n">Ls</span><span class="p">,</span>
+                        <span class="n">L_tot</span><span class="p">,</span>
+                        <span class="n">L_dir_dir</span><span class="p">,</span>
+                        <span class="n">L_dif_dir</span><span class="p">,</span>
+                        <span class="n">L_dir_dif</span><span class="p">,</span>
+                        <span class="n">L_dif_dif</span><span class="p">,</span>
+                        <span class="n">r</span><span class="p">,</span>
+                        <span class="n">geom</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">Kb_RT</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">rdne</span> <span class="o">-</span> <span class="n">rdn</span><span class="p">)</span> <span class="o">/</span> <span class="n">eps</span><span class="p">)</span>
+
+        <span class="n">Kb_RT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Kb_RT</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">return</span> <span class="n">Kb_RT</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.summarize"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.summarize" title="Go to docs">[docs]</a></div>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">RT</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+            <span class="n">ret</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RT</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">))</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">pack_arrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rtm_quantities_from_RT_engines</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.pack_arrays"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.RadiativeTransfer.pack_arrays" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Take the list of dict outputs from each RT engine and</span>
+<span class="sd">        stack their internal arrays in the same order. Keep only</span>
+<span class="sd">        those quantities that are common to all RT engines.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get the intersection of the sets of keys from each of the rtm_quantities_from_RT_engines</span>
+        <span class="n">shared_rtm_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rtm_quantities_from_RT_engines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rtm_quantities_from_RT_engines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">rtm_quantities_from_one_RT_engine</span> <span class="ow">in</span> <span class="n">rtm_quantities_from_RT_engines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">shared_rtm_keys</span><span class="o">.</span><span class="n">intersection_update</span><span class="p">(</span>
+                    <span class="n">rtm_quantities_from_one_RT_engine</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Concatenate the different band ranges</span>
+        <span class="n">rtm_quantities_concatenated_over_RT_bands</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">shared_rtm_keys</span><span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rtm_quantities_from_RT_engines</span><span class="p">]</span>
+            <span class="n">rtm_quantities_concatenated_over_RT_bands</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">rtm_quantities_concatenated_over_RT_bands</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ext550_to_vis</span><span class="p">(</span><span class="n">ext550</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.radiative_transfer.radiative_transfer.ext550_to_vis"><a href="../../../../api/isofit/radiative_transfer/radiative_transfer/#isofit.radiative_transfer.radiative_transfer.ext550_to_vis" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;VIS is defined as a function of the surface aerosol extinction coefficient</span>
+<span class="sd">    at 550 nm in km-1, EXT550, by the formula VIS[km] = ln(50) / (EXT550 + 0.01159),</span>
+<span class="sd">    where 0.01159 is the surface Rayleigh scattering coefficient at 550 nm in km-1</span>
+<span class="sd">    (see MODTRAN6 manual, p. 50).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">ext550</span> <span class="o">+</span> <span class="mf">0.01159</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Configs - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Configs";
+        var mkdocs_page_input_path = "src/isofit/configs/configs.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Configs</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-object" id="isofit.configs.configs">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../api/isofit/configs/configs/#isofit.configs.configs" title="Go to docs">[docs]</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.configs.configs" title="isofit.configs.configs">isofit.configs.configs</a></span>
+</p>
+<div class="mkapi-source no-copy highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2018 California Institute of Technology</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ISOFIT: Imaging Spectrometer Optimal FITting</span>
+<span class="c1"># Author: Philip G. Brodrick, philip.brodrick@jpl.nasa.gov</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Type</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.configs.base_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseConfigSection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.configs.sections.forward_model_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ForwardModelConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.configs.sections.implementation_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImplementationConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.configs.sections.input_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">InputConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.configs.sections.output_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutputConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">common</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">(</span><span class="n">BaseConfigSection</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.configs.configs.Config"><a href="../../../../api/isofit/configs/configs/#isofit.configs.configs.Config" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles the reading and formatting of configuration files.  Please note - there are many ways to do this, some</span>
+<span class="sd">    of which require fewer lines of code.  This method was chosen to facilitate more clarity when using / adding /</span>
+<span class="sd">    modifying code, particularly given the highly flexible nature of Isofit.</span>
+
+<span class="sd">    How to use:</span>
+
+<span class="sd">    To add an additional parameter to an existing class, simply go to the relevant config (e.g. for forward_model go</span>
+<span class="sd">    to sections/forward_model_config.py), and in the config class (e.g. ForwardModelConfig) add the parameter.  Also</span>
+<span class="sd">    Add a hidden parameter with the _type suffix, which will be used to check that configs read the appropriate type.</span>
+<span class="sd">    Add comments directly below, to be auto-appended to online documentation.</span>
+<span class="sd">    Example::</span>
+<span class="sd">        class GenericConfigSection(BaseConfigSection):</span>
+<span class="sd">            _attribute_type = str</span>
+<span class="sd">            attribute = &#39;my attribute&#39;</span>
+<span class="sd">            \&quot;&quot;&quot;</span><span class="nb">str</span><span class="p">:</span> <span class="n">attribute</span> <span class="n">does</span> <span class="n">whatever</span> <span class="n">it</span> <span class="n">happens</span> <span class="n">to</span> <span class="n">do</span>\<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">    To validate that attributes have appropriate relationships or characteristics, use the hidden _check_config_validity</span>
+<span class="s2">    method to add more detailed validation checks. Simply return a list of string descriptions of errors from the</span>
+<span class="s2">    method as demonstrated::</span>
+<span class="s2">        def _check_config_validity(self) -&gt; List[str]:</span>
+<span class="s2">            errors = list()</span>
+<span class="s2">            if self.attribute_min &gt;= self.attribute_max:</span>
+<span class="s2">                errors.append(&#39;attribute_min must be less than attribute_max.&#39;)</span>
+<span class="s2">            return errors</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">configdict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_type</span> <span class="o">=</span> <span class="n">InputConfig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">InputConfig</span><span class="p">({})</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;InputConfig: Input config. Holds all input file information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_type</span> <span class="o">=</span> <span class="n">OutputConfig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">OutputConfig</span><span class="p">({})</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;OutputConfig: Output config. Holds all output file information.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_forward_model_type</span> <span class="o">=</span> <span class="n">ForwardModelConfig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">forward_model</span> <span class="o">=</span> <span class="n">ForwardModelConfig</span><span class="p">({})</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ForwardModelConfig: forward_model config. Holds information about surface models,</span>
+<span class="sd">        radiative transfer models, and the instrument.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_implementation_type</span> <span class="o">=</span> <span class="n">ImplementationConfig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span> <span class="o">=</span> <span class="n">ImplementationConfig</span><span class="p">({})</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ImplementationConfig: holds information regarding how isofit is to be run, including relevant sub-configs</span>
+<span class="sd">        (e.g. inversion information).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Load sub-classes and attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_config_options</span><span class="p">(</span><span class="n">configdict</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_config_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.configs.configs.Config.get_config_errors"><a href="../../../../api/isofit/configs/configs/#isofit.configs.configs.Config.get_config_errors" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get configuration option errors by checking the validity of each config section.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Checking config sections for configuration issues&quot;</span><span class="p">)</span>
+
+        <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_config_validity</span><span class="p">()</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">check_inter_section_validity</span><span class="p">())</span>
+
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Configuration error(s) found.  See log for details.&quot;</span><span class="p">)</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Configuration file checks complete, no errors found.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_inter_section_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.configs.configs.Config.check_inter_section_validity"><a href="../../../../api/isofit/configs/configs/#isofit.configs.configs.Config.check_inter_section_validity" title="Go to docs">[docs]</a></div>
+        <span class="n">return_errors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">implementation</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;simulation&quot;</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">reflectance_file</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="p">):</span>
+            <span class="n">return_errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s2">&quot;If implementation.mode is set to simulation, input.reflectance_file&quot;</span>
+                <span class="s2">&quot; must be set&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">return_errors</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_config_differences</span><span class="p">(</span><span class="n">config_a</span><span class="p">:</span> <span class="n">Config</span><span class="p">,</span> <span class="n">config_b</span><span class="p">:</span> <span class="n">Config</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span><div class="mkapi-source-link" id="isofit.configs.configs.get_config_differences"><a href="../../../../api/isofit/configs/configs/#isofit.configs.configs.get_config_differences" title="Go to docs">[docs]</a></div>
+    <span class="n">differing_items</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">dict_a</span> <span class="o">=</span> <span class="n">config_a</span><span class="o">.</span><span class="n">get_config_as_dict</span><span class="p">()</span>
+    <span class="n">dict_b</span> <span class="o">=</span> <span class="n">config_b</span><span class="o">.</span><span class="n">get_config_as_dict</span><span class="p">()</span>
+    <span class="n">all_sections</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dict_a</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">dict_b</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">all_sections</span><span class="p">:</span>
+        <span class="n">section_a</span> <span class="o">=</span> <span class="n">dict_a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="n">section_b</span> <span class="o">=</span> <span class="n">dict_b</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="n">all_options</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">section_a</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">section_b</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">all_options</span><span class="p">:</span>
+            <span class="n">value_a</span> <span class="o">=</span> <span class="n">section_a</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">value_b</span> <span class="o">=</span> <span class="n">section_b</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value_a</span> <span class="o">!=</span> <span class="n">value_b</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;Configs have different values for option </span><span class="si">{}</span><span class="s2"> in section </span><span class="si">{}</span><span class="s2">:  </span><span class="si">{}</span><span class="s2">&quot;</span>
+                    <span class="s2">&quot; and </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">value_a</span><span class="p">,</span> <span class="n">value_b</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">differing_items</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">value_a</span><span class="p">,</span> <span class="n">value_b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">differing_items</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_new_config</span><span class="p">(</span><span class="n">config_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Config</span><span class="p">:</span><div class="mkapi-source-link" id="isofit.configs.configs.create_new_config"><a href="../../../../api/isofit/configs/configs/#isofit.configs.configs.create_new_config" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load a config file from disk.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        config_file: file to load config from.  Currently accepted formats: JSON and YAML</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Config object, having completed all necessary config checks</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading config file: </span><span class="si">{</span><span class="n">config_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="c1"># pdb.set_trace()</span>
+            <span class="n">config_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span>
+            <span class="s2">&quot;Unexpected configuration file time, only json and yaml supported&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">configdir</span><span class="p">,</span> <span class="n">f</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">config_file</span><span class="p">))</span>
+
+    <span class="n">config_dict</span> <span class="o">=</span> <span class="n">common</span><span class="o">.</span><span class="n">expand_all_paths</span><span class="p">(</span><span class="n">config_dict</span><span class="p">,</span> <span class="n">configdir</span><span class="p">)</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">(</span><span class="n">config_dict</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">config</span>
+</code></pre></div></td></tr></table></div>
+
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

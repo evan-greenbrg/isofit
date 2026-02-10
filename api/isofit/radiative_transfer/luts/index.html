@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Luts - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Luts";
+        var mkdocs_page_input_path = "api/isofit/radiative_transfer/luts.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >isofit</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >isofit.radiative_transfer</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Luts</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.Keys">Keys</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.Create">Create</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.findSlice">findSlice</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.optimizedInterp">optimizedInterp</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.sel">sel</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.sub">sub</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.couple">couple</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.load">load</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.extractPoints">extractPoints</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.extractGrid">extractGrid</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.saveDataset">saveDataset</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.radiative_transfer.luts.cleanup">cleanup</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+          <li class="breadcrumb-item">isofit</li>
+          <li class="breadcrumb-item">isofit.radiative_transfer</li>
+      <li class="breadcrumb-item active">Luts</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts" title="isofit.radiative_transfer.luts">isofit.radiative_transfer.luts</a></span>
+</p>
+<div class="mkapi-document">
+<p>This is the netCDF4 implementation for handling ISOFIT LUT files. For previous
+implementations and research, please see https://github.com/isofit/isofit/tree/897062a3dcc64d5292d0d2efe7272db0809a6085/isofit/luts</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle classes">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Classes</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Keys" title="isofit.radiative_transfer.luts.Keys">Keys</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Prepare a LUT netCDF</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle functions">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Functions</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.findSlice" title="isofit.radiative_transfer.luts.findSlice">findSlice</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Creates a slice for selecting along a dimension such that a value is encompassed by
+the slice.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.optimizedInterp" title="isofit.radiative_transfer.luts.optimizedInterp">optimizedInterp</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Optimizes the interpolation step by subselecting along dimensions first then
+interpolating</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.sel" title="isofit.radiative_transfer.luts.sel">sel</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Subselects an xarray Dataset object using .sel</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.sub" title="isofit.radiative_transfer.luts.sub">sub</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Subsets a dataset object along a specific dimension in a few supported ways.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.couple" title="isofit.radiative_transfer.luts.couple">couple</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Calculates coupled terms on the input Dataset</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.load" title="isofit.radiative_transfer.luts.load">load</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Loads a LUT NetCDF
+Assumes to be a regular grid at this time (auto creates the point dim)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.extractPoints" title="isofit.radiative_transfer.luts.extractPoints">extractPoints</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Extracts the points and point name arrays</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.extractGrid" title="isofit.radiative_transfer.luts.extractGrid">extractGrid</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Extracts the LUT grid from a Dataset</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.saveDataset" title="isofit.radiative_transfer.luts.saveDataset">saveDataset</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Handles saving an xarray.Dataset to a NetCDF file for ISOFIT. Will detect if the
+point dim needs to be unstacked before saving (regular grids) or not (irregular)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.cleanup" title="isofit.radiative_transfer.luts.cleanup">cleanup</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Checks the <code>ISOFIT status</code> attribute on a LUT and removes the file if it is
+incomplete.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Keys">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Keys" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Keys" title="isofit.radiative_transfer.luts.Keys">Keys</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">file</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">wl</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">grid</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-comma">, </span><span class="mkapi-arg">attrs</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-equal"> = </span><span class="mkapi-default">{}</span><span class="mkapi-comma">, </span><span class="mkapi-arg">consts</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-equal"> = </span><span class="mkapi-default">{}</span><span class="mkapi-comma">, </span><span class="mkapi-arg">onedim</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-equal"> = </span><span class="mkapi-default">{}</span><span class="mkapi-comma">, </span><span class="mkapi-arg">alldim</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-equal"> = </span><span class="mkapi-default">{}</span><span class="mkapi-comma">, </span><span class="mkapi-arg">zeros</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="typing.List">List</span>[str]</span><span class="mkapi-equal"> = </span><span class="mkapi-default">[]</span><span class="mkapi-comma">, </span><span class="mkapi-arg">compression</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'zlib'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">complevel</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Prepare a LUT netCDF</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">file</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+NetCDF filepath for the LUT.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">wl</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span> <span class="mkapi-dash">&mdash;</span>
+The wavelength array.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">grid</span> : 
+<span class="mkapi-item-type">dict</span> <span class="mkapi-dash">&mdash;</span>
+The LUT grid, formatted as {str: Iterable}.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">attrs</span> : 
+<span class="mkapi-item-type">dict, defaults={}</span> <span class="mkapi-dash">&mdash;</span>
+Dict of dataset attributes, ie. {"RT_mode": "transm"}</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">consts</span> : 
+<span class="mkapi-item-type">dict, optional, default={}</span> <span class="mkapi-dash">&mdash;</span>
+Dictionary of constant values. Appends/replaces current Create.consts list.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">onedim</span> : 
+<span class="mkapi-item-type">dict, optional, default={}</span> <span class="mkapi-dash">&mdash;</span>
+Dictionary of one-dimensional data. Appends/replaces to the current Create.onedim list.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">alldim</span> : 
+<span class="mkapi-item-type">dict, optional, default={}</span> <span class="mkapi-dash">&mdash;</span>
+Dictionary of multi-dimensional data. Appends/replaces to the current Create.alldim list.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">zeros</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="typing.List">List</span>[str], optional, default=[]</span> <span class="mkapi-dash">&mdash;</span>
+List of zero values. Appends to the current Create.zeros list.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">compression</span> : 
+<span class="mkapi-item-type">str, default="zlib"</span> <span class="mkapi-dash">&mdash;</span>
+Compression method to use to the NetCDF. Check https://unidata.github.io/netcdf4-python/
+for available options. Currently, must use h5py &lt;= 3.14.0</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">complevel</span> : 
+<span class="mkapi-item-type">int, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Compression to use. Impact and levels vary per method.</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle methods">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Methods</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.initialize" title="isofit.radiative_transfer.luts.Create.initialize">initialize</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Initializes the LUT netCDF by prepopulating it with filler values.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.pointIndices" title="isofit.radiative_transfer.luts.Create.pointIndices">pointIndices</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Get the indices of the point in the grid.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.queuePoint" title="isofit.radiative_transfer.luts.Create.queuePoint">queuePoint</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Queues a point and its data to the internal hold list which is used by the
+flush function to write these points to disk.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.flush" title="isofit.radiative_transfer.luts.Create.flush">flush</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Flushes the (point, data) pairs held in the hold list to the LUT netCDF.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.writePoint" title="isofit.radiative_transfer.luts.Create.writePoint">writePoint</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Queues a point and immediately flushes to disk.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.setAttr" title="isofit.radiative_transfer.luts.Create.setAttr">setAttr</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Sets an attribute in the netCDF</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.getAttr" title="isofit.radiative_transfer.luts.Create.getAttr">getAttr</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Gets an attribute from the netCDF</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.radiative_transfer.luts.Create.finalize" title="isofit.radiative_transfer.luts.Create.finalize">finalize</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Finalizes the netCDF by writing any remaining attributes to disk</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.initialize">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.initialize" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.initialize" title="isofit.radiative_transfer.luts.Create.initialize">initialize</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Initializes the LUT netCDF by prepopulating it with filler values.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.pointIndices">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.pointIndices" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.pointIndices" title="isofit.radiative_transfer.luts.Create.pointIndices">pointIndices</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">point</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="typing.List">List</span>[int]</span></span>
+</p>
+<div class="mkapi-document">
+<p>Get the indices of the point in the grid.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">point</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span> <span class="mkapi-dash">&mdash;</span>
+The coordinates of the point in the grid.</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><span class="mkapi-tooltip" title="typing.List">List</span>[int]</span> <span class="mkapi-dash">&mdash;</span>
+Mapped point values to index positions.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.queuePoint">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.queuePoint" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.queuePoint" title="isofit.radiative_transfer.luts.Create.queuePoint">queuePoint</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">point</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">data</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Queues a point and its data to the internal hold list which is used by the
+flush function to write these points to disk.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">point</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span> <span class="mkapi-dash">&mdash;</span>
+The coordinates of the point in the grid.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">data</span> : 
+<span class="mkapi-item-type">dict</span> <span class="mkapi-dash">&mdash;</span>
+Data for this point to write.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.flush">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.flush" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.flush" title="isofit.radiative_transfer.luts.Create.flush">flush</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">finalize</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Flushes the (point, data) pairs held in the hold list to the LUT netCDF.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">finalize</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Calls the <a href="./#isofit.radiative_transfer.luts.Create.finalize" title="isofit.radiative_transfer.luts.Create.finalize"><code>finalize</code></a> function</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.writePoint">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.writePoint" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.writePoint" title="isofit.radiative_transfer.luts.Create.writePoint">writePoint</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">point</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">data</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Queues a point and immediately flushes to disk.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">point</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.ndarray">ndarray</span></span> <span class="mkapi-dash">&mdash;</span>
+The coordinates of the point in the grid.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">data</span> : 
+<span class="mkapi-item-type">dict</span> <span class="mkapi-dash">&mdash;</span>
+Data for this point to write.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.setAttr">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.setAttr" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.setAttr" title="isofit.radiative_transfer.luts.Create.setAttr">setAttr</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">key</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">value</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="typing.Any">Any</span></span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Sets an attribute in the netCDF</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">key</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Key to set</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">value</span> : 
+<span class="mkapi-item-type">any</span> <span class="mkapi-dash">&mdash;</span>
+Value to set</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.getAttr">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.getAttr" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.getAttr" title="isofit.radiative_transfer.luts.Create.getAttr">getAttr</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">key</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="typing.Any">Any</span></span></span>
+</p>
+<div class="mkapi-document">
+<p>Gets an attribute from the netCDF</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">key</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Key to get</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">any | None</span> <span class="mkapi-dash">&mdash;</span>
+Retrieved attribute from netCDF, if it exists</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.Create.finalize">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.Create.finalize" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.radiative_transfer.luts.Create" title="isofit.radiative_transfer.luts.Create">Create</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.Create.finalize" title="isofit.radiative_transfer.luts.Create.finalize">finalize</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Finalizes the netCDF by writing any remaining attributes to disk</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.findSlice">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.findSlice" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.findSlice" title="isofit.radiative_transfer.luts.findSlice">findSlice</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dim</span><span class="mkapi-comma">, </span><span class="mkapi-arg">val</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Creates a slice for selecting along a dimension such that a value is encompassed by
+the slice.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dim</span> : 
+<span class="mkapi-item-type">array</span> <span class="mkapi-dash">&mdash;</span>
+Dimension array</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">val</span> : 
+<span class="mkapi-item-type">float, int</span> <span class="mkapi-dash">&mdash;</span>
+Value to be encompassed</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">slice</span> <span class="mkapi-dash">&mdash;</span>
+Index slice to encompass the value</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.optimizedInterp">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.optimizedInterp" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.optimizedInterp" title="isofit.radiative_transfer.luts.optimizedInterp">optimizedInterp</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-comma">, </span><span class="mkapi-arg">strat</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Optimizes the interpolation step by subselecting along dimensions first then
+interpolating</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">strat</span> : 
+<span class="mkapi-item-type">dict</span> <span class="mkapi-dash">&mdash;</span>
+Interpolation stategies to perform in the form of {dim: interpolate_values}</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Interpolated dataset</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.sel">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.sel" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.sel" title="isofit.radiative_transfer.luts.sel">sel</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dim</span><span class="mkapi-comma">, </span><span class="mkapi-arg">lt</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">lte</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">gt</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">gte</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">encompass</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Subselects an xarray Dataset object using .sel</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type">xarray.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+LUT dataset</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dim</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Dimension to work on</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">lt</span> : 
+<span class="mkapi-item-type">float, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Select along this dim coordinates that are valued less than this</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">lte</span> : 
+<span class="mkapi-item-type">float, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Select along this dim coordinates that are valued less than or equal to this</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">gt</span> : 
+<span class="mkapi-item-type">float, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Select along this dim coordinates that are valued greater than this</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">gte</span> : 
+<span class="mkapi-item-type">float, default=None</span> <span class="mkapi-dash">&mdash;</span>
+Select along this dim coordinates that are valued greater than or equal to this</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">encompass</span> : 
+<span class="mkapi-item-type">bool, default=True</span> <span class="mkapi-dash">&mdash;</span>
+Change the values of gte/lte such that these values are encompassed using the
+previous/next valid grid point</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type">xarray.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Subsetted dataset</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.sub">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.sub" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.sub" title="isofit.radiative_transfer.luts.sub">sub</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">dim</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">strat</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span></span>
+</p>
+<div class="mkapi-document">
+<p>Subsets a dataset object along a specific dimension in a few supported ways.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Dataset to operate on</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dim</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Name of the dimension to subset</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">strat</span> : 
+<span class="mkapi-item-type">float, int, list, dict, str, None</span> <span class="mkapi-dash">&mdash;</span>
+Strategy to subset the given dimension with</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+New subset of the input dataset</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.couple">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.couple" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.couple" title="isofit.radiative_transfer.luts.couple">couple</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-comma">, </span><span class="mkapi-arg">inplace</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Calculates coupled terms on the input Dataset</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Dataset to process on</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">inplace</span> : 
+<span class="mkapi-item-type">bool, default=True</span> <span class="mkapi-dash">&mdash;</span>
+Insert the coupled terms in-place to the original Dataset. If False, copy the
+Dataset first</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Dataset with coupled terms</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.load">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.load" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.load" title="isofit.radiative_transfer.luts.load">load</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">file</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">subset</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dask</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">mode</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'a'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">lock</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">load</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-arg">coupling</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'after'</span><span class="mkapi-comma">, </span><span class="mkapi-star">**</span><span class="mkapi-arg">kwargs</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span></span>
+</p>
+<div class="mkapi-document">
+<p>Loads a LUT NetCDF
+Assumes to be a regular grid at this time (auto creates the point dim)</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">file</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+LUT file to load</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">subset</span> : 
+<span class="mkapi-item-type">dict, default={}</span> <span class="mkapi-dash">&mdash;</span>
+Subset each dimension with a given strategy. Each dimension in the LUT file
+must be specified.
+See examples for more information</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dask</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Use Dask on the backend of Xarray to lazy load the dataset. This enables
+out-of-core subsetting</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">mode</span> : 
+<span class="mkapi-item-type">str, default="a"</span> <span class="mkapi-dash">&mdash;</span>
+File mode to open with, must be set to append="a" for coupled terms to be
+saved back</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">lock</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Set a lock on the input file</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">load</span> : 
+<span class="mkapi-item-type">bool, default=True</span> <span class="mkapi-dash">&mdash;</span>
+Calls ds.load() at the end to cast from Dask arrays back into numpy arrays held
+in memory</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">coupling</span> : 
+<span class="mkapi-item-type">string, default="after"</span> <span class="mkapi-dash">&mdash;</span>
+Calculates coupling terms, if needed. This may be set one of four ways:
+    "before"
+        Calculate before subsetting
+    "before-save"
+        Before + save the coupled terms to the original input file
+    "after"
+        Calculate after subsetting
+    "after-save"
+        After + save to a new file (the original input file with the extension
+        changed to ".coupled-subset.nc")</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle examples">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Examples</span>
+</p>
+<div class="mkapi-section-content">
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Create a test file for the examples to load</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;subsetting_example.nc&#39;</span>
+<span class="n">lut_dims</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.1009</span><span class="p">,</span> <span class="mf">0.2008</span><span class="p">,</span> <span class="mf">0.3007</span><span class="p">,</span> <span class="mf">0.4006</span><span class="p">,</span> <span class="mf">0.5005</span><span class="p">,</span> <span class="mf">0.6004</span><span class="p">,</span> <span class="mf">0.7003</span><span class="p">,</span> <span class="mf">0.8002</span><span class="p">,</span> <span class="mf">0.9001</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2231</span><span class="p">,</span> <span class="mf">0.4637</span><span class="p">,</span> <span class="mf">0.7042</span><span class="p">,</span> <span class="mf">0.9447</span><span class="p">,</span> <span class="mf">1.1853</span><span class="p">,</span> <span class="mf">1.4258</span><span class="p">,</span> <span class="mf">1.6664</span><span class="p">,</span> <span class="mf">1.9069</span><span class="p">,</span> <span class="mf">2.1474</span><span class="p">,</span> <span class="mf">2.388</span><span class="p">,</span> <span class="mf">2.6285</span><span class="p">,</span> <span class="mf">2.869</span><span class="p">,</span> <span class="mf">3.1096</span><span class="p">,</span> <span class="mf">3.3501</span><span class="p">],</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">7.2155</span><span class="p">,</span> <span class="mf">9.8900</span><span class="p">],</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.2361</span><span class="p">,</span> <span class="mf">0.4721</span><span class="p">,</span> <span class="mf">0.7082</span><span class="p">,</span> <span class="mf">0.9442</span><span class="p">,</span> <span class="mf">1.1803</span><span class="p">,</span> <span class="mf">1.4164</span><span class="p">,</span> <span class="mf">1.6524</span><span class="p">,</span> <span class="mf">1.8885</span><span class="p">,</span> <span class="mf">2.1245</span><span class="p">,</span> <span class="mf">2.3606</span><span class="p">,</span> <span class="mf">2.5966</span><span class="p">,</span> <span class="mf">2.8327</span><span class="p">,</span> <span class="mf">3.0688</span><span class="p">,</span> <span class="mf">3.3048</span><span class="p">,</span> <span class="mf">3.5409</span><span class="p">,</span> <span class="mf">3.7769</span><span class="p">,</span> <span class="mf">4.013</span><span class="p">],</span>
+    <span class="s1">&#39;wl&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">285</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span><span class="n">coords</span><span class="o">=</span><span class="n">lut_dims</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: Exact values along the dimension</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.1853</span><span class="p">,</span> <span class="mf">2.869</span><span class="p">],</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 792})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;H2OSTR&#39;: 2, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Interpolate H2OSTR to 1.5</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;interp&#39;</span><span class="p">:</span> <span class="mf">1.5</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 396})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: 1.1853 &lt; H2OSTR &lt; 2.869</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;gt&#39;</span><span class="p">:</span> <span class="mf">1.1853</span><span class="p">,</span>
+        <span class="s1">&#39;lt&#39;</span><span class="p">:</span> <span class="mf">2.869</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 2376})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;H2OSTR&#39;: 6, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: 1.1853 &lt;= H2OSTR &lt;= 2.869, encompassed</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;gte&#39;</span><span class="p">:</span> <span class="mf">1.1853</span><span class="p">,</span>
+        <span class="s1">&#39;lte&#39;</span><span class="p">:</span> <span class="mf">2.869</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 3960})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;H2OSTR&#39;: 10, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: 1.1853 &lt;= H2OSTR &lt;= 2.869, not encompassed</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;gte&#39;</span><span class="p">:</span> <span class="mf">1.1853</span><span class="p">,</span>
+        <span class="s1">&#39;lte&#39;</span><span class="p">:</span> <span class="mf">2.869</span><span class="p">,</span>
+        <span class="s1">&#39;encompass&#39;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 3168})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;H2OSTR&#39;: 8, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: Exact value, squeeze dimension</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="mf">2.869</span><span class="p">,</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 396})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: Using mean, squeeze dimension</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 396})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Subset: Using max, squeeze dimension</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 396})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 11, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Multiple subsets</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2008</span><span class="p">,</span> <span class="mf">0.4006</span><span class="p">,</span> <span class="mf">0.6004</span><span class="p">],</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;gte&#39;</span><span class="p">:</span> <span class="mf">1.1853</span><span class="p">,</span>
+        <span class="s1">&#39;lte&#39;</span><span class="p">:</span> <span class="mf">2.869</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 1080})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 3, &#39;H2OSTR&#39;: 10, &#39;observer_zenith&#39;: 2, &#39;surface_elevation_km&#39;: 18, &#39;wl&#39;: 285})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="c1"># Multiple subsets</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AOT550&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2008</span><span class="p">,</span> <span class="mf">0.4006</span><span class="p">,</span> <span class="mf">0.6004</span><span class="p">],</span>
+    <span class="s1">&#39;H2OSTR&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;gte&#39;</span><span class="p">:</span> <span class="mf">1.1853</span><span class="p">,</span>
+        <span class="s1">&#39;lte&#39;</span><span class="p">:</span> <span class="mf">2.869</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;observer_zenith&#39;</span><span class="p">:</span> <span class="mf">7.2155</span><span class="p">,</span>
+    <span class="s1">&#39;surface_elevation_km&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span>
+<span class="p">}</span>
+<span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;wl&#39;: 285, &#39;point&#39;: 30})
+</code></pre></div>
+<div class="mkapi-example-input highlight"><pre><span></span><code><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">dims</span>
+</code></pre></div>
+<div class="mkapi-example-output highlight"><pre><span></span><code>Frozen({&#39;AOT550&#39;: 3, &#39;H2OSTR&#39;: 10, &#39;wl&#39;: 285})
+</code></pre></div>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">AttributeError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.extractPoints">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.extractPoints" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.extractPoints" title="isofit.radiative_transfer.luts.extractPoints">extractPoints</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">names</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.array">array</span></span></span>
+</p>
+<div class="mkapi-document">
+<p>Extracts the points and point name arrays</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+LUT Dataset object</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">names</span> : 
+<span class="mkapi-item-type">bool, default=False</span> <span class="mkapi-dash">&mdash;</span>
+Return the names of the point coords as well</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><span class="mkapi-tooltip" title="isofit.radiative_transfer.luts.extractPoints.points">points</span> or (<span class="mkapi-tooltip" title="isofit.radiative_transfer.luts.extractPoints.points">points</span>, names)</span> <span class="mkapi-dash">&mdash;</span>
+Extracted points, plus names if requested</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.extractGrid">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.extractGrid" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.extractGrid" title="isofit.radiative_transfer.luts.extractGrid">extractGrid</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">ds</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">dict</span></span>
+</p>
+<div class="mkapi-document">
+<p>Extracts the LUT grid from a Dataset</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+LUT Dataset object. Carried stacked: Dimensions wl, points</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.saveDataset">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.saveDataset" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.saveDataset" title="isofit.radiative_transfer.luts.saveDataset">saveDataset</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">file</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ds</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="xarray">xr</span>.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Handles saving an xarray.Dataset to a NetCDF file for ISOFIT. Will detect if the
+point dim needs to be unstacked before saving (regular grids) or not (irregular)</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">file</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Path to save the <span class="mkapi-tooltip" title="isofit.radiative_transfer.luts.saveDataset.ds"><code>ds</code></span> object to. This will be a NetCDF, recommended extension
+is <code>.nc</code></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">ds</span> : 
+<span class="mkapi-item-type">xarray.<span class="mkapi-tooltip" title="xarray.core.dataset.Dataset">Dataset</span></span> <span class="mkapi-dash">&mdash;</span>
+Data object to save</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.radiative_transfer.luts.cleanup">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/radiative_transfer/luts/#isofit.radiative_transfer.luts.cleanup" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.radiative_transfer.luts.cleanup" title="isofit.radiative_transfer.luts.cleanup">cleanup</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">file</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Checks the <code>ISOFIT status</code> attribute on a LUT and removes the file if it is
+incomplete.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">file</span> : 
+<span class="mkapi-item-type">str</span> <span class="mkapi-dash">&mdash;</span>
+Path to the file to check</p>
+</li>
+</ul>
+</div>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../engines/six_s/" class="btn btn-neutral float-left" title="Six s"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../radiative_transfer/" class="btn btn-neutral float-right" title="Radiative transfer">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../engines/six_s/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../radiative_transfer/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

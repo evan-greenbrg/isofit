@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Fileio - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Fileio";
+        var mkdocs_page_input_path = "api/isofit/core/fileio.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >isofit</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >isofit.core</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../common/">Common</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Fileio</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.fileio.SpectrumFile">SpectrumFile</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.fileio.InputData">InputData</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.fileio.IO">IO</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.fileio.write_bil_chunk">write_bil_chunk</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.fileio.initialize_output">initialize_output</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+          <li class="breadcrumb-item">isofit</li>
+          <li class="breadcrumb-item">isofit.core</li>
+      <li class="breadcrumb-item active">Fileio</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-source" id="isofit.core.fileio">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio" title="isofit.core.fileio">isofit.core.fileio</a></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle classes">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Classes</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+A buffered file object that contains configuration information about formatting, etc.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+...</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle functions">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Functions</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.write_bil_chunk" title="isofit.core.fileio.write_bil_chunk">write_bil_chunk</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Write a chunk of data to a binary, BIL formatted data cube.
+Args:
+    dat: data to write
+    outfile: output file to write to
+    line: line of the output file to write to
+    shape: shape of the output file
+    dtype: output data type</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.initialize_output" title="isofit.core.fileio.initialize_output">initialize_output</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Initialize output file by updating metadata and creating object.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">fname</span><span class="mkapi-comma">, </span><span class="mkapi-arg">write</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_rows</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cols</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_bands</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">interleave</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dtype</span><span class="mkapi-equal">=</span><span class="mkapi-default"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.float32">float32</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">wavelengths</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fwhm</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">band_names</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">bad_bands</span><span class="mkapi-equal">=</span><span class="mkapi-default">'[]'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">zrange</span><span class="mkapi-equal">=</span><span class="mkapi-default">'{0.0, 1.0}'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">flag</span><span class="mkapi-equal">=</span><span class="mkapi-default">-9999.0</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ztitles</span><span class="mkapi-equal">=</span><span class="mkapi-default">'{Wavelength (nm), Magnitude}'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">map_info</span><span class="mkapi-equal">=</span><span class="mkapi-default">'{}'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">engine_name</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">isofit_version</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>A buffered file object that contains configuration information about formatting, etc.</p>
+<p>.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle methods">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Methods</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile.open_map_with_retries" title="isofit.core.fileio.SpectrumFile.open_map_with_retries">open_map_with_retries</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Try to open a memory map, handling Beowulf I/O issues.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile.get_frame" title="isofit.core.fileio.SpectrumFile.get_frame">get_frame</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+The frame is a 2D array, essentially a list of spectra. The
+self.frames list acts as a hash table to avoid storing the
+entire cube in memory. So we read them or create them on an
+as-needed basis.  When the buffer flushes via a call to
+flush_buffers, they will be deleted.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile.write_spectrum" title="isofit.core.fileio.SpectrumFile.write_spectrum">write_spectrum</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+We write a spectrum. If a binary format file, we simply change
+the data cached in self.frames and defer file I/O until
+flush_buffers is called.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile.read_spectrum" title="isofit.core.fileio.SpectrumFile.read_spectrum">read_spectrum</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Get a spectrum from the frame list or ASCII file. Note that if
+we are an ASCII file, we have already read the single spectrum and
+return it as-is (ignoring the row/column indices).</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.SpectrumFile.flush_buffers" title="isofit.core.fileio.SpectrumFile.flush_buffers">flush_buffers</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Write to file, and refresh the memory map object.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile.open_map_with_retries">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile.open_map_with_retries" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile.open_map_with_retries" title="isofit.core.fileio.SpectrumFile.open_map_with_retries">open_map_with_retries</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Try to open a memory map, handling Beowulf I/O issues.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">IOError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile.get_frame">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile.get_frame" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile.get_frame" title="isofit.core.fileio.SpectrumFile.get_frame">get_frame</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>The frame is a 2D array, essentially a list of spectra. The
+self.frames list acts as a hash table to avoid storing the
+entire cube in memory. So we read them or create them on an
+as-needed basis.  When the buffer flushes via a call to
+flush_buffers, they will be deleted.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile.write_spectrum">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile.write_spectrum" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile.write_spectrum" title="isofit.core.fileio.SpectrumFile.write_spectrum">write_spectrum</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-comma">, </span><span class="mkapi-arg">col</span><span class="mkapi-comma">, </span><span class="mkapi-arg">x</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>We write a spectrum. If a binary format file, we simply change
+the data cached in self.frames and defer file I/O until
+flush_buffers is called.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile.read_spectrum">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile.read_spectrum" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile.read_spectrum" title="isofit.core.fileio.SpectrumFile.read_spectrum">read_spectrum</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-comma">, </span><span class="mkapi-arg">col</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Get a spectrum from the frame list or ASCII file. Note that if
+we are an ASCII file, we have already read the single spectrum and
+return it as-is (ignoring the row/column indices).</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.SpectrumFile.flush_buffers">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.SpectrumFile.flush_buffers" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.SpectrumFile" title="isofit.core.fileio.SpectrumFile">SpectrumFile</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.SpectrumFile.flush_buffers" title="isofit.core.fileio.SpectrumFile.flush_buffers">flush_buffers</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Write to file, and refresh the memory map object.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.InputData">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.InputData" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle methods">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Methods</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.InputData.clear" title="isofit.core.fileio.InputData.clear">clear</a></span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.InputData.clear">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.InputData.clear" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.InputData.clear" title="isofit.core.fileio.InputData.clear">clear</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">config</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Config</span><span class="mkapi-comma">, </span><span class="mkapi-arg">forward</span><span class="mkapi-colon">: </span><span class="mkapi-ann">ForwardModel</span><span class="mkapi-comma">, </span><span class="mkapi-arg">full_statevec</span><span class="mkapi-colon">: </span><span class="mkapi-ann">list</span><span class="mkapi-equal"> = </span><span class="mkapi-default">[]</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>...</p>
+<p>Initialization specifies retrieval subwindows for calculating
+measurement cost distributions.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle methods">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Methods</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.get_components_at_index" title="isofit.core.fileio.IO.get_components_at_index">get_components_at_index</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Load data from input files at the specified (row, col) index.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.flush_buffers" title="isofit.core.fileio.IO.flush_buffers">flush_buffers</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Write all buffered output data to disk, and erase read buffers.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.write_datasets" title="isofit.core.fileio.IO.write_datasets">write_datasets</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Write all valid datasets to disk (possibly buffered).</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.build_output" title="isofit.core.fileio.IO.build_output">build_output</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Build the output to be written to disk as a dictionary</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.write_spectrum" title="isofit.core.fileio.IO.write_spectrum">write_spectrum</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Convenience function to build and write output in one step</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.initialize_output_files" title="isofit.core.fileio.IO.initialize_output_files">initialize_output_files</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.fileio.IO.load_esd" title="isofit.core.fileio.IO.load_esd">load_esd</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Loads an earth_sun_distance file. Defaults to the
+[env.data]/earth_sun_distance.txt if not provided</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.get_components_at_index">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.get_components_at_index" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.get_components_at_index" title="isofit.core.fileio.IO.get_components_at_index">get_components_at_index</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">col</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span></span>
+</p>
+<div class="mkapi-document">
+<p>Load data from input files at the specified (row, col) index.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">row</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+row to retrieve data from</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">col</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+column to retrieve data from</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span> <span class="mkapi-dash">&mdash;</span>
+object containing all current data reads</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.flush_buffers">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.flush_buffers" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.flush_buffers" title="isofit.core.fileio.IO.flush_buffers">flush_buffers</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Write all buffered output data to disk, and erase read buffers.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.write_datasets">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.write_datasets" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.write_datasets" title="isofit.core.fileio.IO.write_datasets">write_datasets</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">col</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">output</span><span class="mkapi-colon">: </span><span class="mkapi-ann">dict</span><span class="mkapi-comma">, </span><span class="mkapi-arg">states</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="typing.List">List</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">flush_immediately</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Write all valid datasets to disk (possibly buffered).</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">row</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+row to write to</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">col</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+column to write to</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">output</span> : 
+<span class="mkapi-item-type">dict</span> <span class="mkapi-dash">&mdash;</span>
+dictionary with keys corresponding to config.input file references</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">states</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="typing.List">List</span></span> <span class="mkapi-dash">&mdash;</span>
+results states from inversion.  In the MCMC case, these are interpreted as samples from the</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">posterior, otherwise they are a gradient descent trajectory (with the last spectrum being the converged</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">solution).</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">flush_immediately</span>
+ <span class="mkapi-dash">&mdash;</span>
+IO argument telling us to immediately write to disk, ignoring config settings</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.build_output">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.build_output" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.build_output" title="isofit.core.fileio.IO.build_output">build_output</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">states</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="typing.List">List</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">input_data</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span><span class="mkapi-comma">, </span><span class="mkapi-arg">fm</span><span class="mkapi-colon">: </span><span class="mkapi-ann">ForwardModel</span><span class="mkapi-comma">, </span><span class="mkapi-arg">iv</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Inversion</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fill_value</span><span class="mkapi-equal">=</span><span class="mkapi-default">-9999.0</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Build the output to be written to disk as a dictionary</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">states</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="typing.List">List</span></span> <span class="mkapi-dash">&mdash;</span>
+results states from inversion.  In the MCMC case, these are interpreted as samples from the</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">posterior, otherwise they are a gradient descent trajectory (with the last spectrum being the converged</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">solution).</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">input_data</span> : 
+<span class="mkapi-item-type"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span> <span class="mkapi-dash">&mdash;</span>
+an InputData object</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">fm</span> : 
+<span class="mkapi-item-type">ForwardModel</span> <span class="mkapi-dash">&mdash;</span>
+the forward model used to solve the inversion</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">iv</span> : 
+<span class="mkapi-item-type">Inversion</span> <span class="mkapi-dash">&mdash;</span>
+the inversion object</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">IOError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.write_spectrum">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.write_spectrum" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">method</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.write_spectrum" title="isofit.core.fileio.IO.write_spectrum">write_spectrum</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">row</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">col</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">states</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="typing.List">List</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">fm</span><span class="mkapi-colon">: </span><span class="mkapi-ann">ForwardModel</span><span class="mkapi-comma">, </span><span class="mkapi-arg">iv</span><span class="mkapi-colon">: </span><span class="mkapi-ann">Inversion</span><span class="mkapi-comma">, </span><span class="mkapi-arg">flush_immediately</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">input_data</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Convenience function to build and write output in one step</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">row</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+data row to write</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">col</span> : 
+<span class="mkapi-item-type">int</span> <span class="mkapi-dash">&mdash;</span>
+data column to write</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">states</span> : 
+<span class="mkapi-item-type"><span class="mkapi-tooltip" title="typing.List">List</span></span> <span class="mkapi-dash">&mdash;</span>
+results states from inversion.  In the MCMC case, these are interpreted as samples from the</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">posterior, otherwise they are a gradient descent trajectory (with the last spectrum being the converged</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">solution).</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">meas</span>
+ <span class="mkapi-dash">&mdash;</span>
+measurement radiance</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">geom</span>
+ <span class="mkapi-dash">&mdash;</span>
+geometry object of the observation</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">fm</span> : 
+<span class="mkapi-item-type">ForwardModel</span> <span class="mkapi-dash">&mdash;</span>
+the forward model used to solve the inversion</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">iv</span> : 
+<span class="mkapi-item-type">Inversion</span> <span class="mkapi-dash">&mdash;</span>
+the inversion object</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">flush_immediately</span>
+ <span class="mkapi-dash">&mdash;</span>
+IO argument telling us to immediately write to disk, ignoring config settings</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">input_data</span> : 
+<span class="mkapi-item-type"><a href="./#isofit.core.fileio.InputData" title="isofit.core.fileio.InputData">InputData</a></span> <span class="mkapi-dash">&mdash;</span>
+optionally overwride self.current_input_data</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.initialize_output_files">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.initialize_output_files" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">staticmethod</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.initialize_output_files" title="isofit.core.fileio.IO.initialize_output_files">initialize_output_files</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">config</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_rows</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cols</span><span class="mkapi-comma">, </span><span class="mkapi-arg">full_statevector</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.IO.load_esd">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.IO.load_esd" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">staticmethod</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.fileio.IO" title="isofit.core.fileio.IO">IO</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.fileio.IO.load_esd" title="isofit.core.fileio.IO.load_esd">load_esd</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">file</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Loads an earth_sun_distance file. Defaults to the
+[env.data]/earth_sun_distance.txt if not provided</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">file</span> : 
+<span class="mkapi-item-type">str, default=None</span> <span class="mkapi-dash">&mdash;</span>
+ESD file to load</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.array">array</span></span> <span class="mkapi-dash">&mdash;</span>
+Loaded ESD. If the file fails to load, creates a default</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.write_bil_chunk">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.write_bil_chunk" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio.write_bil_chunk" title="isofit.core.fileio.write_bil_chunk">write_bil_chunk</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dat</span><span class="mkapi-colon">: </span><span class="mkapi-ann"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.array">array</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">outfile</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">line</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-comma">, </span><span class="mkapi-arg">shape</span><span class="mkapi-colon">: </span><span class="mkapi-ann">tuple</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dtype</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'float32'</span><span class="mkapi-paren">)</span><span class="mkapi-arrow"> → </span><span class="mkapi-return">None</span></span>
+</p>
+<div class="mkapi-document">
+<p>Write a chunk of data to a binary, BIL formatted data cube.
+Args:
+    dat: data to write
+    outfile: output file to write to
+    line: line of the output file to write to
+    shape: shape of the output file
+    dtype: output data type</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">None</span> <span class="mkapi-dash">&mdash;</span>
+None</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.fileio.initialize_output">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/fileio/#isofit.core.fileio.initialize_output" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.fileio.initialize_output" title="isofit.core.fileio.initialize_output">initialize_output</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">output_metadata</span><span class="mkapi-comma">, </span><span class="mkapi-arg">outpath</span><span class="mkapi-comma">, </span><span class="mkapi-arg">out_shape</span><span class="mkapi-comma">, </span><span class="mkapi-star">**</span><span class="mkapi-arg">kwargs</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Initialize output file by updating metadata and creating object.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">output_metadata</span>
+ <span class="mkapi-dash">&mdash;</span>
+dict - Dictionary with envi header information</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">outpath</span>
+ <span class="mkapi-dash">&mdash;</span>
+str - path to output file</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">out_shape</span>
+ <span class="mkapi-dash">&mdash;</span>
+tuple - dimensions of initialized file</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">keys_to_del</span>
+ <span class="mkapi-dash">&mdash;</span>
+list - keys to remove from output_metadata</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">kwargs - key-argument pairs to add to output_metadata</span></p>
+</li>
+</ul>
+</div>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../common/" class="btn btn-neutral float-left" title="Common"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../forward/" class="btn btn-neutral float-right" title="Forward">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../common/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../forward/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Surface thermal - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Surface thermal";
+        var mkdocs_page_input_path = "src/isofit/surface/surface_thermal.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Surface thermal</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-object" id="isofit.surface.surface_thermal">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal" title="Go to docs">[docs]</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.surface.surface_thermal" title="isofit.surface.surface_thermal">isofit.surface.surface_thermal</a></span>
+</p>
+<div class="mkapi-source no-copy highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2018 California Institute of Technology</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ISOFIT: Imaging Spectrometer Optimal FITting</span>
+<span class="c1"># Author: David R Thompson, david.r.thompson@jpl.nasa.gov</span>
+<span class="c1">#</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">block_diag</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">emissive_radiance</span><span class="p">,</span> <span class="n">svd_inv_sqrt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.surface.surface_multicomp</span><span class="w"> </span><span class="kn">import</span> <span class="n">MultiComponentSurface</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ThermalSurface</span><span class="p">(</span><span class="n">MultiComponentSurface</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A model of the surface based on a Mixture of a hot Black Body and</span>
+<span class="sd">    Multicomponent cold surfaces.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">full_config</span><span class="p">:</span> <span class="n">Config</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;.&quot;&quot;&quot;</span>
+
+        <span class="n">config</span> <span class="o">=</span> <span class="n">full_config</span><span class="o">.</span><span class="n">forward_model</span><span class="o">.</span><span class="n">surface</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">full_config</span><span class="p">)</span>
+
+        <span class="c1"># TODO: Enforce this attribute in the config, not here (this is hidden)</span>
+        <span class="c1"># Handle additional state vector elements</span>
+        <span class="k">if</span> <span class="s2">&quot;SURF_TEMP_K&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s2">&quot;SURF_TEMP_K&quot;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mf">300.0</span><span class="p">])</span>  <span class="c1"># This is overwritten below</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mf">100.0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bounds</span><span class="o">.</span><span class="n">extend</span><span class="p">([[</span><span class="mf">250.0</span><span class="p">,</span> <span class="mf">400.0</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx_surface</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emissive</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_state</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">emissivity_for_surface_T_init</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">emissivity_for_surface_T_init</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surface_T_prior_sigma_degK</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">surface_T_prior_sigma_degK</span>
+
+        <span class="c1"># Compute and and cache normalized Sa inversions for thermal case</span>
+        <span class="n">Cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="bp">self</span><span class="o">.</span><span class="n">surface_T_prior_sigma_degK</span><span class="o">**</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_thermal</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_sqrt_thermal</span> <span class="o">=</span> <span class="n">svd_inv_sqrt</span><span class="p">(</span>
+            <span class="n">Cov</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">Cov</span><span class="p">))</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">xa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.xa"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.xa" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mean of prior distribution, calculated at state x.  We find</span>
+<span class="sd">        the covariance in a normalized space (normalizing by z) and then un-</span>
+<span class="sd">        normalize the result for the calling function.&quot;&quot;&quot;</span>
+
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">MultiComponentSurface</span><span class="o">.</span><span class="n">xa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">mu</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">mu</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">Sa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.Sa"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.Sa" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Covariance of prior distribution, calculated at state x.&quot;&quot;&quot;</span>
+
+        <span class="n">Sa_unnormalized</span><span class="p">,</span> <span class="n">Sa_inv_normalized</span><span class="p">,</span> <span class="n">Sa_inv_sqrt_normalized</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">MultiComponentSurface</span><span class="o">.</span><span class="n">Sa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">Sa_unnormalized</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">surface_T_prior_sigma_degK</span><span class="o">**</span><span class="mi">2</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Append normalized Sa inv and sqrt from thermal model</span>
+        <span class="n">Sa_inv_normalized</span> <span class="o">=</span> <span class="n">block_diag</span><span class="p">(</span><span class="n">Sa_inv_normalized</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_thermal</span><span class="p">)</span>
+        <span class="n">Sa_inv_sqrt_normalized</span> <span class="o">=</span> <span class="n">block_diag</span><span class="p">(</span>
+            <span class="n">Sa_inv_sqrt_normalized</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Sa_inv_sqrt_thermal</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Sa_unnormalized</span><span class="p">,</span> <span class="n">Sa_inv_normalized</span><span class="p">,</span> <span class="n">Sa_inv_sqrt_normalized</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rfl_meas</span><span class="p">,</span> <span class="n">geom</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.fit_params"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.fit_params" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Given a reflectance estimate, find the surface reflectance&quot;&quot;&quot;</span>
+
+        <span class="n">x_surface</span> <span class="o">=</span> <span class="n">MultiComponentSurface</span><span class="o">.</span><span class="n">fit_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rfl_meas</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">x_surface</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">x_surface</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">dlamb_dsurface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.dlamb_dsurface"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.dlamb_dsurface" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Partial derivative of Lambertian reflectance with respect to state</span>
+<span class="sd">        vector, calculated at x_surface.&quot;&quot;&quot;</span>
+
+        <span class="n">dlamb</span> <span class="o">=</span> <span class="n">MultiComponentSurface</span><span class="o">.</span><span class="n">dlamb_dsurface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">dlamb</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">return</span> <span class="n">dlamb</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calc_Ls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.calc_Ls"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.calc_Ls" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Emission of surface, as a radiance.&quot;&quot;&quot;</span>
+
+        <span class="n">T</span> <span class="o">=</span> <span class="n">x_surface</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span>
+        <span class="n">rfl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_rfl</span><span class="p">(</span><span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="c1"># ToDo: direct and diffuse reflectance vectors not supported yet</span>
+        <span class="n">rfl</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">rfl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">emissivity</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">rfl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Ls</span><span class="p">,</span> <span class="n">dLs_dT</span> <span class="o">=</span> <span class="n">emissive_radiance</span><span class="p">(</span><span class="n">emissivity</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wl</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Ls</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">dLs_dsurface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.dLs_dsurface"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.dLs_dsurface" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Partial derivative of surface emission with respect to state vector,</span>
+<span class="sd">        calculated at x_surface.&quot;&quot;&quot;</span>
+
+        <span class="n">T</span> <span class="o">=</span> <span class="n">x_surface</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span>
+        <span class="n">lambertian_rfl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_lamb</span><span class="p">(</span><span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">emissivity</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">lambertian_rfl</span>
+        <span class="n">Ls</span><span class="p">,</span> <span class="n">dLs_dT</span> <span class="o">=</span> <span class="n">emissive_radiance</span><span class="p">(</span><span class="n">emissivity</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wl</span><span class="p">)</span>
+        <span class="n">dLs_drfl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">Ls</span><span class="p">)</span>
+        <span class="n">dLs_dsurface</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">dLs_drfl</span><span class="p">,</span> <span class="n">dLs_dT</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="n">dLs_dsurface</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">drdn_dsurface</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.drdn_dsurface"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.drdn_dsurface" title="Go to docs">[docs]</a></div>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">rho_dif_dir</span><span class="p">,</span>
+        <span class="n">drfl_dsurface</span><span class="p">,</span>
+        <span class="n">dLs_dsurface</span><span class="p">,</span>
+        <span class="n">s_alb</span><span class="p">,</span>
+        <span class="n">t_total_up</span><span class="p">,</span>
+        <span class="n">L_tot</span><span class="p">,</span>
+        <span class="n">L_dir_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">L_dir_dif</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">L_dif_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">L_dif_dif</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative of radiance with respect to</span>
+<span class="sd">        full surface vector&quot;&quot;&quot;</span>
+
+        <span class="c1"># Construct the output matrix:</span>
+        <span class="c1"># Dimensions should be (len(RT.wl), len(x_surface))</span>
+        <span class="c1"># which is correctly handled by the instrument resampling</span>
+        <span class="n">drdn_dsurface</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">drfl_dsurface</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">drdn_drfl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">drdn_drfl</span><span class="p">(</span><span class="n">L_tot</span><span class="p">,</span> <span class="n">s_alb</span><span class="p">,</span> <span class="n">rho_dif_dir</span><span class="p">)</span>
+
+        <span class="n">drdn_dsurface</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_wl</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span>
+            <span class="n">drdn_drfl</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">drfl_dsurface</span><span class="p">[:,</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_wl</span><span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get the derivative w.r.t. surface emission</span>
+        <span class="n">drdn_dLs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">drdn_dLs</span><span class="p">(</span><span class="n">t_total_up</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">dLs_dsurface</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">drdn_dsurface</span><span class="p">,</span> <span class="n">drdn_dLs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.surface.surface_thermal.ThermalSurface.summarize"><a href="../../../../api/isofit/surface/surface_thermal/#isofit.surface.surface_thermal.ThermalSurface.summarize" title="Go to docs">[docs]</a></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Summary of state vector.&quot;&quot;&quot;</span>
+
+        <span class="n">mcm</span> <span class="o">=</span> <span class="n">MultiComponentSurface</span><span class="o">.</span><span class="n">summarize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot; Kelvins: </span><span class="si">%5.1f</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="n">x_surface</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">surf_temp_ind</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">msg</span> <span class="o">+</span> <span class="n">mcm</span>
+</code></pre></div></td></tr></table></div>
+
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

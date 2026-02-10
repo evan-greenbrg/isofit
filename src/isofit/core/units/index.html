@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Units - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Units";
+        var mkdocs_page_input_path = "src/isofit/core/units.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Units</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-object" id="isofit.core.units">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../api/isofit/core/units/#isofit.core.units" title="Go to docs">[docs]</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.units" title="isofit.core.units">isofit.core.units</a></span>
+</p>
+<div class="mkapi-source no-copy highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2018 California Institute of Technology</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ISOFIT: Imaging Spectrometer Optimal FITting</span>
+<span class="c1"># Authors: Philip G. Brodrick, philip.brodrick@jpl.nasa.gov</span>
+<span class="c1">#          Niklas Bohn, urs.n.bohn@jpl.nasa.gov</span>
+<span class="c1">#          Evan Greenberg, evan.greenberg@jpl.nasa.gov</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">E_to_L</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">coszen</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.E_to_L"><a href="../../../../api/isofit/core/units/#isofit.core.units.E_to_L" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert irradiance to radiance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        E:         input irradiance vector</span>
+<span class="sd">        coszen:    cosine of solar zenith angle</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to radiance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">E</span> <span class="o">*</span> <span class="n">coszen</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">L</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">L_to_E</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">coszen</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.L_to_E"><a href="../../../../api/isofit/core/units/#isofit.core.units.L_to_E" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert radiance to irradiance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        L:         input radiance vector</span>
+<span class="sd">        coszen:    cosine of solar zenith angle</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to irradiance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">coszen</span>
+    <span class="k">return</span> <span class="n">E</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">transm_to_rdn</span><span class="p">(</span><span class="n">transm</span><span class="p">,</span> <span class="n">coszen</span><span class="p">,</span> <span class="n">solar_irr</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.transm_to_rdn"><a href="../../../../api/isofit/core/units/#isofit.core.units.transm_to_rdn" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to convert a unitless atmospheric vector to radiance units.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        transm:    input data vector in unitless atmospheric units</span>
+<span class="sd">        coszen:    cosine of solar zenith angle</span>
+<span class="sd">        solar_irr: solar irradiance vector</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to radiance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rdn</span> <span class="o">=</span> <span class="n">transm</span> <span class="o">*</span> <span class="n">E_to_L</span><span class="p">(</span><span class="n">solar_irr</span><span class="p">,</span> <span class="n">coszen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rdn</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rdn_to_transm</span><span class="p">(</span><span class="n">rdn</span><span class="p">,</span> <span class="n">coszen</span><span class="p">,</span> <span class="n">solar_irr</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.rdn_to_transm"><a href="../../../../api/isofit/core/units/#isofit.core.units.rdn_to_transm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to convert a radiance vector to transmittance.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rdn:       input data vector in radiance</span>
+<span class="sd">        coszen:    cosine of solar zenith angle</span>
+<span class="sd">        solar_irr: solar irradiance vector</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to unitless atmospheric units</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">transm</span> <span class="o">=</span> <span class="n">rdn</span> <span class="o">/</span> <span class="n">E_to_L</span><span class="p">(</span><span class="n">solar_irr</span><span class="p">,</span> <span class="n">coszen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">wavenumber_to_nm</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.wavenumber_to_nm"><a href="../../../../api/isofit/core/units/#isofit.core.units.wavenumber_to_nm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert wavenumber to nm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wavenumber:     value(s) in wavenumber in 1/cm</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        value(s) in nanometers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="mf">1e7</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavenumber</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nm_to_wavenumber</span><span class="p">(</span><span class="n">nm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.nm_to_wavenumber"><a href="../../../../api/isofit/core/units/#isofit.core.units.nm_to_wavenumber" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert nm to wavenumber.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wavenumber</span> <span class="o">=</span> <span class="n">wavenumber_to_nm</span><span class="p">(</span><span class="n">nm</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wavenumber</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">vis_to_aod</span><span class="p">(</span><span class="n">vis</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.vis_to_aod"><a href="../../../../api/isofit/core/units/#isofit.core.units.vis_to_aod" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts VIS modtran parameter to the AOD550 .</span>
+<span class="sd">    This formula comes from page 50 of the MODTRAN 6 user manual,</span>
+<span class="sd">    which relates ViS to the extinction coefficient at 550 nm.</span>
+<span class="sd">    The constant, 0.01159 is the Rayleigh scattering coefficient at</span>
+<span class="sd">    550 nm in 1/km.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        vis:    visibility</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to exctinction at 550 nm</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">aod</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="o">/</span> <span class="n">vis</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.01159</span>
+    <span class="k">return</span> <span class="n">aod</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">aod_to_vis</span><span class="p">(</span><span class="n">aod</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.aod_to_vis"><a href="../../../../api/isofit/core/units/#isofit.core.units.aod_to_vis" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts AOD550 to VIS modtran parameter.</span>
+<span class="sd">    Formula comes from page 50 of the MODTRAN 6 users manual,</span>
+<span class="sd">    which relates ViS to the extinction coefficient at 550 nm.</span>
+<span class="sd">    The constant, 0.01159 is the Rayleigh scattering coefficient at</span>
+<span class="sd">    550 nm in 1/km.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        aod:    extinction at 550 nm</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector converted to visibility</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">aod</span> <span class="o">+</span> <span class="mf">0.01159</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vis</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rfl_to_rrs</span><span class="p">(</span><span class="n">rfl</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.rfl_to_rrs"><a href="../../../../api/isofit/core/units/#isofit.core.units.rfl_to_rrs" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts unitless reflectance to remote sensing reflectance</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rfl:    unitless reflectance</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector of remote sensing reflectance in units 1/sr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rrs</span> <span class="o">=</span> <span class="n">rfl</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">rrs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rrs_to_rfl</span><span class="p">(</span><span class="n">rrs</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.rrs_to_rfl"><a href="../../../../api/isofit/core/units/#isofit.core.units.rrs_to_rfl" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts remote sensing reflectance to unitless reflectance</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rrs:   remote sensing reflectance in 1/sr</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Data vector of unitless reflectance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rfl</span> <span class="o">=</span> <span class="n">rrs</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+    <span class="k">return</span> <span class="n">rfl</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">W_to_uW</span><span class="p">(</span><span class="n">w</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.W_to_uW"><a href="../../../../api/isofit/core/units/#isofit.core.units.W_to_uW" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units watts to units microwatts</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        w:      value(s) in units of Watts</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of microwatts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">uw</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="mf">1e6</span>
+    <span class="k">return</span> <span class="n">uw</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">uW_to_W</span><span class="p">(</span><span class="n">uw</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.uW_to_W"><a href="../../../../api/isofit/core/units/#isofit.core.units.uW_to_W" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units microwatts to units watts</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        uw:      value(s) in units of Microwatts</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of microwatts</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">uw</span> <span class="o">/</span> <span class="mf">1e6</span>
+    <span class="k">return</span> <span class="n">w</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">Wm2_to_uWcm2</span><span class="p">(</span><span class="n">wm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.Wm2_to_uWcm2"><a href="../../../../api/isofit/core/units/#isofit.core.units.Wm2_to_uWcm2" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units Watts / square meter to units</span>
+<span class="sd">    of micro-watts / square centimeter</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        wm:     value(s) in units of W/m2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of uW/cm2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">uwcm</span> <span class="o">=</span> <span class="n">wm</span> <span class="o">*</span> <span class="mf">1e2</span>
+    <span class="k">return</span> <span class="n">uwcm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">uWcm2_to_Wm2</span><span class="p">(</span><span class="n">uwcm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.uWcm2_to_Wm2"><a href="../../../../api/isofit/core/units/#isofit.core.units.uWcm2_to_Wm2" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of micro-watts / square centimeter to units Watts / square meter</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        uwcm:     value(s) in units of uW/cm2</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of W/m2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wm</span> <span class="o">=</span> <span class="n">uwcm</span> <span class="o">/</span> <span class="mf">1e2</span>
+    <span class="k">return</span> <span class="n">wm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">micron_to_nm</span><span class="p">(</span><span class="n">micron</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.micron_to_nm"><a href="../../../../api/isofit/core/units/#isofit.core.units.micron_to_nm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert microns to nanometers</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        micron: value(s) in microns</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        value(s) in nanometers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="n">micron</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="k">return</span> <span class="n">nm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nm_to_micron</span><span class="p">(</span><span class="n">nm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.nm_to_micron"><a href="../../../../api/isofit/core/units/#isofit.core.units.nm_to_micron" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert nanometers to microns</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nm:     value(s) in nanometers</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        value(s) in microns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">micron</span> <span class="o">=</span> <span class="n">nm</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="k">return</span> <span class="n">micron</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cm_to_nm</span><span class="p">(</span><span class="n">cm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.cm_to_nm"><a href="../../../../api/isofit/core/units/#isofit.core.units.cm_to_nm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert microns to nanometers</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cm: value(s) in centimeters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        value(s) in nanometers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">*</span> <span class="mf">1e7</span>
+    <span class="k">return</span> <span class="n">nm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">nm_to_cm</span><span class="p">(</span><span class="n">nm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.nm_to_cm"><a href="../../../../api/isofit/core/units/#isofit.core.units.nm_to_cm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to convert nanometers to microns</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        nm:     value(s) in nanometers</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        value(s) in microns</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">nm</span> <span class="o">/</span> <span class="mf">1e7</span>
+    <span class="k">return</span> <span class="n">cm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">m_to_km</span><span class="p">(</span><span class="n">m</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.m_to_km"><a href="../../../../api/isofit/core/units/#isofit.core.units.m_to_km" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units meters to units kilometer</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        m:     value(s) in units of meters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of kilometers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">km</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="mi">1000</span>
+    <span class="k">return</span> <span class="n">km</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mm_to_cm</span><span class="p">(</span><span class="n">mm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.mm_to_cm"><a href="../../../../api/isofit/core/units/#isofit.core.units.mm_to_cm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units mm to unit centimeters</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mm:     value(s) in units of millimeters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of centimeters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">mm</span> <span class="o">/</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">cm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cm_to_mm</span><span class="p">(</span><span class="n">cm</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.cm_to_mm"><a href="../../../../api/isofit/core/units/#isofit.core.units.cm_to_mm" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units mm to unit millimeters</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        cm:     value(s) in units of centimeters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of millimeters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mm</span> <span class="o">=</span> <span class="n">cm</span> <span class="o">*</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">mm</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">km_to_m</span><span class="p">(</span><span class="n">km</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.km_to_m"><a href="../../../../api/isofit/core/units/#isofit.core.units.km_to_m" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units kilometers to unit meters</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        km:     value(s) in units of kilometers</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of meters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">km</span> <span class="o">*</span> <span class="mi">1000</span>
+    <span class="k">return</span> <span class="n">m</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">m_to_ft</span><span class="p">(</span><span class="n">m</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.m_to_ft"><a href="../../../../api/isofit/core/units/#isofit.core.units.m_to_ft" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units meters to units feet</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        m:     value(s) in units of meters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of feet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ft</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="mf">3.280839895</span>
+    <span class="k">return</span> <span class="n">ft</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ft_to_m</span><span class="p">(</span><span class="n">ft</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.core.units.ft_to_m"><a href="../../../../api/isofit/core/units/#isofit.core.units.ft_to_m" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts value of units ft to units m</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ft:     value(s) in units of feet</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Value(s) in units of meters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">ft</span> <span class="o">/</span> <span class="mf">3.280839895</span>
+    <span class="k">return</span> <span class="n">m</span>
+</code></pre></div></td></tr></table></div>
+
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Sunposition - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Sunposition";
+        var mkdocs_page_input_path = "api/isofit/core/sunposition.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >isofit</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >isofit.core</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Sunposition</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.julian_day">julian_day</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.arcdist">arcdist</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.observed_sunpos">observed_sunpos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.topocentric_sunpos">topocentric_sunpos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.sunpos">sunpos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.core.sunposition.Sunposition">Sunposition</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+          <li class="breadcrumb-item">isofit</li>
+          <li class="breadcrumb-item">isofit.core</li>
+      <li class="breadcrumb-item active">Sunposition</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition" title="isofit.core.sunposition">isofit.core.sunposition</a></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle classes">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Classes</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.Sunposition" title="isofit.core.sunposition.Sunposition">Sunposition</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Compute sun position parameters given the time and location.</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle functions">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Functions</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.julian_day" title="isofit.core.sunposition.julian_day">julian_day</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Convert UTC datetimes or UTC timestamps to Julian days.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.arcdist" title="isofit.core.sunposition.arcdist">arcdist</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Angular distance between azimuth, zenith pairs.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.observed_sunpos" title="isofit.core.sunposition.observed_sunpos">observed_sunpos</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Compute the observed coordinates of the sun as viewed at the given time and location.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.topocentric_sunpos" title="isofit.core.sunposition.topocentric_sunpos">topocentric_sunpos</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Compute the topocentric coordinates of the sun as viewed at the given time and location.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.core.sunposition.sunpos" title="isofit.core.sunposition.sunpos">sunpos</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Compute the observed and topocentric coordinates of the sun as viewed at the given time and location.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.julian_day">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.julian_day" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.julian_day" title="isofit.core.sunposition.julian_day">julian_day</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dt</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Convert UTC datetimes or UTC timestamps to Julian days.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dt</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+UTC datetime objects or UTC timestamps (as per datetime.utcfromtimestamp)</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">jd</span> : 
+<span class="mkapi-item-type">ndarray</span> <span class="mkapi-dash">&mdash;</span>
+datetimes converted to fractional Julian days</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.arcdist">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.arcdist" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.arcdist" title="isofit.core.sunposition.arcdist">arcdist</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">p0</span><span class="mkapi-comma">, </span><span class="mkapi-arg">p1</span><span class="mkapi-comma">, </span><span class="mkapi-arg">radians</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Angular distance between azimuth, zenith pairs.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">p0</span> : 
+<span class="mkapi-item-type">array_like, shape (..., 2)</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">p1</span> : 
+<span class="mkapi-item-type">array_like, shape (..., 2)</span> <span class="mkapi-dash">&mdash;</span>
+p[...,0] = azimuth angles, p[...,1] = zenith angles</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">radians</span> : 
+<span class="mkapi-item-type">boolean (default False)</span> <span class="mkapi-dash">&mdash;</span>
+If False, angles are in degrees, otherwise in radians</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">ad</span> : 
+<span class="mkapi-item-type">array_like, shape is broadcast(p0,p1).shape</span> <span class="mkapi-dash">&mdash;</span>
+Arcdistances between corresponding pairs in p0,p1
+In degrees by default, in radians if radians=True</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.observed_sunpos">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.observed_sunpos" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.observed_sunpos" title="isofit.core.sunposition.observed_sunpos">observed_sunpos</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dt</span><span class="mkapi-comma">, </span><span class="mkapi-arg">latitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">longitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">elevation</span><span class="mkapi-comma">, </span><span class="mkapi-arg">temperature</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">pressure</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">delta_t</span><span class="mkapi-equal">=</span><span class="mkapi-default">0</span><span class="mkapi-comma">, </span><span class="mkapi-arg">radians</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Compute the observed coordinates of the sun as viewed at the given time and location.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dt</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+UTC datetime objects or UTC timestamps (as per datetime.utcfromtimestamp) representing the times of observations</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">latitude, longitude</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+decimal degrees, positive for north of the equator and east of Greenwich</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">elevation</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+meters, relative to the WGS-84 ellipsoid</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">temperature</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+celcius, default is 14.6 (global average in 2013)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">pressure</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+millibar, default is 1013 (global average in ??)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">delta_t</span> : 
+<span class="mkapi-item-type">array_like, optional</span> <span class="mkapi-dash">&mdash;</span>
+seconds, default is 0, difference between the earth's rotation time (TT) and universal time (UT)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">radians</span> : 
+<span class="mkapi-item-type">{True, False}, optional</span> <span class="mkapi-dash">&mdash;</span>
+return results in radians if True, degrees if False (default)</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">coords</span> : 
+<span class="mkapi-item-type">ndarray, (...,2)</span> <span class="mkapi-dash">&mdash;</span>
+The shape of the array is parameters broadcast together, plus a final dimension for the coordinates.
+coords[...,0] = observed azimuth angle, measured eastward from north
+coords[...,1] = observed zenith angle, measured down from vertical</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.topocentric_sunpos">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.topocentric_sunpos" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.topocentric_sunpos" title="isofit.core.sunposition.topocentric_sunpos">topocentric_sunpos</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dt</span><span class="mkapi-comma">, </span><span class="mkapi-arg">latitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">longitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">temperature</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">pressure</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">delta_t</span><span class="mkapi-equal">=</span><span class="mkapi-default">0</span><span class="mkapi-comma">, </span><span class="mkapi-arg">radians</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Compute the topocentric coordinates of the sun as viewed at the given time and location.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dt</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+UTC datetime objects or UTC timestamps (as per datetime.utcfromtimestamp) representing the times of observations</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">latitude, longitude</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+decimal degrees, positive for north of the equator and east of Greenwich</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">elevation</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+meters, relative to the WGS-84 ellipsoid</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">temperature</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+celcius, default is 14.6 (global average in 2013)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">pressure</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+millibar, default is 1013 (global average in ??)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">delta_t</span> : 
+<span class="mkapi-item-type">array_like, optional</span> <span class="mkapi-dash">&mdash;</span>
+seconds, default is 0, difference between the earth's rotation time (TT) and universal time (UT)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">radians</span> : 
+<span class="mkapi-item-type">{True, False}, optional</span> <span class="mkapi-dash">&mdash;</span>
+return results in radians if True, degrees if False (default)</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">coords</span> : 
+<span class="mkapi-item-type">ndarray, (...,3)</span> <span class="mkapi-dash">&mdash;</span>
+The shape of the array is parameters broadcast together, plus a final dimension for the coordinates.
+coords[...,0] = topocentric right ascension
+coords[...,1] = topocentric declination
+coords[...,2] = topocentric hour angle</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.sunpos">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.sunpos" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.sunpos" title="isofit.core.sunposition.sunpos">sunpos</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dt</span><span class="mkapi-comma">, </span><span class="mkapi-arg">latitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">longitude</span><span class="mkapi-comma">, </span><span class="mkapi-arg">elevation</span><span class="mkapi-comma">, </span><span class="mkapi-arg">temperature</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">pressure</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">delta_t</span><span class="mkapi-equal">=</span><span class="mkapi-default">0</span><span class="mkapi-comma">, </span><span class="mkapi-arg">radians</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Compute the observed and topocentric coordinates of the sun as viewed at the given time and location.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dt</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+UTC datetime objects or UTC timestamps (as per datetime.utcfromtimestamp) representing the times of observations</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">latitude, longitude</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+decimal degrees, positive for north of the equator and east of Greenwich</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">elevation</span> : 
+<span class="mkapi-item-type">array_like</span> <span class="mkapi-dash">&mdash;</span>
+meters, relative to the WGS-84 ellipsoid</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">temperature</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+celcius, default is 14.6 (global average in 2013)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">pressure</span> : 
+<span class="mkapi-item-type">array_like or None, optional</span> <span class="mkapi-dash">&mdash;</span>
+millibar, default is 1013 (global average in ??)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">delta_t</span> : 
+<span class="mkapi-item-type">array_like, optional</span> <span class="mkapi-dash">&mdash;</span>
+seconds, default is 0, difference between the earth's rotation time (TT) and universal time (UT)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">radians</span> : 
+<span class="mkapi-item-type">{True, False}, optional</span> <span class="mkapi-dash">&mdash;</span>
+return results in radians if True, degrees if False (default)</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">coords</span> : 
+<span class="mkapi-item-type">ndarray, (...,5)</span> <span class="mkapi-dash">&mdash;</span>
+The shape of the array is parameters broadcast together, plus a final dimension for the coordinates.
+coords[...,0] = observed azimuth angle, measured eastward from north
+coords[...,1] = observed zenith angle, measured down from vertical
+coords[...,2] = topocentric right ascension
+coords[...,3] = topocentric declination
+coords[...,4] = topocentric hour angle</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.Sunposition">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.Sunposition" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">class</span>
+<span class="mkapi-object-name"><a href="./#isofit.core.sunposition.Sunposition" title="isofit.core.sunposition.Sunposition">Sunposition</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">t</span><span class="mkapi-comma">, </span><span class="mkapi-arg">lat</span><span class="mkapi-comma">, </span><span class="mkapi-arg">lon</span><span class="mkapi-comma">, </span><span class="mkapi-arg">elev</span><span class="mkapi-comma">, </span><span class="mkapi-arg">temp</span><span class="mkapi-comma">, </span><span class="mkapi-arg">p</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dt</span><span class="mkapi-comma">, </span><span class="mkapi-arg">rad</span><span class="mkapi-comma">, </span><span class="mkapi-arg">csv</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Compute sun position parameters given the time and location.</p>
+<p>Initialize the class and run the model.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle attributes">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Attributes</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">citation</span>
+ <span class="mkapi-dash">&mdash;</span>
+Print the citation.</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.core.sunposition.Sunposition.citation">
+<span class="mkapi-object-link">
+<span class="mkapi-parent-toggle" title="Toggle class names">
+<i class="fa-solid fa-square-plus"></i>
+</span>
+
+<a href="../../../../src/isofit/core/sunposition/#isofit.core.sunposition.Sunposition.citation" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">property</span>
+<span class="mkapi-object-parent">
+<a href="./#isofit.core.sunposition.Sunposition" title="isofit.core.sunposition.Sunposition">Sunposition</a><span class="mkapi-dot">.</span></span><span class="mkapi-object-name"><a href="./#isofit.core.sunposition.Sunposition.citation" title="isofit.core.sunposition.Sunposition.citation">citation</a></span>
+</p>
+<div class="mkapi-document">
+<p>Print the citation.</p>
+</div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../multistate/" class="btn btn-neutral float-left" title="Multistate"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../units/" class="btn btn-neutral float-right" title="Units">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../multistate/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../units/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

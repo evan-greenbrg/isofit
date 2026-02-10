@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Contributing - ISOFIT</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Contributing";
+        var mkdocs_page_input_path = "developers/contributing.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Contributing</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#fork-and-create-a-branch">Fork and Create a Branch</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#debug">Debug</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#a-note-about-style">A Note About Style</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#implement-your-changes-and-create-a-pull-request">Implement Your Changes and Create a Pull Request</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#keeping-your-pull-request-updated">Keeping your Pull Request Updated</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#project-decision-making">Project Decision Making</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#release-steps-for-maintainers">Release Steps (for Maintainers)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#updating-uvlock-for-maintainers">Updating uv.lock (for Maintainers)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#contributors">Contributors</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Developers</li>
+      <li class="breadcrumb-item active">Contributing</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/isofit/isofit/edit/master/docs/developers/contributing.md">Edit on isofit/isofit</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">#</a></h2>
+<p>Thank you for your interest in contributing to ISOFIT! If you are just getting
+started, please review the guidelines below to understand how and where you can
+best support and contribute to this project.  Typical contributions may include:</p>
+<ul>
+<li>Unit tests</li>
+<li>Code patches</li>
+<li>Feature enhancements</li>
+<li>Documentation improvements</li>
+<li>Bug reports</li>
+</ul>
+<p>If you have ideas for new additions, that's great - please contact the maintainers
+at the addresses given below, and we can coordinate efforts.  Our general policy
+is to for the maintainers to delegate technical authority to individuals to make
+changes and additions to specific topics.</p>
+<h3 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">#</a></h3>
+<p>First of all, to get a sense of the project's current status and roadmap, please
+be sure to spend some time reviewing issues in the <a href="https://github.com/isofit/isofit/issues">issue tracker</a>.</p>
+<p>If you have have discovered a new issue or task, then go ahead and create a <a href="https://github.com/isofit/isofit/issues/new">new
+issue</a>.</p>
+<h3 id="fork-and-create-a-branch">Fork and Create a Branch<a class="headerlink" href="#fork-and-create-a-branch" title="Permanent link">#</a></h3>
+<p>ISOFIT follows the <a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962">Standard Fork and Pull Request</a> workflow.</p>
+<p>When you have chosen an issue to work on, start by <a href="https://help.github.com/articles/fork-a-repo/">forking</a> the repo.</p>
+<p>Then, create a branch with a descriptive name.  A good branch name starts with
+the issue number you are working on followed by some descriptive text.  For
+example, if you are working on issue #314 you would run:</p>
+<div class="highlight"><pre><span></span><code>$ git checkout -b 314-update-docs-libradtran
+</code></pre></div>
+<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">#</a></h3>
+<p>Tests live in <code>isofit/tests/</code> and are executed using <a href="https://pytest.org">pytest</a>.</p>
+<p>Our development strategy employs continuous integration and unit testing to validate all changes. We appreciate you writing additional tests for new modifications or features. In the interest of validating your code, please also be sure to run realistic examples like this:</p>
+<div class="highlight"><pre><span></span><code>$ cd $(isofit path examples)/20171108_Pasadena
+$ ./modtran.sh
+</code></pre></div>
+<p>See <a href="../testing/">Testing</a> for more information.</p>
+<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">#</a></h3>
+<p>ISOFIT uses <a href="https://www.ray.io/">ray</a> as the multiprocessing backend; however, this package can be unstable for some systems and difficult to develop with. As such, ISOFIT has a debug mode that can be activated via the <code>ISOFIT_DEBUG</code> environment variable.</p>
+<p>This is the only environment variable of ISOFIT and is strictly for enabling the DEBUG features of the code. The flag simply disables the ray package and instead uses an in-house wrapper module to emulate the functions of ray.
+This enables complete circumvention of ray while supporting ray-like syntax in the codebase.</p>
+<p>To enable, set the environment variable <code>ISOFIT_DEBUG</code> to any value before runtime. For example:</p>
+<div class="highlight"><pre><span></span><code>$ ISOFIT_DEBUG=1 isofit run ...
+</code></pre></div>
+<h3 id="a-note-about-style">A Note About Style<a class="headerlink" href="#a-note-about-style" title="Permanent link">#</a></h3>
+<p>We use <a href="https://github.com/psf/black">Black</a> and <a href="https://github.com/PyCQA/isort">isort</a> to maintain style consistency. These are included via <a href="https://pre-commit.com">pre-commit</a> and should be installed once ISOFIT is installed. To do so, simply run:</p>
+<div class="highlight"><pre><span></span><code>$ pre-commit install
+</code></pre></div>
+<p>Every commit from here on will auto-apply the above packages. Additionally, upon a PR to the <code>dev</code> branch, <code>Black</code> consistency will be checked.
+Any PRs failing this check will be rejected by the maintainers until it is passing.</p>
+<p>If you must apply Black manually, you must first <code>pip install black</code> and then run <code>black isofit</code> from the root of the repository.</p>
+<h3 id="implement-your-changes-and-create-a-pull-request">Implement Your Changes and Create a Pull Request<a class="headerlink" href="#implement-your-changes-and-create-a-pull-request" title="Permanent link">#</a></h3>
+<p>At this point, you are ready to implement your changes!</p>
+<p>As you develop, you should make sure that your branch doesn't veer too far from
+ISOFIT's dev branch.  To do this, switch back to your dev branch and make
+sure it's up to date with ISOFIT's dev branch:</p>
+<div class="highlight"><pre><span></span><code>$ git remote add upstream https://github.com/isofit/isofit.git
+$ git checkout dev
+$ git pull upstream dev
+</code></pre></div>
+<p>Then update your feature branch from your local copy of dev, and push it!</p>
+<div class="highlight"><pre><span></span><code>$ git checkout 314-update-docs-libradtran
+$ git rebase dev
+$ git push --set-upstream origin 314-update-docs-libradtran
+</code></pre></div>
+<p>When you are ready to submit your changes back to the ISOFIT repo, go to GitHub and make a <a href="https://help.github.com/articles/creating-a-pull-request/">Pull Request</a>.</p>
+<h3 id="keeping-your-pull-request-updated">Keeping your Pull Request Updated<a class="headerlink" href="#keeping-your-pull-request-updated" title="Permanent link">#</a></h3>
+<p>If a maintainer asks you to "rebase" your PR, they're saying that a lot of code has changed, and that you need to update your branch so it's easier to merge.</p>
+<p>Here's the suggested workflow:</p>
+<div class="highlight"><pre><span></span><code>$ git checkout 314-update-docs-libradtran
+$ git pull --rebase upstream dev
+$ git push --force-with-lease 314-update-docs-libradtran
+</code></pre></div>
+<h3 id="project-decision-making">Project Decision Making<a class="headerlink" href="#project-decision-making" title="Permanent link">#</a></h3>
+<p>Minor changes follow an expedited acceptance process.  These are things like:</p>
+<ul>
+<li>Bug fixes</li>
+<li>Unit tests</li>
+<li>Documentation</li>
+<li>Consolidation that does not change algorithm results or provide significant new functionality</li>
+<li>New functionality initiated by maintainers, or over which authority has been delegated in advance by maintainers (e.g. through issue assignment)</li>
+</ul>
+<p>Minor change pull requests are accepted once they:</p>
+<ul>
+<li>Pass unit tests and adhere to project coding conventions</li>
+<li>Get signoff from at least one maintainer, with no objections from any other maintainer</li>
+</ul>
+<p>Accepted minor changes will be released in the next major or minor release version. Hotfixes will be expedited as needed.</p>
+<p>Major changes include:</p>
+<ul>
+<li>New functionality, including examples, data, and algorithm changes, over which authority was not delegated in advance</li>
+<li>Official releases</li>
+<li>Project policy updates</li>
+</ul>
+<p>These are accepted through consensus of a quorum of maintainers.  <strong>If you would like to include any new algorithms or examples, we highly recommend that they are supported by peer reviewed scientific research.</strong></p>
+<h3 id="release-steps-for-maintainers">Release Steps (for Maintainers)<a class="headerlink" href="#release-steps-for-maintainers" title="Permanent link">#</a></h3>
+<p>Releases should trigger a new PyPi upload, and subsequently a fresh upload to conda-forge.  Therefore,
+the revised steps for versioning are:</p>
+<ul>
+<li>Submit version number change to setup.cfg in dev</li>
+<li>Trigger a PR from dev to main</li>
+<li>Accept the PR</li>
+<li>Go to https://github.com/isofit/isofit/releases</li>
+<li>Click "Draft a new release"</li>
+<li>Enter tag version as "v3.8.0" (depending on latest version), and input release title and description</li>
+<li>Click "Publish release"</li>
+</ul>
+<h3 id="updating-uvlock-for-maintainers">Updating uv.lock (for Maintainers)<a class="headerlink" href="#updating-uvlock-for-maintainers" title="Permanent link">#</a></h3>
+<p>The uv.lock file maintains the pinned versions of every dependency for all supported python versions in order to ensure environment reproducibility.
+This file should be occasionally updated to retrieve dependency updates.</p>
+<ol>
+<li>Create a branch from dev</li>
+<li>Execute <code>uv lock --upgrade</code></li>
+<li>Commit the changes to uv.lock</li>
+<li>Ensure workflows pass with the new dependency pins</li>
+<li>uv by default should auto-sync the local virtual environment to the lock file, but you can also manually ensure it via: <code>uv sync</code></li>
+</ol>
+<p>Additionally:</p>
+<ul>
+<li>When changing the default recommended python version, use <code>uv python pin &lt;version&gt;</code> and commit the <code>.python-version</code> file and follow the above instructions for updating the lock file as well.</li>
+<li>If a package needs to added or removed from the toml file, use <code>uv [add|remove] &lt;package&gt;</code>. Commit the toml and follow the above.</li>
+<li>If changing the <code>requires-python</code> field of the toml file, manually do so then follow the above to ensure all dependencies are compatible.</li>
+</ul>
+<h3 id="contributors">Contributors<a class="headerlink" href="#contributors" title="Permanent link">#</a></h3>
+<p>The github maintainers, responsible for handling pull requests, are:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>David R. Thompson</td>
+<td>david.r.thompson@jpl.nasa.gov</td>
+</tr>
+<tr>
+<td>Philip G. Brodrick</td>
+<td>philip.brodrick@jpl.nasa.gov</td>
+</tr>
+<tr>
+<td>Niklas Bohn</td>
+<td>urs.n.bohn@jpl.nasa.gov</td>
+</tr>
+<tr>
+<td>James Montgomery</td>
+<td>J.Montgomery@jpl.nasa.gov</td>
+</tr>
+<tr>
+<td>Evan Greenberg</td>
+<td>evan.greenberg@jpl.nasa.gov</td>
+</tr>
+</tbody>
+</table>
+<p>Thanks to the following regular contributors:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Affiliation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alexey Shiklomanov</td>
+<td>NASA Goddard</td>
+</tr>
+<tr>
+<td>Jay Fahlen</td>
+<td>NASA JPL</td>
+</tr>
+<tr>
+<td>Kevin Wurster</td>
+<td>Planet</td>
+</tr>
+<tr>
+<td>Nimrod Carmon</td>
+<td>NASA JPL</td>
+</tr>
+<tr>
+<td>Regina Eckert</td>
+<td>NASA JPL</td>
+</tr>
+<tr>
+<td>Brent Wilder</td>
+<td>NASA JPL</td>
+</tr>
+</tbody>
+</table>
+<p>The ISOFIT codebase was made possible with support from various sources.</p>
+<p>The initial algorithm and code was developed by the NASA Earth Science Division data analysis program “Utilization of Airborne Visible/Infrared Imaging Spectrometer Next Generation Data from an Airborne Campaign in India," program NNH16ZDA001N-AVRSNG, managed by Woody Turner.</p>
+<p>Later research and maturation was provided by the Jet Propulsion Laboratory and California Institute of Technology President and Director’s Fund, and the
+Jet Propulsion Laboratory Research and Technology Development Program.</p>
+<p>The project is currently supported by the Open Source Tools, Frameworks, and Libraries Program (NNH20ZDA001N), managed by Dr. Steven Crawford.</p>
+<p>Neural network radiative transfer is supported by the NASA Center Innovation Fund managed in conjunction with the Jet Propulsion Laboratory Office of the Chief Scientist and Technologist.</p>
+<p>The initial research took place at the Jet Propulsion Laboratory, California Institute of Technology, 4800 Oak Grove Dr., Pasadena, CA 91109 USA.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../information/code_of_conduct/" class="btn btn-neutral float-left" title="Code of Conduct"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../documentation/" class="btn btn-neutral float-right" title="Documentation">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../../information/code_of_conduct/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../documentation/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../javascript/mkapi.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

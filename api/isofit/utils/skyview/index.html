@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Skyview - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Skyview";
+        var mkdocs_page_input_path = "api/isofit/utils/skyview.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >isofit</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >isofit.utils</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../segment/">Segment</a>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" href="#">Skyview</a>
+    <ul class="current">
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.skyview">skyview</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.horizon_worker">horizon_worker</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.init_horizon">init_horizon</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.save_horizon">save_horizon</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.load_horizon">load_horizon</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.create_shadow_mask">create_shadow_mask</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.update_h_for_local_topo">update_h_for_local_topo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.load_input">load_input</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.gradient_d8">gradient_d8</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.calc_slope">calc_slope</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.aspect">aspect</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.aspect_to_ipw_radians">aspect_to_ipw_radians</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.horizon">horizon</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.hor1d">hor1d</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.horval">horval</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.hor2d">hor2d</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.adjust_spacing">adjust_spacing</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.skew">skew</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.skew_transpose">skew_transpose</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.transpose_skew">transpose_skew</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#isofit.utils.skyview.cli">cli</a>
+    </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Reference</li>
+          <li class="breadcrumb-item">isofit</li>
+          <li class="breadcrumb-item">isofit.utils</li>
+      <li class="breadcrumb-item active">Skyview</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview" title="isofit.utils.skyview">isofit.utils.skyview</a></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle functions">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Functions</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.skyview" title="isofit.utils.skyview.skyview">skyview</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Applies sky view factor calculation for a given projected DEM or DSM. Much of this code was borrowed from ARS Topo-Calc.
+The key thing here was to create a python-only, rasterio-free port of this that could be used within ISOFIT. We also included 
+improvements that are current in Jeff Dozier's horizon method in Matlab (https://github.com/DozierJeff/Topographic-Horizons).
+Following suggestions from Dozier (2021), multiprocessing is leveraged here w.r.t. to n_angles rotating the image. As default,
+sky view is computed with n angles = 64 which in most cases is of sufficient accuracy to resolve but more angles may be used.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.horizon_worker" title="isofit.utils.skyview.horizon_worker">horizon_worker</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Each worker gets an angle and is sent to this function to compute horizons, and save to a compressed/scaled zarr file.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.init_horizon" title="isofit.utils.skyview.init_horizon">init_horizon</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Creates a zarr dataset for the horizon computations.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.save_horizon" title="isofit.utils.skyview.save_horizon">save_horizon</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+utility function to house metadata and information for saving horizon angles</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.load_horizon" title="isofit.utils.skyview.load_horizon">load_horizon</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.create_shadow_mask" title="isofit.utils.skyview.create_shadow_mask">create_shadow_mask</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Computes horizons at a specific geometry to create a binary shadow mask because nearby terrain
+can cast shadows onto pixels as a function of the solar geometry that aren't always captured in cos-i.
+In this case, the input angle is the solar azimuth, and the solar zenith is compared to h at each pixel.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.update_h_for_local_topo" title="isofit.utils.skyview.update_h_for_local_topo">update_h_for_local_topo</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.load_input" title="isofit.utils.skyview.load_input">load_input</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.gradient_d8" title="isofit.utils.skyview.gradient_d8">gradient_d8</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Calculate the slope and aspect for provided dem,
+using a 3x3 cell around the center</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.calc_slope" title="isofit.utils.skyview.calc_slope">calc_slope</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Calculate the slope given the finite differences</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.aspect" title="isofit.utils.skyview.aspect">aspect</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Calculate the aspect from the finite difference.
+Aspect is degrees clockwise from North (0/360 degrees)</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.aspect_to_ipw_radians" title="isofit.utils.skyview.aspect_to_ipw_radians">aspect_to_ipw_radians</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+IPW defines aspect differently than most GIS programs
+so convert an aspect in degrees from due North (0/360)
+to the IPW definition.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.horizon" title="isofit.utils.skyview.horizon">horizon</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Calculate horizon angles for one direction. Horizon angles
+are based on Dozier and Frew 1990 and are adapted from the
+IPW C code.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.hor1d" title="isofit.utils.skyview.hor1d">hor1d</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.horval" title="isofit.utils.skyview.horval">horval</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.hor2d" title="isofit.utils.skyview.hor2d">hor2d</a></span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.adjust_spacing" title="isofit.utils.skyview.adjust_spacing">adjust_spacing</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Adjust the grid spacing if a skew angle is present</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.skew" title="isofit.utils.skyview.skew">skew</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Skew the origin of successive lines by a specified angle
+A skew with angle of 30 degrees causes the following transformation:</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.skew_transpose" title="isofit.utils.skyview.skew_transpose">skew_transpose</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Skew and transpose the dem for the given angle.
+Also calculate the new spacing given the skew.</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.transpose_skew" title="isofit.utils.skyview.transpose_skew">transpose_skew</a></span>
+ <span class="mkapi-dash">&mdash;</span>
+Transpose, skew then transpose a dem for the
+given angle. Also calculate the new spacing</p>
+</li>
+<li>
+<p><span class="mkapi-item-name"><a href="./#isofit.utils.skyview.cli" title="isofit.utils.skyview.cli">cli</a></span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.skyview">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.skyview" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.skyview" title="isofit.utils.skyview.skyview">skyview</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">input</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">output_directory</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">resolution</span><span class="mkapi-colon">: </span><span class="mkapi-ann">float</span><span class="mkapi-equal"> = </span><span class="mkapi-default"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.numeric.nan">nan</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">obs_or_loc</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">method</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'slope'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_angles</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-equal"> = </span><span class="mkapi-default">64</span><span class="mkapi-comma">, </span><span class="mkapi-arg">logging_level</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'INFO'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">log_file</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cores</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-equal"> = </span><span class="mkapi-default">1</span><span class="mkapi-comma">, </span><span class="mkapi-arg">keep_horizon_files</span><span class="mkapi-colon">: </span><span class="mkapi-ann">bool</span><span class="mkapi-equal"> = </span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_address</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_redis_password</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_temp_dir</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_ip_head</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Applies sky view factor calculation for a given projected DEM or DSM. Much of this code was borrowed from ARS Topo-Calc.
+The key thing here was to create a python-only, rasterio-free port of this that could be used within ISOFIT. We also included 
+improvements that are current in Jeff Dozier's horizon method in Matlab (https://github.com/DozierJeff/Topographic-Horizons).
+Following suggestions from Dozier (2021), multiprocessing is leveraged here w.r.t. to n_angles rotating the image. As default,
+sky view is computed with n angles = 64 which in most cases is of sufficient accuracy to resolve but more angles may be used.</p>
+<p>Optionally to this horizon based method, one can pass method="slope" to compute a faster estimate that may be sufficent for regions with lower relief.
+The slope based estimate is simply, svf = cos^2(slope/2). </p>
+<p>Yet another option is to pass an ISOFIT "OBS" or "LOC" file as input and using the obs_or_loc arg. 
+OBS files have slope data and can be used for method='slope' only. LOC files have elevation data and can be used for method='slope'. 
+One can also use the full horizon method on the LOC file although this is not recommended because the edges miss information 
+(a warning will be triggered in this case).</p>
+<p>
+Parameters</p>
+<hr />
+<p>input : str
+    Path to the projected ENVI File. If <code>obs_or_loc</code> is None or "loc" input is elevation. If is "obs", then it's a slope product.
+output_directory : str
+    Directory path for temporary files and outputs during processing; similar to apply_oe.
+resolution : float, optional
+    Spatial resolution of the projected DEM in coordinate units (GSD in meters). Required for elevation input data.
+obs_or_loc : str, optional
+    Options here are 'obs', 'loc', or None. Default is None. If 'obs' is selected, it will pick the slope data from index 6 in OBS file.
+    If 'loc' is selected it well select the elevation data from index 2. None will assume a single band elevation data is passed.
+method : str, optional
+    Options are either "horizon" or "slope". Passing "horizon" runs the full computation and is recommended for very steep terrain.
+    Passing "slope"" runs the simplifed calculation of svf=cos^2(slope/2) and can be useful for more mild slopes. 
+n_angles : int, optional
+    Number of angles used in horizon calculations (default is 64).
+    As a reference, n=72 computes every 5deg, n=64 every 5.6deg, n=32 every 11.25deg, etc.<br />
+keep_horizon_files : bool, optional
+    Horizon angles are created in output_dir as a zarr data structure. False deletes files, and True keeps them. These angles are based from zenith.      <br />
+logging_level : str, optional
+    Logging verbosity level (default is "INFO"); similar to apply_oe.
+log_file : str or None, optional
+    File path to write logs; similar to apply_oe.
+n_cores : int, optional
+    Number of CPU cores to use for parallel processing (default is 1). Only used for method="horizon". 
+    Note: n_cores should ideally not be larger than n_angles.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">TypeError</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.horizon_worker">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.horizon_worker" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.horizon_worker" title="isofit.utils.skyview.horizon_worker">horizon_worker</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">angle</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dem</span><span class="mkapi-comma">, </span><span class="mkapi-arg">spacing</span><span class="mkapi-comma">, </span><span class="mkapi-arg">aspect</span><span class="mkapi-comma">, </span><span class="mkapi-arg">tan_slope</span><span class="mkapi-comma">, </span><span class="mkapi-arg">output_directory</span><span class="mkapi-comma">, </span><span class="mkapi-arg">logging_level</span><span class="mkapi-comma">, </span><span class="mkapi-arg">log_file</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Each worker gets an angle and is sent to this function to compute horizons, and save to a compressed/scaled zarr file.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.init_horizon">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.init_horizon" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.init_horizon" title="isofit.utils.skyview.init_horizon">init_horizon</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">output_directory</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angles</span><span class="mkapi-comma">, </span><span class="mkapi-arg">shape</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Creates a zarr dataset for the horizon computations.</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.save_horizon">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.save_horizon" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.save_horizon" title="isofit.utils.skyview.save_horizon">save_horizon</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">h</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angle</span><span class="mkapi-comma">, </span><span class="mkapi-arg">output_directory</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>utility function to house metadata and information for saving horizon angles</p>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.load_horizon">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.load_horizon" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.load_horizon" title="isofit.utils.skyview.load_horizon">load_horizon</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">output_directory</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angle</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.create_shadow_mask">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.create_shadow_mask" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.create_shadow_mask" title="isofit.utils.skyview.create_shadow_mask">create_shadow_mask</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">input</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">output_directory</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-comma">, </span><span class="mkapi-arg">resolution</span><span class="mkapi-colon">: </span><span class="mkapi-ann">float</span><span class="mkapi-equal"> = </span><span class="mkapi-default"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.numeric.nan">nan</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">sza</span><span class="mkapi-colon">: </span><span class="mkapi-ann">float</span><span class="mkapi-equal"> = </span><span class="mkapi-default"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.numeric.nan">nan</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">saa</span><span class="mkapi-colon">: </span><span class="mkapi-ann">float</span><span class="mkapi-equal"> = </span><span class="mkapi-default"><span class="mkapi-tooltip" title="numpy">np</span>.<span class="mkapi-tooltip" title="numpy._core.numeric.nan">nan</span></span><span class="mkapi-comma">, </span><span class="mkapi-arg">logging_level</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">'INFO'</span><span class="mkapi-comma">, </span><span class="mkapi-arg">log_file</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cores</span><span class="mkapi-colon">: </span><span class="mkapi-ann">int</span><span class="mkapi-equal"> = </span><span class="mkapi-default">1</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_address</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_redis_password</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_temp_dir</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">ray_ip_head</span><span class="mkapi-colon">: </span><span class="mkapi-ann">str</span><span class="mkapi-equal"> = </span><span class="mkapi-default">None</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Computes horizons at a specific geometry to create a binary shadow mask because nearby terrain
+can cast shadows onto pixels as a function of the solar geometry that aren't always captured in cos-i.
+In this case, the input angle is the solar azimuth, and the solar zenith is compared to h at each pixel.</p>
+<p>As of right now, this assumes solar azimuth is constant value (0-360deg). However, solar zenith (0-90deg) can vary by pixel.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.update_h_for_local_topo">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.update_h_for_local_topo" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.update_h_for_local_topo" title="isofit.utils.skyview.update_h_for_local_topo">update_h_for_local_topo</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">h</span><span class="mkapi-comma">, </span><span class="mkapi-arg">aspect</span><span class="mkapi-comma">, </span><span class="mkapi-arg">azimuth</span><span class="mkapi-comma">, </span><span class="mkapi-arg">tan_slope</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.load_input">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.load_input" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.load_input" title="isofit.utils.skyview.load_input">load_input</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">input</span><span class="mkapi-comma">, </span><span class="mkapi-arg">resolution</span><span class="mkapi-comma">, </span><span class="mkapi-arg">obs_or_loc</span><span class="mkapi-equal">=</span><span class="mkapi-default">None</span><span class="mkapi-comma">, </span><span class="mkapi-arg">method</span><span class="mkapi-equal">=</span><span class="mkapi-default">'slope'</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">FileNotFoundError</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.gradient_d8">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.gradient_d8" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.gradient_d8" title="isofit.utils.skyview.gradient_d8">gradient_d8</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dem</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dx</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dy</span><span class="mkapi-comma">, </span><span class="mkapi-arg">aspect_rad</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Calculate the slope and aspect for provided dem,
+using a 3x3 cell around the center</p>
+<p>Given a center cell e and it's neighbors:</p>
+<p>| a | b | c |
+| d | e | f |
+| g | h | i |</p>
+<p>The rate of change in the x direction is</p>
+<p>[dz/dx] = ((c + 2f + i) - (a + 2d + g) / (8 * dx)</p>
+<p>The rate of change in the y direction is</p>
+<p>[dz/dy] = ((g + 2h + i) - (a + 2b + c)) / (8 * dy)</p>
+<p>The slope is calculated</p>
+<p>slope_radians = arctan ( sqrt ([dz/dx]^2 + [dz/dy]^2) )</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dem</span>
+ <span class="mkapi-dash">&mdash;</span>
+array of elevation values</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dx</span>
+ <span class="mkapi-dash">&mdash;</span>
+cell size along the x axis</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dy</span>
+ <span class="mkapi-dash">&mdash;</span>
+cell size along the y axis</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">aspect_rad</span>
+ <span class="mkapi-dash">&mdash;</span>
+turn the aspect from degrees to IPW radians</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>slope in radians
+aspect in degrees or IPW radians</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.calc_slope">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.calc_slope" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.calc_slope" title="isofit.utils.skyview.calc_slope">calc_slope</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dz_dx</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dz_dy</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Calculate the slope given the finite differences</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dz_dx</span>
+ <span class="mkapi-dash">&mdash;</span>
+finite difference in the x direction</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dz_dy</span>
+ <span class="mkapi-dash">&mdash;</span>
+finite difference in the y direction</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>slope numpy array</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.aspect">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.aspect" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.aspect" title="isofit.utils.skyview.aspect">aspect</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dz_dx</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dz_dy</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Calculate the aspect from the finite difference.
+Aspect is degrees clockwise from North (0/360 degrees)</p>
+<p>See below for a referance to how ArcGIS calculates slope
+http://help.arcgis.com/en/arcgisdesktop/10.0/help/index.html#/How_Aspect_works/00q900000023000000/</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dz_dx</span>
+ <span class="mkapi-dash">&mdash;</span>
+finite difference in the x direction</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dz_dy</span>
+ <span class="mkapi-dash">&mdash;</span>
+finite difference in the y direction</p>
+</li>
+</ul>
+</div>
+<div class="mkapi-section-content">
+<p>Returns
+    aspect in degrees clockwise from North</p>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.aspect_to_ipw_radians">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.aspect_to_ipw_radians" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.aspect_to_ipw_radians" title="isofit.utils.skyview.aspect_to_ipw_radians">aspect_to_ipw_radians</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">a</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>IPW defines aspect differently than most GIS programs
+so convert an aspect in degrees from due North (0/360)
+to the IPW definition.</p>
+<p>Aspect is radians from south (aspect 0 is toward
+the south) with range from -pi to pi, with negative
+values to the west and positive values to the east</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">a</span>
+ <span class="mkapi-dash">&mdash;</span>
+aspect in degrees from due North</p>
+</li>
+</ul>
+</div>
+<div class="mkapi-section-content">
+<p>Returns
+    a: aspect in radians from due South</p>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.horizon">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.horizon" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.horizon" title="isofit.utils.skyview.horizon">horizon</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">azimuth</span><span class="mkapi-comma">, </span><span class="mkapi-arg">dem</span><span class="mkapi-comma">, </span><span class="mkapi-arg">spacing</span><span class="mkapi-comma">, </span><span class="mkapi-arg">par</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cores</span><span class="mkapi-equal">=</span><span class="mkapi-default">1</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Calculate horizon angles for one direction. Horizon angles
+are based on Dozier and Frew 1990 and are adapted from the
+IPW C code.</p>
+<p>The coordinate system for the azimuth is 0 degrees is South,
+with positive angles through East and negative values
+through West. Azimuth values must be on the -180 -&gt; 0 -&gt; 180
+range.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">azimuth {float} -- find horizon's along this direction</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">dem {np.array2d} -- numpy array of dem elevations</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">spacing {float} -- grid spacing</span></p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>hcos {np.array} -- cosines of angles to the horizon</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.hor1d">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.hor1d" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.hor1d" title="isofit.utils.skyview.hor1d">hor1d</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">z</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fwd</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.horval">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.horval" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.horval" title="isofit.utils.skyview.horval">horval</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">z</span><span class="mkapi-comma">, </span><span class="mkapi-arg">delta</span><span class="mkapi-comma">, </span><span class="mkapi-arg">h</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.hor2d">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.hor2d" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.hor2d" title="isofit.utils.skyview.hor2d">hor2d</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">z</span><span class="mkapi-comma">, </span><span class="mkapi-arg">delta</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fwd</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-arg">par</span><span class="mkapi-equal">=</span><span class="mkapi-default">False</span><span class="mkapi-comma">, </span><span class="mkapi-arg">n_cores</span><span class="mkapi-equal">=</span><span class="mkapi-default">1</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.adjust_spacing">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.adjust_spacing" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.adjust_spacing" title="isofit.utils.skyview.adjust_spacing">adjust_spacing</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">spacing</span><span class="mkapi-comma">, </span><span class="mkapi-arg">skew_angle</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Adjust the grid spacing if a skew angle is present</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">spacing {float} -- grid spacing</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">skew_angle {float} -- angle to adjust the spacing for [degrees]</span></p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.skew">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.skew" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.skew" title="isofit.utils.skyview.skew">skew</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">arr</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angle</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fwd</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-comma">, </span><span class="mkapi-arg">fill_min</span><span class="mkapi-equal">=</span><span class="mkapi-default">True</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Skew the origin of successive lines by a specified angle
+A skew with angle of 30 degrees causes the following transformation:</p>
+<div class="highlight"><pre><span></span><code>+-----------+       +---------------+
+|           |       |000/          /|
+|   input   |       |00/  output  /0|
+|   image   |       |0/   image  /00|
+|           |       |/          /000|
++-----------+       +---------------+
+</code></pre></div>
+<p>Calling skew with fwd=False will return the output image
+back to the input image.</p>
+<p>Skew angle must be between -45 and 45 degrees</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">arr</span>
+ <span class="mkapi-dash">&mdash;</span>
+array to skew</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">angle</span>
+ <span class="mkapi-dash">&mdash;</span>
+angle between -45 and 45 to skew by</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">fwd</span>
+ <span class="mkapi-dash">&mdash;</span>
+add skew to image if True, unskew image if False</p>
+</li>
+<li>
+<p><span class="mkapi-item-name">fill_min</span>
+ <span class="mkapi-dash">&mdash;</span>
+While IPW skew says it fills with zeros, the output
+image is filled with the minimum value</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>skewed array</p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle raises">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Raises</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-type">ValueError</span></p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.skew_transpose">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.skew_transpose" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.skew_transpose" title="isofit.utils.skyview.skew_transpose">skew_transpose</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dem</span><span class="mkapi-comma">, </span><span class="mkapi-arg">spacing</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angle</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Skew and transpose the dem for the given angle.
+Also calculate the new spacing given the skew.</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dem {array} -- numpy array of dem elevations</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">spacing {float} -- grid spacing</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">angle {float} -- skew angle</span></p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>t -- skew and transpose array
+spacing -- new spacing adjusted for angle</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.transpose_skew">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.transpose_skew" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.transpose_skew" title="isofit.utils.skyview.transpose_skew">transpose_skew</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">dem</span><span class="mkapi-comma">, </span><span class="mkapi-arg">spacing</span><span class="mkapi-comma">, </span><span class="mkapi-arg">angle</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document">
+<p>Transpose, skew then transpose a dem for the
+given angle. Also calculate the new spacing</p>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle parameters">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Parameters</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p><span class="mkapi-item-name">dem {array} -- numpy array of dem elevations</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">spacing {float} -- grid spacing</span></p>
+</li>
+<li>
+<p><span class="mkapi-item-name">angle {float} -- skew angle</span></p>
+</li>
+</ul>
+</div>
+<p class="mkapi-section">
+<span class="mkapi-object-link">
+<span class="mkapi-section-toggle" title="Toggle returns">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-section-name">Returns</span>
+</p>
+<div class="mkapi-section-content">
+<ul class="mkapi-item-list">
+<li>
+<p>t -- skew and transpose array
+spacing -- new spacing adjusted for angle</p>
+</li>
+</ul>
+</div>
+</div>
+<p class="mkapi-object mkapi-page-source" id="isofit.utils.skyview.cli">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../src/isofit/utils/skyview/#isofit.utils.skyview.cli" title="Go to source">source</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span>
+<span class="mkapi-object-name"><a href="./#isofit.utils.skyview.cli" title="isofit.utils.skyview.cli">cli</a></span><span class="mkapi-signature"><span class="mkapi-paren">(</span><span class="mkapi-arg">debug_args</span><span class="mkapi-comma">, </span><span class="mkapi-star">**</span><span class="mkapi-arg">kwargs</span><span class="mkapi-paren">)</span></span>
+</p>
+<div class="mkapi-document"></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../segment/" class="btn btn-neutral float-left" title="Segment"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../solar_position/" class="btn btn-neutral float-right" title="Solar position">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+      <span><a href="../segment/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../solar_position/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

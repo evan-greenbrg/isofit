@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../../img/favicon.ico" />
+    <title>Inverse simple - ISOFIT</title>
+    <link rel="stylesheet" href="../../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../../css/mkapi-common.css" rel="stylesheet" />
+        <link href="../../../../css/mkapi-material.css" rel="stylesheet" />
+        <link href="../../../../stylesheets/icons.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Inverse simple";
+        var mkdocs_page_input_path = "src/isofit/inversion/inverse_simple.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../../.." class="icon icon-home"> ISOFIT
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/installation/">Installation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/srtmnet/">Quick Start (New Users)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/quickstarts/modtran/">MODTRAN</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../getting_started/best_practices/">Best Practices</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Extra Downloads</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/data/">Dependencies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../extra_downloads/building_examples/">Building Examples</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="https://isofit.github.io/isofit-tutorials">Tutorials</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../../../docker/">Docker</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Information</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/bibliography/">Bibliography</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../information/code_of_conduct/">Code of Conduct</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Developers</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/contributing/">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/documentation/">Documentation</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../../developers/testing/">Testing</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Reference</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >isofit</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../../api/isofit/">Index</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.configs</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.configs.sections</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/forward_model_config/">Forward model config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/implementation_config/">Implementation config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/input_config/">Input config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/instrument_config/">Instrument config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/inversion_config/">Inversion config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/output_config/">Output config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/radiative_transfer_config/">Radiative transfer config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/statevector_config/">Statevector config</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/configs/sections/surface_config/">Surface config</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/base_config/">Base config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/configs/configs/">Configs</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.core</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/common/">Common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/fileio/">Fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/forward/">Forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/geometry/">Geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/instrument/">Instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/isofit/">Isofit</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/multistate/">Multistate</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/sunposition/">Sunposition</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/core/units/">Units</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.data</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.data.cli</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/data/">Data</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/examples/">Examples</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/imagecube/">Imagecube</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/isoplots/">Isoplots</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/sixs/">Sixs</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/srtmnet/">Srtmnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/data/cli/surface/">Surface</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/build_examples/">Build examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/download/">Download</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/ini/">Ini</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/shared/">Shared</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/data/validate/">Validate</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.debug</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/ray_bypass/">Ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/debug/resource_tracker/">Resource tracker</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.inversion</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse/">Inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_mcmc/">Inverse mcmc</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/inversion/inverse_simple/">Inverse simple</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.radiative_transfer</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >isofit.radiative_transfer.engines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/">Index</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/kernel_flows/">Kernel flows</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/libradtran/">Libradtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/modtran/">Modtran</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/sRTMnet/">sRTMnet</a>
+                </li>
+                <li class="toctree-l4"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/engines/six_s/">Six s</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/luts/">Luts</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer/">Radiative transfer</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/radiative_transfer/radiative_transfer_engine/">Radiative transfer engine</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.surface</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface/">Surface</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_glint_model/">Surface glint model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_lut/">Surface lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_multicomp/">Surface multicomp</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/surface/surface_thermal/">Surface thermal</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.test</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/conftest/">Conftest</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli/">Test cli</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_cli_machinery/">Test cli machinery</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_common/">Test common</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_env/">Test env</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_examples/">Test examples</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_fileio/">Test fileio</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_forward/">Test forward</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_geometry/">Test geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_instrument/">Test instrument</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_inverse/">Test inverse</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_lut/">Test lut</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_ray_bypass/">Test ray bypass</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/test/test_sunposition/">Test sunposition</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >isofit.utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/">Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/add_HRRR_profiles_to_modtran_config/">add HRRR profiles to modtran config</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/algebraic_line/">Algebraic line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/analytical_line/">Analytical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/apply_oe/">Apply oe</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/atm_interpolation/">Atm interpolation</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/convert_6s_to_srtmnet/">Convert 6s to srtmnet</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/empirical_line/">Empirical line</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/ewt_from_reflectance/">Ewt from reflectance</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/extractions/">Extractions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/generate_noise/">Generate noise</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/instrument_model/">Instrument model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/interpolate_spectra/">Interpolate spectra</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/multicomponent_classification/">Multicomponent classification</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reconstruct/">Reconstruct</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/reducers/">Reducers</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/remap/">Remap</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/segment/">Segment</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/skyview/">Skyview</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/solar_position/">Solar position</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/surface_model/">Surface model</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/template_construction/">Template construction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../../api/isofit/utils/wavelength_cal/">Wavelength cal</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../..">ISOFIT</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Inverse simple</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p class="mkapi-object mkapi-page-object" id="isofit.inversion.inverse_simple">
+<span class="mkapi-object-link">
+
+
+<a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple" title="Go to docs">[docs]</a>
+<span class="mkapi-document-toggle" title="Toggle all docs">
+<i class="fa-regular fa-square-minus"></i>
+</span>
+</span><span class="mkapi-object-kind">module</span>
+<span class="mkapi-object-name"><a href="./#isofit.inversion.inverse_simple" title="isofit.inversion.inverse_simple">isofit.inversion.inverse_simple</a></span>
+</p>
+<div class="mkapi-source no-copy highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2018 California Institute of Technology</span>
+<span class="c1">#</span>
+<span class="c1">#  Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1">#  you may not use this file except in compliance with the License.</span>
+<span class="c1">#  You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1">#  Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1">#  distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1">#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1">#  See the License for the specific language governing permissions and</span>
+<span class="c1">#  limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># ISOFIT: Imaging Spectrometer Optimal FITting</span>
+<span class="c1"># Author: David R Thompson, david.r.thompson@jpl.nasa.gov</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">least_squares</span><span class="p">,</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize_scalar</span> <span class="k">as</span> <span class="n">min1d</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.core.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">emissive_radiance</span><span class="p">,</span> <span class="n">eps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">isofit.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">env</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">heuristic_atmosphere</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.inversion.inverse_simple.heuristic_atmosphere"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.heuristic_atmosphere" title="Go to docs">[docs]</a></div>
+    <span class="n">fm</span><span class="p">:</span> <span class="n">ForwardModel</span><span class="p">,</span>
+    <span class="n">x_surface</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">x_RT</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">x_instrument</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">,</span>
+    <span class="n">wl_lo</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">865</span><span class="p">,</span>
+    <span class="n">wl_center</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">945</span><span class="p">,</span>
+    <span class="n">wl_hi</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1040</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;From a given radiance, estimate atmospheric state with band ratios.</span>
+<span class="sd">    Used to initialize gradient descent inversions.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fm: isofit forward model</span>
+<span class="sd">        x_surface: surface portion of the state vector</span>
+<span class="sd">        x_RT: radiative transfer portion of the state vector</span>
+<span class="sd">        x_instrument: instrument portion of the state vector</span>
+<span class="sd">        meas: a one-D numpy vector of radiance in uW/nm/sr/cm2</span>
+<span class="sd">        geom: geometry object corresponding to given measurement</span>
+<span class="sd">        wl_lo: Low wavelength to use for the continuum removal H2O fit</span>
+<span class="sd">        wl_center: Center wavelength to use for the continuum removal H2O fit</span>
+<span class="sd">        wl_hi: High wavelength to use for the continuum removal H2O fit</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        x_new: updated estimate of x_RT</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Identify the latest instrument wavelength calibration (possibly</span>
+    <span class="c1"># state-dependent) and identify channel numbers for the band ratio.</span>
+    <span class="n">wl</span><span class="p">,</span> <span class="n">fwhm</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">instrument</span><span class="o">.</span><span class="n">calibration</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">)</span>
+    <span class="n">blo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">wl</span> <span class="o">-</span> <span class="n">wl_lo</span><span class="p">))</span>
+    <span class="n">bcenter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">wl</span> <span class="o">-</span> <span class="n">wl_center</span><span class="p">))</span>
+    <span class="n">bhi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">wl</span> <span class="o">-</span> <span class="n">wl_hi</span><span class="p">))</span>
+
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># nm</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">wl</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">wl_lo</span> <span class="o">-</span> <span class="n">offset</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">wl</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">wl_hi</span> <span class="o">+</span> <span class="n">offset</span><span class="p">))):</span>
+        <span class="k">return</span> <span class="n">x_RT</span>
+
+    <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_RT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Figure out which RT object we are using</span>
+    <span class="c1"># TODO: this is currently very specific to vswir-tir 2-mode, eventually generalize</span>
+    <span class="n">my_RT</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">rte</span> <span class="ow">in</span> <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rte</span><span class="o">.</span><span class="n">treat_as_emissive</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">my_RT</span> <span class="o">=</span> <span class="n">rte</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">my_RT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No suitable RT object for initialization&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Band ratio retrieval of H2O.  Depending on the radiative transfer</span>
+    <span class="c1"># model we are using, this state parameter could go by several names.</span>
+    <span class="k">for</span> <span class="n">h2oname</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;H2OSTR&quot;</span><span class="p">,</span> <span class="s2">&quot;h2o&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">h2oname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># ignore unused names</span>
+        <span class="k">if</span> <span class="n">h2oname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">my_RT</span><span class="o">.</span><span class="n">lut_names</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># find the index in the lookup table associated with water vapor</span>
+        <span class="n">ind_sv</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">statevec_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">h2oname</span><span class="p">)</span>
+        <span class="n">h2os</span><span class="p">,</span> <span class="n">areas</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="c1"># We iterate through every possible grid point in the lookup table,</span>
+        <span class="c1"># calculating the band ratio that we would see if this were the</span>
+        <span class="c1"># atmospheric H2O content.  It assumes that defaults for all other</span>
+        <span class="c1"># atmospheric parameters (such as aerosol, if it is there).</span>
+        <span class="k">for</span> <span class="n">h2o</span> <span class="ow">in</span> <span class="n">my_RT</span><span class="o">.</span><span class="n">lut_grid</span><span class="p">[</span><span class="n">h2oname</span><span class="p">]:</span>
+            <span class="c1"># Get Atmospheric terms at high spectral resolution</span>
+            <span class="n">x_RT_2</span> <span class="o">=</span> <span class="n">x_RT</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">x_RT_2</span><span class="p">[</span><span class="n">ind_sv</span><span class="p">]</span> <span class="o">=</span> <span class="n">h2o</span>
+
+            <span class="c1"># pass in all zeros, as this is ONLY used for Ls, which we will</span>
+            <span class="c1"># assume is not present</span>
+            <span class="n">r</span><span class="p">,</span> <span class="n">coeffs</span> <span class="o">=</span> <span class="n">invert_algebraic</span><span class="p">(</span>
+                <span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="p">,</span>
+                <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="p">,</span>
+                <span class="n">fm</span><span class="o">.</span><span class="n">instrument</span><span class="p">,</span>
+                <span class="n">x_surface</span><span class="p">,</span>
+                <span class="n">x_RT_2</span><span class="p">,</span>
+                <span class="n">x_instrument</span><span class="p">,</span>
+                <span class="n">meas</span><span class="p">,</span>
+                <span class="n">geom</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">fit_params</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">geom</span><span class="p">)[</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surf_rfl</span><span class="p">]</span>
+
+            <span class="c1"># Simple linear interpolation</span>
+            <span class="n">vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">wl</span><span class="p">[</span><span class="n">blo</span><span class="p">:</span><span class="n">bhi</span><span class="p">],</span> <span class="p">[</span><span class="n">wl_lo</span><span class="p">,</span> <span class="n">wl_hi</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="p">[</span><span class="n">blo</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="n">bhi</span><span class="p">]])</span>
+
+            <span class="c1"># Minimize the absolute distance between the continuum removed</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">vals</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="n">blo</span><span class="p">:</span><span class="n">bhi</span><span class="p">])</span>
+
+            <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+            <span class="n">h2os</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h2o</span><span class="p">)</span>
+
+        <span class="c1"># Finally, interpolate to determine the actual water vapor level that</span>
+        <span class="c1"># would optimize the continuum-relative correction</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">h2os</span><span class="p">,</span> <span class="n">areas</span><span class="p">)</span>
+        <span class="n">bounds</span> <span class="o">=</span> <span class="p">(</span><span class="n">h2os</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.001</span><span class="p">,</span> <span class="n">h2os</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.001</span><span class="p">)</span>
+        <span class="n">best</span> <span class="o">=</span> <span class="n">min1d</span><span class="p">(</span><span class="k">lambda</span> <span class="n">h</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="n">h</span><span class="p">)),</span> <span class="n">bounds</span><span class="o">=</span><span class="n">bounds</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bounded&quot;</span><span class="p">)</span>
+        <span class="n">x_new</span><span class="p">[</span><span class="n">ind_sv</span><span class="p">]</span> <span class="o">=</span> <span class="n">best</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="k">return</span> <span class="n">x_new</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">invert_algebraic</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.inversion.inverse_simple.invert_algebraic"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.invert_algebraic" title="Go to docs">[docs]</a></div>
+    <span class="n">surface</span><span class="p">:</span> <span class="n">Surface</span><span class="p">,</span>
+    <span class="n">RT</span><span class="p">:</span> <span class="n">RadiativeTransfer</span><span class="p">,</span>
+    <span class="n">instrument</span><span class="p">:</span> <span class="n">Instrument</span><span class="p">,</span>
+    <span class="n">x_surface</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">x_RT</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">x_instrument</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inverts radiance algebraically using Lambertian assumptions to get a</span>
+<span class="sd">    reflectance.  If the appropriate transmittance terms are available,</span>
+<span class="sd">    surface slope will enter for the initial guess.  Otherwise, the surface</span>
+<span class="sd">    will be treated as if flat.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        surface: surface model</span>
+<span class="sd">        RT: radiative transfer model to use</span>
+<span class="sd">        instrument: instrument model</span>
+<span class="sd">        x_surface: surface portion of the state vector</span>
+<span class="sd">        x_RT: radiative transfer portion of the state vector</span>
+<span class="sd">        x_instrument: instrument portion of the state vector</span>
+<span class="sd">        meas: a one-D numpy vector of radiance in uW/nm/sr/cm2</span>
+<span class="sd">        geom: geometry object corresponding to given measurement</span>
+
+
+<span class="sd">    Return:</span>
+<span class="sd">        rfl_est: estimate of the surface reflectance based on the given surface model and specified atmospheric state</span>
+<span class="sd">        coeffs: atmospheric parameters used for the inversion, returned for convenience</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Figure out which RT object we are using</span>
+    <span class="c1"># TODO: this is currently very specific to vswir-tir 2-mode, eventually generalize</span>
+    <span class="n">my_RT</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">rte</span> <span class="ow">in</span> <span class="n">RT</span><span class="o">.</span><span class="n">rt_engines</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rte</span><span class="o">.</span><span class="n">treat_as_emissive</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">my_RT</span> <span class="o">=</span> <span class="n">rte</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">my_RT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No suitable RT object for initialization&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get all radiance terms</span>
+    <span class="p">(</span>
+        <span class="n">rhi</span><span class="p">,</span>
+        <span class="n">L_tot</span><span class="p">,</span>
+        <span class="n">L_dir_dir</span><span class="p">,</span>
+        <span class="n">L_dif_dir</span><span class="p">,</span>
+        <span class="n">L_dir_dif</span><span class="p">,</span>
+        <span class="n">L_dif_dif</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">calc_RT_quantities</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">L_atm</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get_L_atm</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">sphalb</span> <span class="o">=</span> <span class="n">rhi</span><span class="p">[</span><span class="s2">&quot;sphalb&quot;</span><span class="p">]</span>
+    <span class="n">Ls</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">calc_Ls</span><span class="p">(</span><span class="n">x_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">transup</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get_upward_transm</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">rhi</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="n">geom</span><span class="p">)</span>
+
+    <span class="c1"># Get the wavelengths too - these may also be adjusted</span>
+    <span class="n">wl</span><span class="p">,</span> <span class="n">fwhm</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">calibration</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">)</span>
+
+    <span class="c1"># Interpolate L_up linearly if needed.</span>
+    <span class="n">Ls</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">Ls</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)(</span><span class="n">RT</span><span class="o">.</span><span class="n">wl</span><span class="p">)</span>
+
+    <span class="c1"># Now convert to what&#39;s scene at the instrument</span>
+    <span class="n">L_up</span> <span class="o">=</span> <span class="n">Ls</span> <span class="o">*</span> <span class="n">transup</span>
+
+    <span class="c1"># Resample the components we need to use</span>
+    <span class="n">L_atm</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">,</span> <span class="n">RT</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">L_atm</span><span class="p">)</span>
+    <span class="n">L_tot</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">,</span> <span class="n">RT</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">L_tot</span><span class="p">)</span>
+    <span class="n">sphalb</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">,</span> <span class="n">RT</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">sphalb</span><span class="p">)</span>
+    <span class="n">L_up</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">x_instrument</span><span class="p">,</span> <span class="n">RT</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">L_up</span><span class="p">)</span>
+
+    <span class="c1"># Now everything should be in hand to do the calculation</span>
+    <span class="n">rdn_solrfl</span> <span class="o">=</span> <span class="n">meas</span> <span class="o">-</span> <span class="n">L_up</span>
+    <span class="n">rfl</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">L_tot</span> <span class="o">/</span> <span class="p">(</span><span class="n">rdn_solrfl</span> <span class="o">-</span> <span class="n">L_atm</span><span class="p">)</span> <span class="o">+</span> <span class="n">sphalb</span><span class="p">)</span>
+
+    <span class="c1"># explicity handle known nan cases - this doesn&#39;t handle nans</span>
+    <span class="c1"># that might appear from the RT directly, as we don&#39;t want to</span>
+    <span class="c1"># cover them up</span>
+    <span class="n">rfl</span><span class="p">[</span><span class="n">rdn_solrfl</span> <span class="o">-</span> <span class="n">L_atm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">rfl</span><span class="p">[</span><span class="n">L_tot</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># While values can go above 1, they shouldn&#39;t got that high above.</span>
+    <span class="c1"># generally it means instability</span>
+    <span class="n">rfl</span><span class="p">[</span><span class="n">rfl</span> <span class="o">&gt;</span> <span class="mf">1.6</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.6</span>
+
+    <span class="c1"># interpolate the output</span>
+    <span class="n">rfl_est</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">rfl</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;extrapolate&quot;</span><span class="p">)(</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">)</span>
+
+    <span class="c1"># Some downstream code will benefit from our precalculated</span>
+    <span class="c1"># atmospheric optical parameters</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">L_atm</span><span class="p">,</span> <span class="n">sphalb</span><span class="p">,</span> <span class="n">L_tot</span><span class="p">,</span> <span class="n">transup</span><span class="p">,</span> <span class="n">L_up</span>
+    <span class="k">return</span> <span class="n">rfl_est</span><span class="p">,</span> <span class="n">coeffs</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">invert_analytical</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.inversion.inverse_simple.invert_analytical"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.invert_analytical" title="Go to docs">[docs]</a></div>
+    <span class="n">fm</span><span class="p">:</span> <span class="n">ForwardModel</span><span class="p">,</span>
+    <span class="n">winidx</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">,</span>
+    <span class="n">x0</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">sub_state</span><span class="p">,</span>
+    <span class="n">num_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">hash_table</span><span class="p">:</span> <span class="n">OrderedDict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">hash_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">diag_uncert</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">outside_ret_const</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>
+    <span class="n">fill_value</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">9999.0</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform an analytical estimate of the conditional MAP estimate for</span>
+<span class="sd">    a fixed atmosphere.  Based on the &quot;Inner loop&quot; from Susiluoto et al. (2025).</span>
+<span class="sd">    doi: https://doi.org/10.3390/rs17223719</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fm: isofit forward model</span>
+<span class="sd">        winidx: indices of surface components of state vector (to be solved)</span>
+<span class="sd">        meas: a one-D numpy vector of radiance in uW/nm/sr/cm2</span>
+<span class="sd">        geom: geometry object corresponding to given measurement</span>
+<span class="sd">        x0: the initialization state including surface from the superpixel</span>
+<span class="sd">            and the atm from the smoothed atmosphere.</span>
+<span class="sd">        num_iter: number of interations to run through</span>
+<span class="sd">        hash_table: a hash table to use locally</span>
+<span class="sd">        hash_size: max size of given hash table</span>
+<span class="sd">        diag_uncert: flag indicating whether to diagonalize the uncertainty</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        x: MAP estimate of the mean</span>
+<span class="sd">        S: diagonal conditional posterior covariance estimate</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg.blas</span><span class="w"> </span><span class="kn">import</span> <span class="n">dsymv</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg.lapack</span><span class="w"> </span><span class="kn">import</span> <span class="n">dpotrf</span><span class="p">,</span> <span class="n">dpotri</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Get all the RT quantities</span>
+    <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">L_tot</span><span class="p">,</span> <span class="n">L_dir_dir</span><span class="p">,</span> <span class="n">L_dif_dir</span><span class="p">,</span> <span class="n">L_dir_dif</span><span class="p">,</span> <span class="n">L_dif_dif</span><span class="p">)</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">calc_RT_quantities</span><span class="p">(</span>
+        <span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Path radiance and spherical albedo</span>
+    <span class="n">L_atm</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">RT</span><span class="o">.</span><span class="n">get_L_atm</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;sphalb&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Get all the surface quantities for the super pixel</span>
+    <span class="n">sub_surface</span><span class="p">,</span> <span class="n">sub_RT</span><span class="p">,</span> <span class="n">sub_instrument</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">sub_state</span><span class="p">)</span>
+
+    <span class="c1"># Surface reflectance at the wl resolution of fm.RT</span>
+    <span class="n">rho_dir_dir</span><span class="p">,</span> <span class="n">rho_dif_dir</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">calc_rfl</span><span class="p">(</span><span class="n">sub_surface</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">rho_dir_dir</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">rho_dir_dir</span><span class="p">)</span>
+    <span class="n">rho_dif_dir</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">rho_dif_dir</span><span class="p">)</span>
+
+    <span class="c1"># Background conditions equal to the superpixel reflectance</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">rho_dif_dir</span>
+
+    <span class="c1"># Get superpixel EOF shift if used</span>
+    <span class="n">eof_offset</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">eof_offset</span><span class="p">(</span><span class="n">sub_surface</span><span class="p">,</span> <span class="n">sub_RT</span><span class="p">,</span> <span class="n">sub_instrument</span><span class="p">)</span>
+
+    <span class="c1"># Get the inversion indices; Include glint indices if applicable</span>
+    <span class="n">full_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">winidx</span><span class="p">,</span> <span class="n">fm</span><span class="o">.</span><span class="n">idx_surf_nonrfl</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">outside_ret_windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">outside_ret_windows</span><span class="p">[</span><span class="n">full_idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">outside_ret_windows</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">outside_ret_windows</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">iv_idx</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">analytical_iv_idx</span>
+
+    <span class="c1"># The H matrix does not change as a function of x-vector</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">analytical_model</span><span class="p">(</span>
+        <span class="n">bg</span><span class="p">,</span>
+        <span class="n">L_tot</span><span class="o">=</span><span class="n">L_tot</span><span class="p">,</span>
+        <span class="n">geom</span><span class="o">=</span><span class="n">geom</span><span class="p">,</span>
+        <span class="n">L_dir_dir</span><span class="o">=</span><span class="n">L_dir_dir</span><span class="p">,</span>
+        <span class="n">L_dir_dif</span><span class="o">=</span><span class="n">L_dir_dif</span><span class="p">,</span>
+        <span class="n">L_dif_dir</span><span class="o">=</span><span class="n">L_dif_dir</span><span class="p">,</span>
+        <span class="n">L_dif_dif</span><span class="o">=</span><span class="n">L_dif_dif</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Sample just the wavelengths and states of interest</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">H</span><span class="p">[</span><span class="n">winidx</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">iv_idx</span><span class="p">]</span>
+
+    <span class="c1"># Use cached scaling factor from inital normalized inverse (outside of loop).</span>
+    <span class="n">Sa</span><span class="p">,</span> <span class="n">Sa_inv</span><span class="p">,</span> <span class="n">Sa_inv_sqrt</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">Sa</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+    <span class="n">Sa_inv</span> <span class="o">=</span> <span class="n">Sa_inv</span><span class="p">[</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span>
+    <span class="n">Sa_inv_sqrt</span> <span class="o">=</span> <span class="n">Sa_inv_sqrt</span><span class="p">[</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span>
+
+    <span class="n">trajectory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="n">trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_iter</span><span class="p">):</span>
+
+        <span class="c1"># Measurement uncertainty</span>
+        <span class="n">Seps</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">Seps</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">meas</span><span class="p">,</span> <span class="n">geom</span><span class="p">)[</span><span class="n">winidx</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">winidx</span><span class="p">]</span>
+
+        <span class="c1"># Prior mean</span>
+        <span class="n">xa_full</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">xa</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">xa_surface</span> <span class="o">=</span> <span class="n">xa_full</span><span class="p">[</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span>
+
+        <span class="c1"># Save the product of the prior covariance and mean</span>
+        <span class="n">prprod</span> <span class="o">=</span> <span class="n">Sa_inv</span> <span class="o">@</span> <span class="n">xa_surface</span>
+
+        <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">C</span> <span class="o">=</span> <span class="n">dpotrf</span><span class="p">(</span><span class="n">Seps</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="n">dpotri</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">P_tilde</span> <span class="o">=</span> <span class="p">((</span><span class="n">L</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P</span><span class="p">)</span> <span class="o">@</span> <span class="n">L</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">P_rcond</span> <span class="o">=</span> <span class="n">Sa_inv</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">,</span> <span class="p">:][:,</span> <span class="n">iv_idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">P_tilde</span>
+
+        <span class="n">LI_rcond</span> <span class="o">=</span> <span class="n">dpotrf</span><span class="p">(</span><span class="n">P_rcond</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">C_rcond</span> <span class="o">=</span> <span class="n">dpotri</span><span class="p">(</span><span class="n">LI_rcond</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">meas</span><span class="p">[</span><span class="n">winidx</span><span class="p">]</span> <span class="o">-</span> <span class="n">L_atm</span><span class="p">[</span><span class="n">winidx</span><span class="p">]</span> <span class="o">-</span> <span class="n">eof_offset</span><span class="p">[</span><span class="n">winidx</span><span class="p">]</span>
+        <span class="n">xk</span> <span class="o">=</span> <span class="n">dsymv</span><span class="p">(</span>
+            <span class="mi">1</span><span class="p">,</span>
+            <span class="n">C_rcond</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">dsymv</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">prprod</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">]),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Save trajectory step:</span>
+        <span class="n">x_surface</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">xk</span>
+        <span class="k">if</span> <span class="n">outside_ret_const</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x_surface</span><span class="p">[</span><span class="n">outside_ret_windows</span><span class="p">]</span> <span class="o">=</span> <span class="n">xa_surface</span><span class="p">[</span><span class="n">outside_ret_windows</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x_surface</span><span class="p">[</span><span class="n">outside_ret_windows</span><span class="p">]</span> <span class="o">=</span> <span class="n">outside_ret_const</span>
+
+        <span class="n">x</span><span class="p">[</span><span class="n">fm</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_surface</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">if</span> <span class="n">diag_uncert</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">C_rcond</span><span class="p">):</span>
+            <span class="n">full_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">full_unc</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">C_rcond</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">full_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">full_unc</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">9999</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="n">iv_idx</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">full_unc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">C_rcond</span>
+
+<div class="mkapi-source-link" id="isofit.inversion.inverse_simple.invert_simple"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.invert_simple" title="Go to docs">[docs]</a></div>
+<span class="k">def</span><span class="w"> </span><span class="nf">invert_simple</span><span class="p">(</span><span class="n">forward</span><span class="p">:</span> <span class="n">ForwardModel</span><span class="p">,</span> <span class="n">meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="n">geom</span><span class="p">:</span> <span class="n">Geometry</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find an initial guess at the state vector. This currently uses</span>
+<span class="sd">    traditional (non-iterative, heuristic) atmospheric correction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        forward: isofit forward model</span>
+<span class="sd">        meas: a one-D numpy vector of radiance in uW/nm/sr/cm2</span>
+<span class="sd">        geom: geometry object corresponding to given measurement</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        x: estimate of the full statevector based on initial conditions, geometry, and a heuristic guess</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span>
+    <span class="n">RT</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">RT</span>
+    <span class="n">instrument</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">instrument</span>
+
+    <span class="n">vswir_present</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span> <span class="o">&lt;</span> <span class="mi">2600</span><span class="p">):</span>
+        <span class="n">vswir_present</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">tir_present</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span> <span class="o">&gt;</span> <span class="mi">2600</span><span class="p">):</span>
+        <span class="n">tir_present</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># First step is to get the atmosphere. We start from the initial state</span>
+    <span class="c1"># and estimate atmospheric terms using traditional heuristics.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">vswir_present</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">forward</span><span class="o">.</span><span class="n">idx_RT</span><span class="p">]</span> <span class="o">=</span> <span class="n">heuristic_atmosphere</span><span class="p">(</span>
+            <span class="n">forward</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span><span class="p">,</span> <span class="n">meas</span><span class="p">,</span> <span class="n">geom</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Now, with atmosphere fixed, we can invert the radiance algebraically</span>
+    <span class="c1"># via Lambertian approximations to get reflectance</span>
+    <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">rfl_est</span><span class="p">,</span> <span class="n">coeffs</span> <span class="o">=</span> <span class="n">invert_algebraic</span><span class="p">(</span>
+        <span class="n">surface</span><span class="p">,</span> <span class="n">RT</span><span class="p">,</span> <span class="n">instrument</span><span class="p">,</span> <span class="n">x_surface</span><span class="p">,</span> <span class="n">x_RT</span><span class="p">,</span> <span class="n">x_instrument</span><span class="p">,</span> <span class="n">meas</span><span class="p">,</span> <span class="n">geom</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Condition thermal part on the VSWIR portion. Only works for</span>
+    <span class="c1"># Multicomponent surfaces. Finds the cluster nearest the VSWIR heuristic</span>
+    <span class="c1"># inversion and uses it for the TIR suface initialization.</span>
+    <span class="k">if</span> <span class="n">tir_present</span><span class="p">:</span>
+        <span class="n">tir_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span> <span class="o">&gt;</span> <span class="mi">3000</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">vswir_present</span><span class="p">:</span>
+            <span class="n">x_surface_temp</span> <span class="o">=</span> <span class="n">x_surface</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">x_surface_temp</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">rfl_est</span><span class="p">)]</span> <span class="o">=</span> <span class="n">rfl_est</span>
+            <span class="n">mu</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">xa</span><span class="p">(</span><span class="n">x_surface_temp</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+            <span class="n">rfl_est</span><span class="p">[</span><span class="n">tir_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="n">tir_idx</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rfl_est</span> <span class="o">=</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">))</span>
+
+    <span class="c1"># Now we have an estimated reflectance. Fit the surface parameters.</span>
+    <span class="n">x_surface</span><span class="p">[</span><span class="n">forward</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">fit_params</span><span class="p">(</span><span class="n">rfl_est</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+
+    <span class="c1"># Find temperature of emissive surfaces</span>
+    <span class="k">if</span> <span class="n">tir_present</span><span class="p">:</span>
+        <span class="c1"># Estimate the total radiance at sensor, leaving out surface emission</span>
+        <span class="c1"># Radiate transfer calculations could take place at high spectral resolution</span>
+        <span class="c1"># so we upsample the surface reflectance</span>
+        <span class="n">rfl_hi</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">upsample</span><span class="p">(</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">,</span> <span class="n">rfl_est</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sphalb</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">transup</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">coeffs</span>
+
+        <span class="n">L_atm</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">get_L_atm</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)</span>
+        <span class="n">L_tot</span> <span class="o">=</span> <span class="n">RT</span><span class="o">.</span><span class="n">calc_RT_quantities</span><span class="p">(</span><span class="n">x_RT</span><span class="p">,</span> <span class="n">geom</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">L_total_without_surface_emission</span> <span class="o">=</span> <span class="n">L_atm</span> <span class="o">+</span> <span class="n">L_tot</span> <span class="o">*</span> <span class="n">rfl_hi</span> <span class="o">/</span> <span class="p">(</span>
+            <span class="mf">1.0</span> <span class="o">-</span> <span class="n">sphalb</span> <span class="o">*</span> <span class="n">rfl_hi</span>
+        <span class="p">)</span>
+
+        <span class="c1"># These tend to have high transmission factors; the emissivity of most</span>
+        <span class="c1"># materials is nearly 1 for these bands, so they are good for</span>
+        <span class="c1"># initializing the surface temperature.</span>
+        <span class="n">clearest_wavelengths</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10125.0</span><span class="p">,</span> <span class="mf">10390.00</span><span class="p">,</span> <span class="mf">10690.00</span><span class="p">]</span>
+
+        <span class="c1"># This is fragile if other instruments have different wavelength</span>
+        <span class="c1"># spacing or range</span>
+        <span class="n">clearest_indices</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">RT</span><span class="o">.</span><span class="n">wl</span> <span class="o">-</span> <span class="n">w</span><span class="p">))</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">clearest_wavelengths</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Error function for nonlinear temperature fit</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">err</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+            <span class="n">T</span> <span class="o">=</span> <span class="n">z</span>
+            <span class="n">emissivity</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">emissivity_for_surface_T_init</span>
+            <span class="n">Ls_est</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">emissive_radiance</span><span class="p">(</span>
+                <span class="n">emissivity</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">wl</span><span class="p">[</span><span class="n">clearest_indices</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">resid</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">transup</span><span class="p">[</span><span class="n">clearest_indices</span><span class="p">]</span> <span class="o">*</span> <span class="n">Ls_est</span>
+                <span class="o">+</span> <span class="n">L_total_without_surface_emission</span><span class="p">[</span><span class="n">clearest_indices</span><span class="p">]</span>
+                <span class="o">-</span> <span class="n">meas</span><span class="p">[</span><span class="n">clearest_indices</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">resid</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Fit temperature, set bounds,  and set the initial values</span>
+        <span class="n">idx_T</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">surf_temp_ind</span>
+        <span class="n">Tinit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">init</span><span class="p">[</span><span class="n">idx_T</span><span class="p">]])</span>
+        <span class="n">Tbest</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">Tinit</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span>
+            <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">idx_T</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">,</span>
+            <span class="nb">min</span><span class="p">(</span><span class="n">Tbest</span><span class="p">,</span> <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">bounds</span><span class="p">[</span><span class="n">idx_T</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">eps</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">x_surface</span><span class="p">[</span><span class="n">idx_T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tbest</span>
+        <span class="n">forward</span><span class="o">.</span><span class="n">surface</span><span class="o">.</span><span class="n">init</span><span class="p">[</span><span class="n">idx_T</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
+
+    <span class="c1"># Update the full state vector</span>
+    <span class="n">x</span><span class="p">[</span><span class="n">forward</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_surface</span>
+
+    <span class="c1"># If available, get initial guess of surface elevation from location file.</span>
+    <span class="k">if</span> <span class="n">geom</span><span class="o">.</span><span class="n">surface_elevation_km</span> <span class="ow">and</span> <span class="s2">&quot;surface_elevation_km&quot;</span> <span class="ow">in</span> <span class="n">RT</span><span class="o">.</span><span class="n">statevec_names</span><span class="p">:</span>
+        <span class="n">ind_sv</span> <span class="o">=</span> <span class="n">forward</span><span class="o">.</span><span class="n">idx_RT</span><span class="p">[</span><span class="n">RT</span><span class="o">.</span><span class="n">statevec_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;surface_elevation_km&quot;</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">geom</span><span class="o">.</span><span class="n">surface_elevation_km</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">ind_sv</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">[</span><span class="n">ind_sv</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span><span class="o">.</span><span class="n">surface_elevation_km</span>
+
+    <span class="c1"># We record these initial values in the geometry object - the only</span>
+    <span class="c1"># &quot;stateful&quot; part of the retrieval</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">x_surf_init</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">forward</span><span class="o">.</span><span class="n">idx_surface</span><span class="p">]</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">x_RT_init</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">forward</span><span class="o">.</span><span class="n">idx_RT</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">invert_liquid_water</span><span class="p">(</span><div class="mkapi-source-link" id="isofit.inversion.inverse_simple.invert_liquid_water"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.invert_liquid_water" title="Go to docs">[docs]</a></div>
+    <span class="n">rfl_meas</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">wl</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+    <span class="n">l_shoulder</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">850</span><span class="p">,</span>
+    <span class="n">r_shoulder</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1100</span><span class="p">,</span>
+    <span class="n">lw_init</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0002</span><span class="p">),</span>
+    <span class="n">lw_bounds</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.0004</span><span class="p">,</span> <span class="mf">0.0004</span><span class="p">]),</span>
+    <span class="n">ewt_detection_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">return_abs_co</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given a reflectance estimate, fit a state vector including liquid water path length</span>
+<span class="sd">    based on a simple Beer-Lambert surface model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rfl_meas:            surface reflectance spectrum</span>
+<span class="sd">        wl:                  instrument wavelengths, must be same size as rfl_meas and in units of nm</span>
+<span class="sd">        l_shoulder:          wavelength of left absorption feature shoulder</span>
+<span class="sd">        r_shoulder:          wavelength of right absorption feature shoulder</span>
+<span class="sd">        lw_init:             initial guess for liquid water path length, intercept, and slope</span>
+<span class="sd">        lw_bounds:           lower and upper bounds for liquid water path length, intercept, and slope</span>
+<span class="sd">        ewt_detection_limit: upper detection limit for ewt</span>
+<span class="sd">        return_abs_co:       if True, returns absorption coefficients of liquid water</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        solution: estimated liquid water path length, intercept, and slope based on a given surface reflectance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># make sure that wavelengths are provided in nm</span>
+    <span class="k">if</span> <span class="n">wl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">wl</span> <span class="o">=</span> <span class="n">units</span><span class="o">.</span><span class="n">micron_to_nm</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span>
+
+    <span class="c1"># params needed for liquid water fitting</span>
+    <span class="n">lw_feature_left</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">l_shoulder</span> <span class="o">-</span> <span class="n">wl</span><span class="p">))</span>
+    <span class="n">lw_feature_right</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r_shoulder</span> <span class="o">-</span> <span class="n">wl</span><span class="p">))</span>
+    <span class="n">wl_sel</span> <span class="o">=</span> <span class="n">wl</span><span class="p">[</span><span class="n">lw_feature_left</span> <span class="p">:</span> <span class="n">lw_feature_right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># adjust upper detection limit for ewt if specified</span>
+    <span class="k">if</span> <span class="n">ewt_detection_limit</span> <span class="o">!=</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">lw_bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ewt_detection_limit</span>
+
+    <span class="c1"># load imaginary part of liquid water refractive index and calculate wavelength dependent absorption coefficient</span>
+    <span class="c1"># options are: &#39;k_22c&#39;, &#39;k_minus8c&#39;, &#39;k_minus25c&#39;, &#39;k_minus7c&#39;, &#39;k_25c_H&#39;, &#39;k_20c&#39;, &#39;k_25c_S</span>
+    <span class="n">path_k</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">path</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;iop&quot;</span><span class="p">,</span> <span class="s2">&quot;k_liquid_water_ice.csv&quot;</span><span class="p">)</span>
+    <span class="n">k_wi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">path_k</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+    <span class="n">k_wi_idx</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">k_wi</span><span class="p">[</span><span class="s2">&quot;wl_20c&quot;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">k_wi</span><span class="p">[</span><span class="s2">&quot;k_20c&quot;</span><span class="p">])</span>
+    <span class="n">kw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">wl_sel</span><span class="p">,</span> <span class="n">xp</span><span class="o">=</span><span class="n">k_wi</span><span class="p">[</span><span class="s2">&quot;wl_20c&quot;</span><span class="p">][</span><span class="n">k_wi_idx</span><span class="p">],</span> <span class="n">fp</span><span class="o">=</span><span class="n">k_wi</span><span class="p">[</span><span class="s2">&quot;k_20c&quot;</span><span class="p">][</span><span class="n">k_wi_idx</span><span class="p">])</span>
+    <span class="n">abs_co_w</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kw</span> <span class="o">/</span> <span class="n">wl_sel</span>
+
+    <span class="n">rfl_meas_sel</span> <span class="o">=</span> <span class="n">rfl_meas</span><span class="p">[</span><span class="n">lw_feature_left</span> <span class="p">:</span> <span class="n">lw_feature_right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">x_opt</span> <span class="o">=</span> <span class="n">least_squares</span><span class="p">(</span>
+        <span class="n">fun</span><span class="o">=</span><span class="n">beer_lambert_model</span><span class="p">,</span>
+        <span class="n">x0</span><span class="o">=</span><span class="n">lw_init</span><span class="p">,</span>
+        <span class="n">jac</span><span class="o">=</span><span class="s2">&quot;2-point&quot;</span><span class="p">,</span>
+        <span class="n">method</span><span class="o">=</span><span class="s2">&quot;trf&quot;</span><span class="p">,</span>
+        <span class="n">bounds</span><span class="o">=</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lw_bounds</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lw_bounds</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]),</span>
+        <span class="p">),</span>
+        <span class="n">max_nfev</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">rfl_meas_sel</span><span class="p">,</span> <span class="n">wl_sel</span><span class="p">,</span> <span class="n">abs_co_w</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">x_opt</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="k">if</span> <span class="n">return_abs_co</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">solution</span><span class="p">,</span> <span class="n">abs_co_w</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">solution</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">beer_lambert_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">wl</span><span class="p">,</span> <span class="n">alpha_lw</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.inversion.inverse_simple.beer_lambert_model"><a href="../../../../api/isofit/inversion/inverse_simple/#isofit.inversion.inverse_simple.beer_lambert_model" title="Go to docs">[docs]</a></div>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function, which computes the vector of residuals between measured and modeled surface reflectance optimizing</span>
+<span class="sd">    for path length of surface liquid water based on the Beer-Lambert attenuation law.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x:        state vector (liquid water path length, intercept, slope)</span>
+<span class="sd">        y:        measurement (surface reflectance spectrum)</span>
+<span class="sd">        wl:       instrument wavelengths</span>
+<span class="sd">        alpha_lw: wavelength dependent absorption coefficients of liquid water</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        resid: residual between modeled and measured surface reflectance</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">attenuation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e7</span> <span class="o">*</span> <span class="n">alpha_lw</span><span class="p">)</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">wl</span><span class="p">)</span> <span class="o">*</span> <span class="n">attenuation</span>
+    <span class="n">resid</span> <span class="o">=</span> <span class="n">rho</span> <span class="o">-</span> <span class="n">y</span>
+
+    <span class="k">return</span> <span class="n">resid</span>
+</code></pre></div></td></tr></table></div>
+
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/isofit/isofit" class="fa fa-code-fork" style="color: #fcfcfc"> isofit/isofit</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../../..";</script>
+    <script src="../../../../js/theme_extra.js"></script>
+    <script src="../../../../js/theme.js"></script>
+      <script src="../../../../javascript/mkapi.js"></script>
+      <script src="../../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
