@@ -277,14 +277,6 @@
          <lastmod>2026-02-24</lastmod>
     </url>
     <url>
-         <loc>https://isofit.github.io/isofit/dev/api/isofit/data/cli/imagecube/</loc>
-         <lastmod>2026-02-24</lastmod>
-    </url>
-    <url>
-         <loc>https://isofit.github.io/isofit/dev/src/isofit/data/cli/imagecube/</loc>
-         <lastmod>2026-02-24</lastmod>
-    </url>
-    <url>
          <loc>https://isofit.github.io/isofit/dev/api/isofit/data/cli/isoplots/</loc>
          <lastmod>2026-02-24</lastmod>
     </url>
@@ -330,6 +322,14 @@
     </url>
     <url>
          <loc>https://isofit.github.io/isofit/dev/src/isofit/data/build_examples/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://isofit.github.io/isofit/dev/api/isofit/data/dev/</loc>
+         <lastmod>2026-02-24</lastmod>
+    </url>
+    <url>
+         <loc>https://isofit.github.io/isofit/dev/src/isofit/data/dev/</loc>
          <lastmod>2026-02-24</lastmod>
     </url>
     <url>
