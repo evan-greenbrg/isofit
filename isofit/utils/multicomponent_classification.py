@@ -453,5 +453,7 @@ def multicomponent_classification(
 @click.option("--loglevel", default="INFO")
 @click.option("--logfile")
 def cli(**kwargs):
+    """Classify a radiance file based on a per-pixel prior selection."""
+
     multicomponent_classification(**kwargs)
     click.echo("Done")

@@ -58,36 +58,8 @@ class Pathnames:
         dn_uncertainty_file: str = None,
         eof_path=None,
     ):
-        # Determine FID based on sensor name
-        if sensor == "ang":
-            self.fid = split(input_radiance)[-1][:18]
-        elif sensor == "av3":
-            self.fid = split(input_radiance)[-1][:18]
-        elif sensor == "av5":
-            self.fid = split(input_radiance)[-1][:18]
-        elif sensor == "avcl":
-            self.fid = split(input_radiance)[-1][:16]
-        elif sensor == "emit":
-            self.fid = split(input_radiance)[-1][:19]
-        elif sensor == "enmap":
-            self.fid = split(input_radiance)[-1].split("_")[5]
-        elif sensor == "hyp":
-            self.fid = split(input_radiance)[-1][:22]
-        elif sensor == "neon":
-            self.fid = split(input_radiance)[-1][:21]
-        elif sensor == "prism":
-            self.fid = split(input_radiance)[-1][:18]
-        elif sensor == "prisma":
-            self.fid = input_radiance.split("/")[-1].split("_")[1]
-        elif sensor == "gao":
-            self.fid = split(input_radiance)[-1][:23]
-        elif sensor == "oci":
-            self.fid = split(input_radiance)[-1][:24]
-        elif sensor == "tanager":
-            self.fid = split(input_radiance)[-1][:23]
-        elif sensor[:3] == "NA-":
-            self.fid = os.path.splitext(os.path.basename(input_radiance))[0]
 
+        self.fid = self.parse_fid(input_radiance)
         logging.info("Flightline ID: %s" % self.fid)
 
         # Names from inputs
@@ -316,6 +288,38 @@ class Pathnames:
             self.rdn_factors_path = abspath(rdn_factors_path)
 
         self.ray_temp_dir = ray_temp_dir
+
+    @staticmethod
+    def parse_fid(input_radiance, sensor):
+        # Determine FID based on sensor name
+        if sensor == "ang":
+            return split(input_radiance)[-1][:18]
+        elif sensor == "av3":
+            return split(input_radiance)[-1][:18]
+        elif sensor == "av5":
+            return split(input_radiance)[-1][:18]
+        elif sensor == "avcl":
+            return split(input_radiance)[-1][:16]
+        elif sensor == "emit":
+            return split(input_radiance)[-1][:19]
+        elif sensor == "enmap":
+            return split(input_radiance)[-1].split("_")[5]
+        elif sensor == "hyp":
+            return split(input_radiance)[-1][:22]
+        elif sensor == "neon":
+            return split(input_radiance)[-1][:21]
+        elif sensor == "prism":
+            return split(input_radiance)[-1][:18]
+        elif sensor == "prisma":
+            return input_radiance.split("/")[-1].split("_")[1]
+        elif sensor == "gao":
+            return split(input_radiance)[-1][:23]
+        elif sensor == "oci":
+            return split(input_radiance)[-1][:24]
+        elif sensor == "tanager":
+            return split(input_radiance)[-1][:23]
+        elif sensor[:3] == "NA-":
+            return os.path.splitext(os.path.basename(input_radiance))[0]
 
     def make_directories(self):
         """Build required subdirectories inside working_directory"""

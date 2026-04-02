@@ -1023,6 +1023,7 @@ def transpose_skew(dem, spacing, angle):
     is_flag=True,
 )
 def cli(debug_args, **kwargs):
+    """Applies sky view factor calculation for a given projected DEM or DSM"""
     if debug_args:
         print("Arguments to be passed:")
         for key, value in kwargs.items():
