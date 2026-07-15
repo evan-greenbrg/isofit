@@ -42,11 +42,8 @@ from isofit.core.multistate import (
     index_spectra_by_surface,
     update_config_for_surface,
 )
-from isofit.inversion.inverse_simple import (
-    invert_algebraic,
-    invert_analytical,
-    invert_simple,
-)
+from isofit.inversion.inverse_analytical import invert_analytical
+from isofit.inversion.inverse_simple import invert_algebraic, invert_simple
 from isofit.utils.atm_interpolation import atm_interpolation
 
 
@@ -618,6 +615,7 @@ class Worker(object):
                 np.copy(x0),
                 sub_state,
                 num_iter=self.num_iter,
+                enforce_bounds=True,
             )
             state_est = states[-1]
 
