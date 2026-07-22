@@ -189,7 +189,8 @@ class MultiComponentSurface(Surface):
         ci = self.component(x_surface, geom)
         lamb_mu = self.component_means[ci]
         lamb_mu = lamb_mu * self.norm(lamb_ref)
-        mu[self.idx_lamb] = lamb_mu
+        bias = np.median(lamb_ref - lamb_mu[self.idx_ref])
+        mu[self.idx_lamb] = lamb_mu + bias
 
         return mu
 
