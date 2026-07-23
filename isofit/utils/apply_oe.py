@@ -930,7 +930,7 @@ def apply_oe(
                     log_file=log_file,
                     n_cores=n_cores,
                 )
-                remove_bgrfl_file = True
+                remove_bgrfl_file = False
 
             if use_superpixels:
                 extractions(
