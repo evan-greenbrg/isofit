@@ -22,6 +22,7 @@ from __future__ import annotations
 import numpy as np
 from scipy.linalg import block_diag
 
+from isofit.core import units
 from isofit.core.common import eps, resample_spectrum, svd_inv_sqrt
 from isofit.data import env
 from isofit.surface.surface import DefaultState
@@ -356,6 +357,7 @@ class GlintModelSurface(MultiComponentSurface):
         self,
         L_tot,
         geom,
+        rho_dif_dif=None,
         s_alb=None,
         L_dir_dir=None,
         L_dir_dif=None,

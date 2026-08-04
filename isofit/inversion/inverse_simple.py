@@ -297,6 +297,7 @@ def invert_analytical(
         L_tot=L_tot,
         geom=geom,
         s_alb=s_alb,
+        rho_dif_dif=rho_dif_dif,
         L_dir_dir=L_dir_dir,
         L_dir_dif=L_dir_dif,
         L_dif_dir=L_dif_dir,

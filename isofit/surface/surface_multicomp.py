@@ -363,6 +363,7 @@ class MultiComponentSurface(Surface):
         self,
         L_tot,
         geom,
+        rho_dif_dif=None,
         s_alb=None,
         L_dir_dir=None,
         L_dir_dif=None,
