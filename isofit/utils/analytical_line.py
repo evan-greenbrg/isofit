@@ -606,6 +606,11 @@ class Worker(object):
 
             x0 = self.fm.clip_bounds(x0, bounds, eps=eps)
 
+            # Check for diagonal Seps
+            seps = self.fm.Seps(x0, meas, geom)
+            dense_seps = np.allclose(seps, np.diag(np.diag(seps)))
+            seps = None
+
             if self.per_pixel_heuristic_prior:
                 self.fm.update_heuristic_prior_means(x0, geom)
 
@@ -617,6 +622,7 @@ class Worker(object):
                 np.copy(x0),
                 sub_state,
                 num_iter=self.num_iter,
+                dense_seps=dense_seps,
             )
             state_est = states[-1]
 
