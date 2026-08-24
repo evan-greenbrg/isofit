@@ -542,17 +542,12 @@ class Worker(object):
             # atm_interpolated file
             x_atmosphere = self.rt_state[r, c, :]
 
-            # TODO depricate this iv_idx. Abstract the indexing a bit more
-            # s.t. we can smooth any statevector element by specifying idx
-            # iv_idx here is a relic from a version that
-            # achieved this by using atm_band_names in atm_interpolation
-            # need to improve that implementation
-            iv_idx = self.fm.surface.analytical_iv_idx
-
             # Populate the "background" superpixel
             lbl_idx = int(self.lbl[r, c, 0])
             sub_state = np.zeros(self.fm.nstate)
-            sub_state[self.fm.idx_surface] = self.subs_state[lbl_idx, 0, iv_idx]
+            sub_state[self.fm.idx_surface] = self.subs_state[
+                lbl_idx, 0, self.fm.full_idx
+            ]
             sub_state[self.fm.idx_atmosphere] = x_atmosphere
             sub_state[self.fm.idx_instrument] = self.subs_state[
                 lbl_idx, 0, self.fm.idx_instrument
@@ -606,11 +601,6 @@ class Worker(object):
 
             x0 = self.fm.clip_bounds(x0, bounds, eps=eps)
 
-            # Check for diagonal Seps
-            seps = self.fm.Seps(x0, meas, geom)
-            dense_seps = np.allclose(seps, np.diag(np.diag(seps)))
-            seps = None
-
             if self.per_pixel_heuristic_prior:
                 self.fm.update_heuristic_prior_means(x0, geom)
 
@@ -622,7 +612,6 @@ class Worker(object):
                 np.copy(x0),
                 sub_state,
                 num_iter=self.num_iter,
-                dense_seps=dense_seps,
             )
             state_est = states[-1]
 

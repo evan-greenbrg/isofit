@@ -223,7 +223,6 @@ def invert_analytical(
     num_iter: int = 1,
     diag_uncert: bool = True,
     outside_ret_const: float = -0.01,
-    dense_seps=True,
 ):
     """Perform an analytical estimate of the conditional MAP estimate for
     a fixed atmosphere.  Based on the "Inner loop" from Susiluoto et al. (2025).
@@ -325,23 +324,24 @@ def invert_analytical(
 
         x_surface, x_atmosphere, x_instrument = fm.unpack(x)
 
-        if dense_seps:
-            C = dpotrf(Seps, 1)[0]
-            P = dpotri(C, 1)[0]
-        else:
-            P = np.diag(1 / np.diag(Seps))
+        # C = dpotrf(Seps, 1)[0]
+        # P = dpotri(C, 1)[0]
+        P = 1.0 / np.diag(Seps)
 
-        P_tilde = ((L.T @ P) @ L).T
+        # P_tilde = ((L.T @ P) @ L).T
+        P_tilde = L.T @ (P[:, None] * L)
         P_rcond = Sa_inv[iv_idx, :][:, iv_idx] + P_tilde
 
         LI_rcond = dpotrf(P_rcond)[0]
         C_rcond = dpotri(LI_rcond)[0]
 
         y = meas[winidx] - L_atm[winidx] - eof_offset[winidx] - L_bg[winidx]
+        Py = P * y
         xk = dsymv(
             1,
             C_rcond,
-            (L.T @ dsymv(1, P, y, lower=1) + prprod[iv_idx]),
+            # (L.T @ dsymv(1, P, y, lower=1) + prprod[iv_idx]),
+            (L.T @ (P @ y) + prprod[iv_idx]),
         )
 
         # Save trajectory step:
