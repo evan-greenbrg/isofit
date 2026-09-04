@@ -32,6 +32,7 @@ from scipy.signal import convolve
 
 from isofit.core import units
 from isofit.core.common import (
+    calculate_resample_matrix,
     emissive_radiance,
     eps,
     load_wavelen,
@@ -44,7 +45,6 @@ from isofit.core.common import (
 
 # Max. wavelength difference (nm) that does not trigger expensive resampling
 wl_tol = 0.01
-
 
 DefaultState = namedtuple(
     "DefaultState",
@@ -360,10 +360,22 @@ class Instrument(NoiseModel):
         if (
             config.statevector.GROW_FWHM is not None
             or config.statevector.WL_SHIFT is not None
+            or config.statevector.PER_WL_RCC is not None
             or config.statevector.WL_SPACE is not None
             or "WLSPL" in list(self.state_idx.keys())
         ):
             self.wavelengths_fixed = False
+
+    @staticmethod
+    def load_prior_file(path):
+        D = loadmat(path)
+        prior_cov = D["cov"]
+        prior_mean = np.squeeze(D["mean"])
+        bounds = np.squeeze(D["bounds"])
+        scale = float(D.get("scale", 1))
+        init = prior_mean
+
+        return bounds, scale, init, prior_mean, prior_cov
 
     @staticmethod
     def load_prior_file(path):
