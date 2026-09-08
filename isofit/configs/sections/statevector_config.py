@@ -55,6 +55,9 @@ class StateVectorElementConfig(BaseConfigSection):
 
         self.set_config_options(sub_configdic)
 
+    def unpack(self):
+        return self.bounds, self.scale, self.init, self.prior_mean, self.prior_sigma
+
 
 class StateVectorConfig(BaseConfigSection):
     def __init__(self, sub_configdic: dict = None):
@@ -66,6 +69,12 @@ class StateVectorConfig(BaseConfigSection):
             for key in configdic:
                 sv = StateVectorElementConfig(configdic[key])
                 setattr(self, key, sv)
+
+    def get_all_names(self):
+        names = []
+        for element, name in zip(*self.get_elements()):
+            names.append(name)
+        return names
 
     def get_all_bounds(self):
         bounds = []

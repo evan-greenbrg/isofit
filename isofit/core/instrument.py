@@ -53,6 +53,7 @@ class Instrument:
         function of the radiance level."""
 
         config = full_config.forward_model.instrument
+        self.config = config
 
         # If needed, skip first index column and/or convert to nanometers
         self.wl_init, self.fwhm_init = load_wavelen(config.wavelength_file)
@@ -60,18 +61,43 @@ class Instrument:
 
         self.fast_resample = config.fast_resample
 
-        self.bounds = config.statevector.get_all_bounds()
-        self.scale = config.statevector.get_all_scales()
-        self.init = config.statevector.get_all_inits()
-        self.prior_mean = np.array(config.statevector.get_all_prior_means())
-        self.prior_sigma = np.array(config.statevector.get_all_prior_sigmas())
-        self.Sa_cached = np.diagflat(np.power(self.prior_sigma, 2))
-        self.Sa_normalized = self.Sa_cached / np.mean(np.diag(self.Sa_cached))
-        self.Sa_inv_normalized, self.Sa_inv_sqrt_normalized = svd_inv_sqrt(
-            self.Sa_normalized
-        )
-        self.statevec_names = config.statevector.get_element_names()
+        # Construct statevector
+        self.statevec_names = []
+        self.bounds = []
+        self.scale = []
+        self.init = []
+        self.prior_mean = []
+        self.prior_sigma = []
+        self.state_idx = {}
+        i = 0
+        for name in config.statevector.get_all_names():
+            self.state_idx[name] = []
+            _bounds, _scale, _init, _prior_mean, _prior_sigma = getattr(
+                config.statevector, name
+            ).unpack()
+            if name == "PER_WL_SHIFT":
+                for wl in self.wl_init:
+                    self.statevec_names.append(f"{name}_{wl:.3f}nm")
+                    self.bounds.append(_bounds)
+                    self.scale.append(_scale)
+                    self.init.append(_init)
+                    self.prior_mean.append(_prior_mean)
+                    self.prior_sigma.append(_prior_sigma)
+                    self.state_idx[name].append(i)
+                    i += 1
+            else:
+                self.statevec_names.append(name)
+                self.bounds.append(_bounds)
+                self.scale.append(_scale)
+                self.init.append(_init)
+                self.prior_mean.append(_prior_mean)
+                self.prior_sigma.append(_prior_sigma)
+                self.state_idx[name].append(i)
+                i += 1
+
         self.n_state = len(self.statevec_names)
+
+        self.Sa_cached, self.Sa_normalized, self.Sa_inv_normalized = self.cache_Sa()
 
         self.integrations = config.integrations
 
@@ -201,6 +227,7 @@ class Instrument:
         self.calibration_fixed = True
         if (
             config.statevector.GROW_FWHM is not None
+            or config.statevector.PER_WL_SHIFT is not None
             or config.statevector.WL_SHIFT is not None
             or config.statevector.WL_SPACE is not None
         ):
@@ -210,6 +237,26 @@ class Instrument:
         """Mean of prior distribution, calculated at state x."""
 
         return self.init.copy()
+
+    def cache_Sa(self):
+        sa = np.zeros((self.n_state, self.n_state))
+        for name, idx in self.state_idx.items():
+            if name == "PER_WL_SHIFT":
+                var = np.power(
+                    getattr(self.config.statevector, "PER_WL_SHIFT").prior_sigma, 2
+                )
+                a = 5
+                l = a * np.abs(np.gradient(self.wl_init))
+                diff = self.wl_init[:, None] - self.wl_init[None, :]
+                k = var * np.exp(-(diff**2) / (2 * l[None, :] ** 2))
+            else:
+                k = np.diagflat(np.power(np.array(self.prior_sigma)[idx], 2))
+            sa[np.ix_(idx, idx)] = k
+
+        sa_norm = sa / np.mean(np.diag(sa))
+        sa_inv_normalized, sa_inv_sqrt_normalized = svd_inv_sqrt(sa_norm)
+
+        return sa, sa_norm, sa_inv_normalized
 
     def Sa(self):
         """Covariance of prior distribution (diagonal)."""
@@ -454,6 +501,9 @@ class Instrument:
             space = x_instrument[ind]
         else:
             space = 1.0
+
+        if "PER_WL_SHIFT" in self.statevec_names:
+            pass
 
         if "WL_SHIFT" in self.statevec_names:
             ind = self.statevec_names.index("WL_SHIFT")
