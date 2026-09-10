@@ -50,6 +50,12 @@ class InstrumentStateVectorConfig(StateVectorConfig):
         self._WL_SHIFT_type = StateVectorElementConfig
         self.WL_SHIFT: StateVectorElementConfig = None
 
+        self._PER_WL_SHIFT_type = StateVectorElementConfig
+        self.PER_WL_SHIFT: StateVectorElementConfig = None
+
+        self._PER_WL_RCC_type = StateVectorElementConfig
+        self.PER_WL_RCC: StateVectorElementConfig = None
+
         self._WL_SPACE_type = StateVectorElementConfig
         self.WL_SPACE: StateVectorElementConfig = None
 
@@ -161,6 +167,12 @@ class InstrumentConfig(BaseConfigSection):
         Radiometric Calibration Coefficients (RCCs) that scale the 
         measured spectrum.  There is one RCC element for each measured 
         channel. If not specified, these values are assumed to be unity."""
+
+        self._per_wl_prior_file_type = str
+        self.per_wl_prior_file = None
+        """str: Indicates a .mat file containing a mean vector "mean" 
+        and a covariance matrix "cov" represetnting  a prior over 
+        wavelengths."""
 
         self.set_config_options(sub_configdic)
 
