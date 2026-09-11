@@ -20,8 +20,11 @@
 from __future__ import annotations
 
 import logging
+from functools import partial
 from itertools import count
 
+import jax
+import jax.numpy as jnp
 import numpy as np
 from scipy.interpolate import interp1d, splev, splrep
 from scipy.io import loadmat
@@ -30,6 +33,7 @@ from scipy.signal import convolve
 
 from isofit.core import units
 from isofit.core.common import (
+    calculate_resample_matrix,
     emissive_radiance,
     eps,
     load_wavelen,
@@ -429,6 +433,9 @@ class Instrument:
 
         return Sy
 
+    def dmeas_deof(self, x_instrument):
+        return self.eof
+
     def dmeas_dinstrument(self, x_instrument, wl_hi, rdn_hi):
         """Jacobian of measurement with respect to the instrument
         free parameter state vector. We use finite differences for now."""
@@ -437,19 +444,35 @@ class Instrument:
         if self.n_state == 0:
             return dmeas_dinstrument
 
-        meas = (
-            self.sample(x_instrument, wl_hi, rdn_hi) * self.rcc_factor(x_instrument)
-        ) + self.eof_offset(x_instrument)
-        for ind in range(self.n_state):
-            x_instrument_perturb = x_instrument.copy()
-            x_instrument_perturb[ind] = x_instrument_perturb[ind] + eps
-            meas_perturb = (
-                self.sample(x_instrument_perturb, wl_hi, rdn_hi)
-                * self.rcc_factor(x_instrument_perturb)
-            ) + self.eof_offset(x_instrument_perturb)
+        wl2, fwhm2 = self.calibration(x_instrument)
 
-            d = (meas_perturb - meas) / eps
-            dmeas_dinstrument[:, ind] = d
+        H_init = calculate_resample_matrix(wl_hi, wl2, fwhm2)
+
+        x_instrument_resample = x_instrument.reshape(-1, 1)
+        meas = (
+            np.dot(H_init, rdn_hi).ravel() * self.rcc_factor(x_instrument)
+        ) + self.eof_offset(x_instrument)
+
+        x_instrument_perturb = np.full(
+            (self.n_state, self.n_state), x_instrument.copy()
+        ) + np.diag([eps for i in range(self.n_state)])
+
+        meas_perturb = []
+        for name, idx in self.state_idx.items():
+            x_instrument_perturb_state = x_instrument_perturb[idx, :]
+            for _x in x_instrument_perturb_state:
+                if name in ["GROW_FWHM", "WL_SHIFT", "PER_WL_SHIFT"]:
+                    wl2, fwhm2 = self.calibration(_x)
+                    H = calculate_resample_matrix(wl_hi, wl2, fwhm2)
+                else:
+                    H = H_init
+                meas_perturb.append(
+                    (np.dot(H, rdn_hi).ravel() * self.rcc_factor(x_instrument))
+                    + self.eof_offset(x_instrument)
+                )
+
+        meas_perturb = np.array(meas_perturb)
+        dmeas_dinstrument = ((meas_perturb - meas[None, :]) / eps).T
 
         return dmeas_dinstrument
 
