@@ -694,7 +694,7 @@ class ForwardModel:
             L_dif_dif=L_dif_dif,
             r=r,
             geom=geom,
-        )
+        ) + self.eof_offset(x_instrument)
 
         # Call derivative of rfl wrt surface state, upsample
         drfl_dsurface_hi = self.upsample(
@@ -710,6 +710,7 @@ class ForwardModel:
         # To get the derivative w.r.t. atmosphere
         drdn_datmosphere = self.drdn_datmosphere(
             x_atmosphere,
+            x_instrument,
             geom,
             rho_dir_dir=rho_dir_dir_hi,
             rho_dif_dir=rho_dif_dir_hi,
@@ -806,10 +807,11 @@ class ForwardModel:
             L_dif_dif=L_dif_dif,
             r=r,
             geom=geom,
-        )
+        ) + self.eof_offset(x_instrument)
 
         drdn_datmosphereb = self.drdn_datmosphereb(
             x_atmosphere,
+            x_instrument,
             geom=geom,
             rho_dir_dir=rho_dir_dir_hi,
             rho_dif_dir=rho_dif_dir_hi,
@@ -836,6 +838,7 @@ class ForwardModel:
     def drdn_datmosphere(
         self,
         x_atmosphere,
+        x_instrument,
         geom,
         rho_dir_dir,
         rho_dif_dir,
@@ -879,7 +882,7 @@ class ForwardModel:
                 L_dif_dif,
                 r,
                 geom,
-            )
+            ) + self.eof_offset(x_instrument)
             K_atmosphere.append((rdne - rdn) / eps)
 
         K_atmosphere = np.array(K_atmosphere).T
@@ -889,6 +892,7 @@ class ForwardModel:
     def drdn_datmosphereb(
         self,
         x_atmosphere,
+        x_instrument,
         geom,
         rho_dir_dir,
         rho_dif_dir,
@@ -955,7 +959,7 @@ class ForwardModel:
                         L_dif_dif,
                         r,
                         geom,
-                    )
+                    ) + self.eof_offset(x_instrument)
                     Kb_atmosphere.append((rdne - rdn) / eps)
 
         Kb_atmosphere = np.array(Kb_atmosphere).T
