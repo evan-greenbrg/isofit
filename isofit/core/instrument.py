@@ -467,8 +467,8 @@ class Instrument:
                 else:
                     H = H_init
                 meas_perturb.append(
-                    (np.dot(H, rdn_hi).ravel() * self.rcc_factor(x_instrument))
-                    + self.eof_offset(x_instrument)
+                    (np.dot(H, rdn_hi).ravel() * self.rcc_factor(_x))
+                    + self.eof_offset(_x)
                 )
 
         meas_perturb = np.array(meas_perturb)
