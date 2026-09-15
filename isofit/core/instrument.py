@@ -56,10 +56,25 @@ class PerWlShift:
     def Sa(_prior_sigma, wl):
         var = np.power(_prior_sigma, 2)
         # Add off-diagonals
-        a = 5
+        a = 1
         l = a * np.abs(np.gradient(wl))
         diff = wl[:, None] - wl[None, :]
-        return var * np.exp(-(diff**2) / (2 * l[None, :] ** 2))
+        # sa = var * np.exp(-(diff**2) / (2 * l**2))
+        sa = var * np.exp(-(diff**2) / (2 * l[None, :] ** 2))
+
+        # Make Bad channels independent
+        i1360 = np.argmin(np.abs(wl - 1360))
+        i1410 = np.argmin(np.abs(wl - 1410))
+        i1800 = np.argmin(np.abs(wl - 1800))
+        i1970 = np.argmin(np.abs(wl - 1970))
+
+        diag_vals = np.diag(sa).copy()
+        for i0, i1 in [(i1360, i1410), (i1800, i1970)]:
+            sa[i0:i1, :] = 0
+            sa[:, i0:i1] = 0
+
+        np.fill_diagonal(sa, diag_vals)
+        return sa
 
 
 class PerWLRCC:
@@ -199,13 +214,22 @@ class Instrument:
             (_bounds, _scale, _init, _prior_mean, _prior_sigma) = (
                 element_config.unpack()
             )
-            self.state_idx[name] = []
+            if "WLSPL" in name:
+                wl_name = name
+                name = "WLSPL"
+
+            if not self.state_idx.get(name):
+                self.state_idx[name] = []
 
             if name == "PER_WL_RCC":
                 self.fit_rcc = True
 
             if name in ("PER_WL_SHIFT", "PER_WL_RCC"):
                 entries = [f"{name}_{wl:.3f}nm" for wl in self.wl_init]
+
+            elif name == "WLSPL":
+                entries = [wl_name]
+
             else:
                 entries = [name]
 
@@ -461,7 +485,7 @@ class Instrument:
         for name, idx in self.state_idx.items():
             x_instrument_perturb_state = x_instrument_perturb[idx, :]
             for _x in x_instrument_perturb_state:
-                if name in ["GROW_FWHM", "WL_SHIFT", "PER_WL_SHIFT"]:
+                if name in ["GROW_FWHM", "WL_SHIFT", "PER_WL_SHIFT", "WLSPL"]:
                     wl2, fwhm2 = self.calibration(_x)
                     H = calculate_resample_matrix(wl_hi, wl2, fwhm2)
                 else:
@@ -595,17 +619,17 @@ class Instrument:
         if "PER_WL_SHIFT" in self.config_state_names:
             shift = x_instrument[self.state_idx["PER_WL_SHIFT"]]
 
-        if "WL_SHIFT" in self.config_state_names:
+        elif "WL_SHIFT" in self.config_state_names:
             ind = self.statevec_names.index("WL_SHIFT")
             shift = x_instrument[ind]
-        elif any([v.startswith("WLSPL") for v in self.statevec_names]):
+
+        elif any([v.startswith("WLSPL") for v in self.config_state_names]):
             # cubic spline perturbation
             channels, vals = [], []
-            for i, v in enumerate(self.statevec_names):
-                if v.startswith("WLSPL"):
-                    chan = int(v.split("_")[1])
-                    channels.append(chan)
-                    vals.append(x_instrument[i])
+            for i, v in enumerate(self.state_idx["WLSPL"]):
+                chan = int(self.statevec_names[v].split("_")[1])
+                channels.append(chan)
+                vals.append(x_instrument[v])
             sp = splrep(channels, vals, s=0)
             xnew = np.arange(len(wl))
             shift = splev(xnew, sp)
