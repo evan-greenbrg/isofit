@@ -46,6 +46,7 @@ from isofit.core.common import (
 # Max. wavelength difference (nm) that does not trigger expensive resampling
 wl_tol = 0.01
 
+
 DefaultState = namedtuple(
     "DefaultState",
     [
