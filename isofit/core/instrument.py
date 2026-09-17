@@ -46,10 +46,6 @@ from isofit.core.common import (
 # Max. wavelength difference (nm) that does not trigger expensive resampling
 wl_tol = 0.01
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 DefaultState = namedtuple(
     "DefaultState",
     [
@@ -72,17 +68,10 @@ DefaultEOFPrior = DefaultState(
 
 
 DefaultRCCPrior = DefaultState(
-<<<<<<< HEAD
     bounds=[0.01, 10.0],
     scale=1.0,
     prior_mean=1.0,
     prior_sigma=10.0,
-=======
-    bounds=[0.5, 1.5],
-    scale=1.0,
-    prior_mean=1.0,
-    prior_sigma=1.0,
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
     init=1.0,
 )
 
@@ -91,13 +80,8 @@ DefaultWLSPLPrior = DefaultState(
     bounds=[-7.0, 7.0],
     scale=1.0,
     prior_mean=0,
-<<<<<<< HEAD
     prior_sigma=10,
     init=0,
-=======
-    prior_sigma=0,
-    init=10.0,
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 )
 
 
@@ -105,13 +89,8 @@ DefaultWLSHIFTPrior = DefaultState(
     bounds=[-7.0, 7.0],
     scale=1.0,
     prior_mean=0,
-<<<<<<< HEAD
     prior_sigma=10,
     init=0.0,
-=======
-    prior_sigma=0,
-    init=100.0,
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 )
 
 
@@ -119,13 +98,8 @@ DefaultGROWFWHMPrior = DefaultState(
     bounds=[-7.0, 7.0],
     scale=1.0,
     prior_mean=0,
-<<<<<<< HEAD
     prior_sigma=10,
     init=0.0,
-=======
-    prior_sigma=0,
-    init=100.0,
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 )
 
 
@@ -133,7 +107,6 @@ class PerWLRCC:
     """Specialized function calls for statevector elements for
     per-wavelength RCCs"""
 
-<<<<<<< HEAD
     # Hard coded for now, likely instrument-specific
     loose_distance = 500
     tight_distance = 20
@@ -174,11 +147,6 @@ class WLSPL:
         rbf = np.exp(-0.5 * (d / self.distance) ** 2)
 
         return self.tight_sigma**2 + self.loose_sigma**2 * rbf + (1e-6 * np.eye(len(x)))
-=======
-    @staticmethod
-    def Sa(_prior_sigma, wl):
-        return np.diagflat(np.power(np.full(len(wl), _prior_sigma), 2))
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 
 
 class NoiseModel:
@@ -359,15 +327,11 @@ class Instrument(NoiseModel):
         sa = np.zeros((self.n_state, self.n_state))
         for name, idx in self.state_idx.items():
             if name == "PER_WL_RCC":
-<<<<<<< HEAD
                 k = PerWLRCC().Sa(self.prior_sigma[idx], self.wl_init)
             elif name == "WLSPL":
                 k = WLSPL().Sa(
                     self.prior_sigma[idx], self.wl_init, idx, self.statevec_names
                 )
-=======
-                k = PerWLRCC.Sa(self.prior_sigma[idx], self.wl_init)
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
             else:
                 k = np.diagflat(np.power(self.prior_sigma[idx], 2))
 
@@ -385,26 +349,10 @@ class Instrument(NoiseModel):
 
             # Overwrite
             for i in idx:
-<<<<<<< HEAD
                 self.bounds[i] = _bounds[i]
                 self.scale[i] = _scale
                 self.init[i] = _init[i]
                 self.prior_mean[i] = _prior_mean[i]
-=======
-                self.bounds[i] = _bounds
-                self.scale[i] = _scale
-                self.init[i] = _init
-                self.prior_mean[i] = _prior_mean
-
-            sa[np.ix_(idx, idx)] = _prior_cov
-
-            # Overwrite
-            for i in idx:
-                self.bounds[i] = _bounds
-                self.scale[i] = _scale
-                self.init[i] = _init
-                self.prior_mean[i] = _prior_mean
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 
             sa[np.ix_(idx, idx)] = _prior_cov
 
@@ -574,12 +522,9 @@ class Instrument(NoiseModel):
     def dmeas_deof(self, x_instrument):
         return self.eof
 
-<<<<<<< HEAD
     def dmeas_drcc(self, rdn):
         return np.diag(rdn)
 
-=======
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
     def dmeas_dinstrument(self, x_instrument, wl_hi, rdn_hi):
         """Jacobian of measurement with respect to the instrument
         free parameter state vector. We use finite differences for now."""
@@ -588,7 +533,6 @@ class Instrument(NoiseModel):
         if self.n_state == 0:
             return dmeas_dinstrument
 
-<<<<<<< HEAD
         meas = self.sample(x_instrument, wl_hi, rdn_hi)
 
         for name, idx in self.state_idx.items():
@@ -609,37 +553,6 @@ class Instrument(NoiseModel):
                 )
 
                 dmeas_dinstrument[:, idx] = ((meas_perturb - meas) / eps).T
-=======
-        wl2, fwhm2 = self.calibration(x_instrument)
-
-        H_init = calculate_resample_matrix(wl_hi, wl2, fwhm2)
-
-        x_instrument_resample = x_instrument.reshape(-1, 1)
-        meas = (
-            np.dot(H_init, rdn_hi).ravel() * self.rcc_factor(x_instrument)
-        ) + self.eof_offset(x_instrument)
-
-        x_instrument_perturb = np.full(
-            (self.n_state, self.n_state), x_instrument.copy()
-        ) + np.diag([eps for i in range(self.n_state)])
-
-        meas_perturb = []
-        for name, idx in self.state_idx.items():
-            x_instrument_perturb_state = x_instrument_perturb[idx, :]
-            for _x in x_instrument_perturb_state:
-                if name in ["GROW_FWHM", "WL_SHIFT", "WLSPL"]:
-                    wl2, fwhm2 = self.calibration(_x)
-                    H = calculate_resample_matrix(wl_hi, wl2, fwhm2)
-                else:
-                    H = H_init
-                meas_perturb.append(
-                    (np.dot(H, rdn_hi).ravel() * self.rcc_factor(_x))
-                    + self.eof_offset(_x)
-                )
-
-        meas_perturb = np.array(meas_perturb)
-        dmeas_dinstrument = ((meas_perturb - meas[None, :]) / eps).T
->>>>>>> 75f3eb10 (initial commit of dynamic rcc calibration)
 
         return dmeas_dinstrument
 
