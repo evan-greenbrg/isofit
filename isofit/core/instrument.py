@@ -46,6 +46,7 @@ from isofit.core.common import (
 # Max. wavelength difference (nm) that does not trigger expensive resampling
 wl_tol = 0.01
 
+
 DefaultState = namedtuple(
     "DefaultState",
     [
@@ -68,10 +69,10 @@ DefaultEOFPrior = DefaultState(
 
 
 DefaultRCCPrior = DefaultState(
-    bounds=[0.5, 1.5],
+    bounds=[0.01, 10.0],
     scale=1.0,
     prior_mean=1.0,
-    prior_sigma=1.0,
+    prior_sigma=10.0,
     init=1.0,
 )
 
@@ -308,19 +309,10 @@ class Instrument(NoiseModel):
 
             # Overwrite
             for i in idx:
-                self.bounds[i] = _bounds
+                self.bounds[i] = _bounds[i]
                 self.scale[i] = _scale
-                self.init[i] = _init
-                self.prior_mean[i] = _prior_mean
-
-            sa[np.ix_(idx, idx)] = _prior_cov
-
-            # Overwrite
-            for i in idx:
-                self.bounds[i] = _bounds
-                self.scale[i] = _scale
-                self.init[i] = _init
-                self.prior_mean[i] = _prior_mean
+                self.init[i] = _init[i]
+                self.prior_mean[i] = _prior_mean[i]
 
             sa[np.ix_(idx, idx)] = _prior_cov
 
