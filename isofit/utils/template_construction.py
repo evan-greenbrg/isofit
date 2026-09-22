@@ -1976,7 +1976,7 @@ def make_instrument_config(
             elif var == "WLSPL":
                 for index in spline_indices:
                     config["statevector"][
-                        f"{var}_{index}"
+                        f"{var}_{index:03d}"
                     ] = DefaultWLSPLPrior._asdict()
 
     if cal_per_channel_rcc:
