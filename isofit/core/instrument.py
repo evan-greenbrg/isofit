@@ -306,7 +306,7 @@ class Instrument(NoiseModel):
         sa = np.zeros((self.n_state, self.n_state))
         for name, idx in self.state_idx.items():
             if name == "PER_WL_RCC":
-                k = PerWLRCC.Sa(self.prior_sigma[idx], self.wl_init)
+                k = PerWLRCC().Sa(self.prior_sigma[idx], self.wl_init)
             else:
                 k = np.diagflat(np.power(self.prior_sigma[idx], 2))
 
