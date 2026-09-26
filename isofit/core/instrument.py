@@ -128,6 +128,27 @@ class PerWLRCC:
         return K
 
 
+class WLSPL:
+    """Specialized function calls for statevector elements for
+    per-wavelength RCCs"""
+
+    # Hard coded for now, likely instrument-specific
+    distance = 50.0
+    loose_sigma = 1.0
+    tight_sigma = 1.0
+
+    def Sa(self, base_prior_var, wl, idx, statevec_names):
+        x = []
+        for i, v in enumerate(idx):
+            chan = int(statevec_names[v].split("_")[1])
+            x.append(wl[chan])
+        x = np.array(x)
+        d = x[:, None] - x[None, :]
+        rbf = np.exp(-0.5 * (d / self.distance) ** 2)
+
+        return self.tight_sigma**2 + self.loose_sigma**2 * rbf + (1e-6 * np.eye(len(x)))
+
+
 class NoiseModel:
     def __init__(self, config):
         self.wl, _ = load_wavelen(config.wavelength_file)
@@ -307,6 +328,10 @@ class Instrument(NoiseModel):
         for name, idx in self.state_idx.items():
             if name == "PER_WL_RCC":
                 k = PerWLRCC().Sa(self.prior_sigma[idx], self.wl_init)
+            elif name == "WLSPL":
+                k = WLSPL().Sa(
+                    self.prior_sigma[idx], self.wl_init, idx, self.statevec_names
+                )
             else:
                 k = np.diagflat(np.power(self.prior_sigma[idx], 2))
 
