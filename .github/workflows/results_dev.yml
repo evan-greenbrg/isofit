@@ -22,20 +22,13 @@ concurrency:
 
 permissions:
   contents: read
-<<<<<<< HEAD
   pull-requests: write
-=======
->>>>>>> ea92bc1a (Added workflow to update dev results on merge)
 
 jobs:
   cache:
     runs-on: ubuntu-latest
     outputs:
-<<<<<<< HEAD
       cache_key: extras
-=======
-      cache_key: ${{ steps.cache_key.outputs.cache_key }}
->>>>>>> ea92bc1a (Added workflow to update dev results on merge)
     steps:
       - name: Cache Extras
         id: cache-extras
