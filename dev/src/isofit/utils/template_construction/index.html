@@ -4890,10 +4890,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#isofit.utils.template_construction.sensor_name_to_dt" class="md-nav__link">
+  <a href="#isofit.utils.template_construction.get_sensor_metadata_from_fid" class="md-nav__link">
     <span class="md-ellipsis">
       
-        sensor_name_to_dt
+        get_sensor_metadata_from_fid
       
     </span>
   </a>
@@ -7032,7 +7032,13 @@
 <span class="normal">1999</span>
 <span class="normal">2000</span>
 <span class="normal">2001</span>
-<span class="normal">2002</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
+<span class="normal">2002</span>
+<span class="normal">2003</span>
+<span class="normal">2004</span>
+<span class="normal">2005</span>
+<span class="normal">2006</span>
+<span class="normal">2007</span>
+<span class="normal">2008</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#! /usr/bin/env python3</span>
 <span class="c1">#</span>
 <span class="c1"># Authors: Philip G. Brodrick and Niklas Bohn</span>
 <span class="c1">#</span>
@@ -8293,6 +8299,12 @@
     <span class="k">del</span> <span class="n">relative_azimuth</span>
 
     <span class="c1"># Make time calculations</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">((</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">24</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Bad UTC time value(s) detected in obs input file: (</span><span class="si">{</span><span class="n">obs_file</span><span class="si">}</span><span class="s2">). "</span>
+            <span class="sa">f</span><span class="s2">"Times must be within [0-24). Min: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">])</span><span class="si">}</span><span class="s2">, Max: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
     <span class="n">mean_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">])</span>
     <span class="n">min_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">])</span>
     <span class="n">max_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="n">valid</span><span class="p">])</span>
@@ -8388,8 +8400,8 @@
     <span class="k">return</span> <span class="n">mean_latitude</span><span class="p">,</span> <span class="n">mean_longitude</span><span class="p">,</span> <span class="n">mean_elevation_km</span><span class="p">,</span> <span class="n">elevation_lut_grid</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">sensor_name_to_dt</span><span class="p">(</span><span class="n">sensor</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fid</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.utils.template_construction.sensor_name_to_dt"><a href="../../../../api/isofit/utils/template_construction/#isofit.utils.template_construction.sensor_name_to_dt" title="Go to docs">[docs]</a></div>
-    <span class="n">inversion_window_update</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_sensor_metadata_from_fid</span><span class="p">(</span><span class="n">sensor</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fid</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span><div class="mkapi-source-link" id="isofit.utils.template_construction.get_sensor_metadata_from_fid"><a href="../../../../api/isofit/utils/template_construction/#isofit.utils.template_construction.get_sensor_metadata_from_fid" title="Go to docs">[docs]</a></div>
+    <span class="n">inversion_window_update</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">sensor</span> <span class="o">==</span> <span class="s2">"ang"</span><span class="p">:</span>
         <span class="c1"># parse flightline ID (AVIRIS-NG assumptions)</span>
         <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">fid</span><span class="p">[</span><span class="mi">3</span><span class="p">:],</span> <span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">t%H%M%S"</span><span class="p">)</span>
